@@ -61,7 +61,7 @@
 		var idCounter = 0;
 		var addNewNode = false;
 		var movingNode = false;	
-		var MIN_ZOOM_FOR_EDIT = 14;
+		var MIN_ZOOM_FOR_EDIT = 16;
 		var MAX_ZOOM = 18;
 
 		var contextPath = '<wt:ue ignoreServletName="true"></wt:ue>';
@@ -249,10 +249,10 @@
 
 				if (forceUpdate || (extWest > west || extEast < east || extSouth > south || extNorth < north) || (url != URL.search))
 				{
-					south = extSouth = (Math.floor(south*100)/100)-0.015;
-					north = extNorth = (Math.ceil(north*100)/100)+0.015;
-					west = extWest = (Math.floor(west*100)/100)-0.015;
-					east = extEast = (Math.ceil(east*100)/100)+0.015;
+					south = extSouth = (Math.floor(south*100)/100)-0.001;
+					north = extNorth = (Math.ceil(north*100)/100)+0.001;
+					west = extWest = (Math.floor(west*100)/100)-0.001;
+					east = extEast = (Math.ceil(east*100)/100)+0.001;
 					
 					var params = $("filterform").serialize(true);
 					params["north"] = north;
