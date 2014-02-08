@@ -26,8 +26,8 @@ public class OsmServerUpdateServiceTest extends TestBase {
 	@Autowired
 	private RestTemplate restTemplate;
 	private MockRestServiceServer mockServer;
-	@Value("${osmApiBaseUrl}")
-	protected String osmApiBaseUrl;
+	@Value("${overpassApiBaseUrl}")
+	protected String overpassApiBaseUrl;
 
 	@Before
 	public void setup() {
@@ -40,7 +40,9 @@ public class OsmServerUpdateServiceTest extends TestBase {
 		HttpHeaders responseHeaders = new HttpHeaders();
 		responseHeaders.setContentType(MediaType.APPLICATION_XML);
 		mockServer
-				.expect(RequestMatchers.requestTo(osmApiBaseUrl + "/api/0.6/map?bbox=9.15,49.27,9.19,49.3"))
+				.expect(RequestMatchers
+						.requestTo(overpassApiBaseUrl
+								+ "?data=(node%5B'amenity'%5D(49.27,9.15,49.3,9.19);node%5B'shop'%5D(49.27,9.15,49.3,9.19);node%5B'man_made'%5D(49.27,9.15,49.3,9.19););out;"))
 				.andExpect(RequestMatchers.method(HttpMethod.GET))
 				.andRespond(
 						ResponseCreators.withResponse(new ClassPathResource("/bbox.xml", getClass()), responseHeaders));
@@ -52,6 +54,6 @@ public class OsmServerUpdateServiceTest extends TestBase {
 		boundingBox.setSouth(49.27);
 
 		List<Amenity> amenities = osmServerUpdateService.getOsmDataAsAmenities(boundingBox);
-		assertEquals(99, amenities.size());
+		assertEquals(76, amenities.size());
 	}
 }

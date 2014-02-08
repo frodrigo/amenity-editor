@@ -23,6 +23,8 @@
 		<oauth.consumerSecret />
 
 		<osm.api.base.url>http://api06.dev.openstreetmap.org</osm.api.base.url>
+		<overpass.api.base.url>http://overpass.osm.rambler.ru/cgi/interpreter</overpass.api.base.url>
+		<overpass.api.key.filter>amenity,shop,man_made</overpass.api.key.filter>
 		<oauth.requestTokenEndpointUrl>http://api06.dev.openstreetmap.org/oauth/request_token</oauth.requestTokenEndpointUrl>
 		<oauth.accessTokenEndpointUrl>http://api06.dev.openstreetmap.org/oauth/access_token</oauth.accessTokenEndpointUrl>
 		<oauth.authorizeWebsiteUrl>http://api06.dev.openstreetmap.org/oauth/authorize</oauth.authorizeWebsiteUrl>

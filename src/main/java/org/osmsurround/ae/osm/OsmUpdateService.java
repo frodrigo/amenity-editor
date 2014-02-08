@@ -38,17 +38,37 @@ public class OsmUpdateService {
 	@Autowired
 	private OsmConvertService osmConvertService;
 
-	@Value("${osmApiBaseUrl}")
-	private String osmApiBaseUrl;
+	@Value("${overpassApiBaseUrl}")
+	private String overpassApiBaseUrl;
+
+	@Value("${overpassApiKeyFilter}")
+	private String overpassApiKeyFilter;
+
+	private String[] overpassApiKeyFilterList;
 
 	public List<Amenity> getOsmDataAsAmenities(BoundingBox boundingBox) {
 		String url = createUrl(boundingBox);
 		return osmConvertService.osmToAmenity(restOperations.getForObject(url, OsmRoot.class));
 	}
 
+	private String[] getOverpassApiKeyFilterList() {
+		if (overpassApiKeyFilterList == null) {
+			overpassApiKeyFilterList = overpassApiKeyFilter.split(",");
+		}
+		return overpassApiKeyFilterList;
+	}
+
 	private String createUrl(BoundingBox boundingBox) {
-		return osmApiBaseUrl + "/api/0.6/map?bbox=" + boundingBox.getWest() + "," + boundingBox.getSouth() + ","
-				+ boundingBox.getEast() + "," + boundingBox.getNorth();
+		String bbox = boundingBox.getSouth() + "," + boundingBox.getWest() + "," + boundingBox.getNorth() + ","
+				+ boundingBox.getEast();
+		
+		StringBuffer sb = new StringBuffer(overpassApiBaseUrl + "?data=(");
+		for (String key : getOverpassApiKeyFilterList()) {
+			sb.append("node['").append(key).append("'](" + bbox + ");");
+		}
+		sb.append(");out;");
+
+		return sb.toString();
 	}
 
 	public void startUpdateThread(List<Amenity> amenities) {
