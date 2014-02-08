@@ -63,6 +63,7 @@
 		var movingNode = false;	
 		var MIN_ZOOM_FOR_EDIT = 14;
 		var MAX_ZOOM = 18;
+		var nextFocus = false;
 
 		var contextPath = '<wt:ue ignoreServletName="true"></wt:ue>';
 
@@ -280,7 +281,58 @@
 			}
 		}
 
-        function createKeyValueTable(amenity)
+        function createKeyValues(nodeId, formTag, amenity, tags, create)
+        {
+			for (var i = 0; i < tags.length; i++)
+			{
+				var object = tags[i].object;
+				switch (tags[i].type)
+				{
+					case "Space":
+						break;
+					case "Link":
+						formTag.insert(createLinkIcon("anchor.png",object.href,"Show Wiki"));
+						break;
+					case "Text":
+						if (create || object.key == "" || amenity.keyValues[object.key] == null)
+						{
+							amenity.keyValues[object.key] = amenity.keyValues[object.key] || object.otherAttributes.value || "";
+							formTag.insert(createViewText(nodeId, object, amenity.keyValues[object.key]));
+						}
+						break;
+					case "Combo":
+						break;
+					case "Multiselect":
+						break;
+					case "Checkgroup":
+						break;
+					case "Check":
+						break;
+					case "Separator":
+						break;
+					case "Reference":
+						var ref = keyValueTemplates[object.ref];
+						if (!ref)
+						{
+							formTag.insert(new Element("div").update("Missing ref "+object.ref));
+						} else {
+							createKeyValues(nodeId, formTag, amenity, ref.tags, create);
+						}
+						break;
+					case "Key":
+						if (create || amenity.keyValues[object.key] == null)
+						{
+							amenity.keyValues[object.key] = amenity.keyValues[object.key] || "";
+							formTag.insert(createViewKey(nodeId, object, amenity.keyValues[object.key]));
+						}
+						break;
+					case "Optional":
+						break;
+				}
+			}
+        }
+
+        function createKeyValueTable(amenity, views)
         {
             var nodeId = amenity.nodeId;
 
@@ -295,11 +347,14 @@
             }   
             formTag.insert(new Element("input",{"type":"hidden","name":"_method","value":nodeId > 0 ? "put" : "post"}));
 
-			for (var key in amenity.keyValues)
-			{
-				var keyId = "k_"+(idCounter)+"_"+nodeId;
-				var valueId = "v_"+(idCounter++)+"_"+nodeId;
-				formTag.insert(createTagValue(nodeId, key, amenity.keyValues[key]));
+			if (views) {
+	            formTag.insert(new Element("span",{}).update(views.name));
+	            createKeyValues(nodeId, formTag, amenity, views.tags, true);
+			} else {
+				for (var key in amenity.keyValues)
+				{
+					formTag.insert(createTagValue(nodeId, key, amenity.keyValues[key]));
+				}
 			}
 
 			return formTag;
@@ -327,6 +382,51 @@
 	    	return elem;
         }
 
+        function createViewText(nodeId, view, value, editable)
+        {
+			var keyId = "k_"+(idCounter)+"_"+nodeId;
+			var valueId = "v_"+(idCounter++)+"_"+nodeId;
+			var keyIdChoices = keyId+"_choices";
+            var newDiv = new Element("div");
+			newDiv.insert(new Element("div").update(view.text));
+			if (view.key == "")
+			{
+				nextFocus = nextFocus || keyId;
+				newDiv.insert(new Element("input", {type:"text", id:keyId, name: "key", "class":"inputkey", size:24, "value":view.key}));
+			} else {
+				newDiv.insert(new Element("input", {type:"hidden", id:keyId, name: "key", "value":view.key}));
+				newDiv.insert(new Element("input", {type:"text", id:keyId+"_" , name: "key_", "class":"inputkey", size:24, "value":view.key, "disabled":"disabled"}));
+			}
+			newDiv.insert(new Element("span").update("&nbsp;"));
+			nextFocus = nextFocus || valueId;
+			newDiv.insert(new Element("input", {type:"text", id:valueId, name: "value", "class":"inputvalue", size:32, "value":value}));
+			if (view.key == "url" && value != "")
+			{
+				newDiv.insert(createLinkIcon("world.png",value,"Show URL"));				
+			}
+
+			newDiv.insert(new Element("div", {id:valueId+"_choices", "class":"autocomplete"}));
+			newDiv.insert(new Element("script").update("new Ajax.Autocompleter('"+valueId+"', '"+valueId+"_choices', '"+URL.acValue+"', {paramName: 'input', method: 'get', minChars: 1, frequency: 0.5, callback:autoCompleteCallBack});"));
+
+			return newDiv;
+        }
+
+        function createViewKey(nodeId, view, value, editable)
+        {
+			var keyId = "k_"+(idCounter)+"_"+nodeId;
+			var valueId = "v_"+(idCounter++)+"_"+nodeId;
+			var keyIdChoices = keyId+"_choices";
+            var newDiv = new Element("div");
+			newDiv.insert(new Element("input", {type:"hidden", id:keyId , name: "key", "value":view.key}));
+			newDiv.insert(new Element("input", {type:"text", id:keyId+"_" , name: "key_", "class":"inputkey", size:24, "value":view.key, "disabled":"disabled"}));	
+			newDiv.insert(new Element("span").update("&nbsp;"));
+			newDiv.insert(new Element("input", {type:"hidden", id:valueId , name: "value", "value":value}));
+			var valueInput = new Element("input", {type:"text", id:valueId+"_", name: "value", "class":"inputvalue", size:32, "value":value, "disabled":"disabled"});
+			newDiv.insert(valueInput);
+
+			return newDiv;
+        }        
+
         function createTagValue(nodeId, key, value)
         {
 			var keyId = "k_"+(idCounter)+"_"+nodeId;
@@ -353,36 +453,16 @@
 			return newDiv;
         }
 
-        function addTag(nodeId)
-        {
-			var keyId = "k_"+(idCounter)+"_"+nodeId;
-			var newDiv = $("form_"+nodeId).insert(createTagValue(nodeId, "", ""));
-			$(keyId).focus();
-        }
-
         function addTags(nodeId, tags)
         {
-            if (tags[""] == "")	// adding an empty key value pair?
-            {
-                addTag(nodeId);
-            }
-            else
-            {
-            var firstKey = null;
             var amenity = AE.getAmenity(nodeId);
-			for (var key in tags)
+            var formTag = $("form_"+nodeId);
+            createKeyValues(nodeId, formTag, amenity, tags, false);
+			if (nextFocus)
 			{
-				if ((amenity) && (amenity.keyValues[key] == null))
-				{
-		        	if (firstKey == null)
-			        	firstKey = "v_"+(idCounter)+"_"+nodeId;
-					var newDiv = $("form_"+nodeId).insert(createTagValue(nodeId, key, tags[key]));
-					amenity.keyValues[key] = tags[key];
-				}
+				$(nextFocus).focus();
+				nextFocus = false;
 			}
-			if (firstKey)
-				$(firstKey).focus();
-            }
         }
 
         
@@ -390,7 +470,7 @@
         function createAddTagIcon(nodeId, iconUrl, iconTitle, tags)
         {
         	var elem = new Element("a",{"href":"#","class":"ae-add-tag-icon",onclick:"addTags('"+nodeId+"',"+Object.toJSON(tags)+")"});
-        	elem.insert(new Element("img",{"src":iconUrl,"title":iconTitle}));
+        	elem.insert(new Element("img",{"src":iconUrl,"title":iconTitle,"alt":iconTitle}));
         	return elem;
         }
 
@@ -401,24 +481,28 @@
         	var elem = new Element("div");
         	elem.insert(new Element("div",{"class":"ae-simple-text"}).update(MSG.templateInfo));
 
-			for (var key in wizardData)
+			for (var i=0; i<wizardData.length; i++)
 			{
-				elem.insert(new Element("a",{"href":"#","class":"ae-create-amenity",onclick:"addDefaultTags('"+nodeId+"',"+Object.toJSON(wizardData[key])+")"}).update(key));
+				var wizard = wizardData[i];
+				elem.insert(new Element("a",{"href":"#","class":"ae-create-amenity",onclick:"addDefaultTags('"+nodeId+"',"+Object.toJSON(wizard)+")"}).update(wizard.name));
 			}
         	
         	return elem;			
         }
 
-        function addDefaultTags(nodeId, tags)
+        function addDefaultTags(nodeId, wizard)
         {
             var amenity = AE.getAmenity(nodeId);
             amenity.keyValues = new Object();
-            Object.extend(amenity.keyValues,tags);
-            $("keyvaluetab_"+nodeId).update(createKeyValueTable(amenity));
+            $("keyvaluetab_"+nodeId).update(createKeyValueTable(amenity,wizard));
             $("naw_"+nodeId).hide();
             $("keyvaluetab_"+nodeId).show();
-            $("form_"+nodeId).focusFirstElement();
             
+			if (nextFocus)
+			{
+				$(nextFocus).focus();
+				nextFocus = false;
+			}            
         }
 
         function createTitleDiv(amenity)
@@ -437,7 +521,7 @@
 			newDiv.update(new Element("div",{"class":"ae-nodename"}).update("<spring:message code="eb.nodename" /> "+amenity.name));
 			newDiv.insert(createTitleDiv(amenity));
 			var editArea = new Element("div",{"class":"ae-editarea"});
-			var keyValueTab = new Element("div",{"class":"ae-keyvaluetab","id":"keyvaluetab_"+amenity.nodeId}).update(createKeyValueTable(amenity));
+			var keyValueTab = new Element("div",{"class":"ae-keyvaluetab","id":"keyvaluetab_"+amenity.nodeId}).update(createKeyValueTable(amenity, null));
 			if (amenity.nodeId == 0)
 			{
 				keyValueTab.hide();
@@ -449,11 +533,11 @@
 
 			var buttonDiv1 = new Element("div",{"class":"ae-buttons-top"});
 
-			for (var x = 0; x < keyValueTemplates.length;x++)
+			for (var id in keyValueTemplates)
 			{
-				var template = keyValueTemplates[x];
-				buttonDiv1.insert(createAddTagIcon(amenity.nodeId,contextPath+template.iconUrl,
-						template.iconTitle,template.tags));
+				var template = keyValueTemplates[id];
+				buttonDiv1.insert(createAddTagIcon(amenity.nodeId,contextPath+template.icon,
+						template.id,template.tags));
 			}
 
 			newDiv.insert(buttonDiv1); 

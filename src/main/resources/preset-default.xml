@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<presets xmlns="http://josm.openstreetmap.de/tagging-preset-1.0">
+	<chunk id="eb.tag.button.add.label" icon="/img/icons/add.png">
+		<text key="" />
+	</chunk>
+	<chunk id="eb.oh.label" icon="/img/icons/time_add.png">
+		<text key="opening_hours" text="Opening Hours" />
+	</chunk>
+	<chunk id="eb.shop.label" icon="/img/icons/cart_add.png">
+		<text key="shop" />
+		<text key="name" name="Name" />
+		<reference ref="eb.oh.label" />
+	</chunk>
+	<chunk id="eb.add.label" icon="/img/icons/book_addresses.png">
+		<text key="addr:street" text="Street name" />
+		<text key="addr:housenumber" text="City name" />
+		<text key="addr:postcode" text="Post code" />
+		<text key="addr:city" text="City name" />
+		<text key="addr:country" text="Country code" />
+	</chunk>
+	<chunk id="eb.tel.label" icon="/img/icons/telephone_add.png">
+		<text key="phone" text="Phone number" default="+49" />
+	</chunk>
+	<chunk id="eb.fuel.label" icon="/img/icons/car_add.png">
+		<text key="fuel:diesel" text="Diesel" value="yes" />
+		<text key="fuel:octane_95" text="Octane 95" value="yes" />
+		<text key="fuel:octane_98" text="Octane 98" value="yes" />
+		<text key="fuel:lpg" text="LPG (Liquefied petroleum gas)" />
+	</chunk>
+	<item name="template.01">
+		<text key="" />
+	</item>
+	<item name="template.02">
+		<text key="amenity" />
+		<text key="name" name="Name" />
+	</item>
+	<item name="template.03">
+		<reference ref="eb.shop.label" />
+		<reference ref="eb.oh.label" />
+	</item>
+	<item name="template.04">
+		<text key="tourism" />
+		<text key="name" name="Name" />
+	</item>
+	<item name="template.05">
+		<link href="http://wiki.openstreetmap.org/wiki/Tag:amenity=restaurant"
+			de.href="http://wiki.openstreetmap.org/wiki/DE:Tag:amenity=restaurant"
+			es.href="http://wiki.openstreetmap.org/wiki/ES:Tag:amenity=restaurant"
+			fr.href="http://wiki.openstreetmap.org/wiki/FR:Tag:amenity=restaurant"
+			ja.href="http://wiki.openstreetmap.org/wiki/JA:Tag:amenity=restaurant"
+			pt_BR.href="http://wiki.openstreetmap.org/wiki/Pt-br:Tag:amenity=restaurant"
+			ru.href="http://wiki.openstreetmap.org/wiki/RU:Tag:amenity=restaurant" />
+		<key key="amenity" value="restaurant" />
+		<text key="name" name="Name" />
+		<text key="cuisine" text="Cuisine" />
+		<reference ref="eb.oh.label" />
+		<reference ref="eb.add.label" />
+		<reference ref="eb.tel.label" />
+		<text key="url" />
+	</item>
+	<item name="template.06">
+		<link href="http://wiki.openstreetmap.org/wiki/Tag:amenity=fast_food"
+			de.href="http://wiki.openstreetmap.org/wiki/DE:Tag:amenity=fast_food"
+			ja.href="http://wiki.openstreetmap.org/wiki/JA:Tag:amenity=fast_food"
+			pt_BR.href="http://wiki.openstreetmap.org/wiki/Pt-br:Tag:amenity=fast_food"
+			ru.href="http://wiki.openstreetmap.org/wiki/RU:Tag:amenity=fast_food" />
+		<key key="amenity" value="fast_food" />
+		<text key="name" name="Name" />
+		<text key="cuisine" text="Cuisine" />
+		<reference ref="eb.oh.label" />
+		<reference ref="eb.add.label" />
+		<reference ref="eb.tel.label" />
+		<text key="url" />
+	</item>
+	<item name="template.07">
+		<link href="http://wiki.openstreetmap.org/wiki/Tag:amenity=biergarten"
+			de.href="http://wiki.openstreetmap.org/wiki/DE:Tag:amenity=biergarten"
+			ja.href="http://wiki.openstreetmap.org/wiki/JA:Tag:amenity=biergarten"
+			pt_BR.href="http://wiki.openstreetmap.org/wiki/Pt-br:Tag:amenity=biergarten"
+			ru.href="http://wiki.openstreetmap.org/wiki/RU:Tag:amenity=biergarten" />
+		<key key="amenity" value="biergarten" />
+		<text key="name" name="Name" />
+		<reference ref="eb.oh.label" />
+		<reference ref="eb.add.label" />
+		<reference ref="eb.tel.label" />
+		<text key="url" />
+	</item>
+	<item name="template.08">
+		<link href="http://wiki.openstreetmap.org/wiki/Tag:amenity=cafe"
+			de.href="http://wiki.openstreetmap.org/wiki/DE:Tag:amenity=cafe"
+			et.href="http://wiki.openstreetmap.org/wiki/Et:Tag:amenity=cafe"
+			fr.href="http://wiki.openstreetmap.org/wiki/FR:Tag:amenity=cafe"
+			ja.href="http://wiki.openstreetmap.org/wiki/JA:Tag:amenity=cafe"
+			nl.href="http://wiki.openstreetmap.org/wiki/NL:Tag:amenity=cafe"
+			pt_BR.href="http://wiki.openstreetmap.org/wiki/Pt-br:Tag:amenity=cafe"
+			ru.href="http://wiki.openstreetmap.org/wiki/RU:Tag:amenity=cafe"
+			zh_CN.href="http://wiki.openstreetmap.org/wiki/Zh-hans:Tag:amenity=cafe" />
+		<key key="amenity" value="cafe" />
+		<text key="name" name="Name" />
+		<text key="cuisine" text="Cuisine" />
+		<reference ref="eb.oh.label" />
+		<reference ref="eb.add.label" />
+		<reference ref="eb.tel.label" />
+		<text key="url" />
+	</item>
+	<item name="template.09">
+		<link href="http://wiki.openstreetmap.org/wiki/Tag:amenity=pub"
+			de.href="http://wiki.openstreetmap.org/wiki/DE:Tag:amenity=pub"
+			ja.href="http://wiki.openstreetmap.org/wiki/JA:Tag:amenity=pub"
+			pt_BR.href="http://wiki.openstreetmap.org/wiki/Pt-br:Tag:amenity=pub"
+			ru.href="http://wiki.openstreetmap.org/wiki/RU:Tag:amenity=pub" />
+		<key key="amenity" value="pub" />
+		<text key="name" name="Name" />
+		<text key="cuisine" text="Cuisine" />
+		<reference ref="eb.oh.label" />
+		<reference ref="eb.add.label" />
+		<reference ref="eb.tel.label" />
+		<text key="url" />
+	</item>
+	<item name="template.10">
+		<link href="http://wiki.openstreetmap.org/wiki/Tag:amenity=nightclub"
+			da.href="http://wiki.openstreetmap.org/wiki/Da:Tag:amenity=nightclub"
+			de.href="http://wiki.openstreetmap.org/wiki/DE:Tag:amenity=nightclub"
+			es.href="http://wiki.openstreetmap.org/wiki/ES:Tag:amenity=nightclub"
+			fi.href="http://wiki.openstreetmap.org/wiki/Fi:Tag:amenity=nightclub"
+			ja.href="http://wiki.openstreetmap.org/wiki/JA:Tag:amenity=nightclub"
+			pt_BR.href="http://wiki.openstreetmap.org/wiki/Pt-br:Tag:amenity=nightclub"
+			ro.href="http://wiki.openstreetmap.org/wiki/Ro:Tag:amenity=nightclub"
+			ru.href="http://wiki.openstreetmap.org/wiki/RU:Tag:amenity=nightclub" />
+		<key key="amenity" value="nightclub" />
+		<text key="name" name="Name" />
+		<reference ref="eb.oh.label" />
+		<reference ref="eb.add.label" />
+		<reference ref="eb.tel.label" />
+		<text key="url" />
+	</item>
+	<item name="template.11">
+		<link href="http://wiki.openstreetmap.org/wiki/Tag:amenity=fuel"
+			de.href="http://wiki.openstreetmap.org/wiki/DE:Tag:amenity=fuel"
+			es.href="http://wiki.openstreetmap.org/wiki/ES:Tag:amenity=fuel"
+			fi.href="http://wiki.openstreetmap.org/wiki/Fi:Tag:amenity=fuel"
+			fr.href="http://wiki.openstreetmap.org/wiki/FR:Tag:amenity=fuel"
+			it.href="http://wiki.openstreetmap.org/wiki/IT:Tag:amenity=fuel"
+			ja.href="http://wiki.openstreetmap.org/wiki/JA:Tag:amenity=fuel"
+			no.href="http://wiki.openstreetmap.org/wiki/No:Tag:amenity=fuel"
+			pl.href="http://wiki.openstreetmap.org/wiki/Pl:Tag:amenity=fuel"
+			pt_BR.href="http://wiki.openstreetmap.org/wiki/Pt-br:Tag:amenity=fuel"
+			ru.href="http://wiki.openstreetmap.org/wiki/RU:Tag:amenity=fuel"
+			zh_TW.href="http://wiki.openstreetmap.org/wiki/Zh-hant:Tag:amenity=fuel" />
+		<key key="amenity" value="fuel" />
+		<text key="name" name="Name" />
+		<text key="operator" />
+		<reference ref="eb.oh.label" />
+		<reference ref="eb.add.label" />
+		<reference ref="eb.fuel.label" />
+	</item>
+	<item name="template.12">
+		<link href="http://wiki.openstreetmap.org/wiki/Tag:amenity=parking"
+			de.href="http://wiki.openstreetmap.org/wiki/DE:Tag:amenity=parking"
+			fr.href="http://wiki.openstreetmap.org/wiki/FR:Tag:amenity=parking"
+			it.href="http://wiki.openstreetmap.org/wiki/IT:Tag:amenity=parking"
+			ja.href="http://wiki.openstreetmap.org/wiki/JA:Tag:amenity=parking"
+			nl.href="http://wiki.openstreetmap.org/wiki/NL:Tag:amenity=parking"
+			pl.href="http://wiki.openstreetmap.org/wiki/Pl:Tag:amenity=parking"
+			pt.href="http://wiki.openstreetmap.org/wiki/Pt:Tag:amenity=parking"
+			pt_BR.href="http://wiki.openstreetmap.org/wiki/Pt-br:Tag:amenity=parking"
+			ru.href="http://wiki.openstreetmap.org/wiki/RU:Tag:amenity=parking" />
+		<key key="amenity" value="parking" />
+		<text key="name" name="Name" />
+		<text key="fee" />
+		<text key="park_ride" />
+	</item>
+	<item name="template.13">
+		<link href="http://wiki.openstreetmap.org/wiki/Tag:shop=supermarket"
+			de.href="http://wiki.openstreetmap.org/wiki/DE:Tag:shop=supermarket"
+			fr.href="http://wiki.openstreetmap.org/wiki/FR:Tag:shop=supermarket"
+			ja.href="http://wiki.openstreetmap.org/wiki/JA:Tag:shop=supermarket"
+			pt_BR.href="http://wiki.openstreetmap.org/wiki/Pt-br:Tag:shop=supermarket"
+			ru.href="http://wiki.openstreetmap.org/wiki/RU:Tag:shop=supermarket" />
+		<key key="shop" value="supermarket" />
+		<text key="name" name="Name" />
+		<reference ref="eb.oh.label" />
+		<reference ref="eb.add.label" />
+	</item>
+	<item name="template.14">
+		<link href="http://wiki.openstreetmap.org/wiki/Tag:amenity=hospital"
+			de.href="http://wiki.openstreetmap.org/wiki/DE:Tag:amenity=hospital"
+			fr.href="http://wiki.openstreetmap.org/wiki/FR:Tag:amenity=hospital"
+			it.href="http://wiki.openstreetmap.org/wiki/IT:Tag:amenity=hospital"
+			ja.href="http://wiki.openstreetmap.org/wiki/JA:Tag:amenity=hospital"
+			pt.href="http://wiki.openstreetmap.org/wiki/Pt:Tag:amenity=hospital"
+			pt_BR.href="http://wiki.openstreetmap.org/wiki/Pt-br:Tag:amenity=hospital"
+			ru.href="http://wiki.openstreetmap.org/wiki/RU:Tag:amenity=hospital" />
+		<key key="shop" value="pharmacy" />
+		<text key="name" name="Name" />
+		<reference ref="eb.oh.label" />
+		<reference ref="eb.add.label" />
+	</item>
+	<item name="template.15">
+		<link href="http://wiki.openstreetmap.org/wiki/Tag:amenity=doctors"
+			ja.href="http://wiki.openstreetmap.org/wiki/JA:Tag:amenity=doctors"
+			pl.href="http://wiki.openstreetmap.org/wiki/Pl:Tag:amenity=doctors"
+			pt_BR.href="http://wiki.openstreetmap.org/wiki/Pt-br:Tag:amenity=doctors"
+			ru.href="http://wiki.openstreetmap.org/wiki/RU:Tag:amenity=doctors" />
+		<key key="amenity" value="doctor" />
+		<text key="name" name="Name" />
+		<reference ref="eb.oh.label" />
+		<reference ref="eb.add.label" />
+		<reference ref="eb.tel.label" />
+	</item>
+	<item name="template.16">
+		<link href="http://wiki.openstreetmap.org/wiki/Tag:shop=bakery"
+			ar.href="http://wiki.openstreetmap.org/wiki/Ar:Tag:shop=bakery"
+			de.href="http://wiki.openstreetmap.org/wiki/DE:Tag:shop=bakery"
+			es.href="http://wiki.openstreetmap.org/wiki/ES:Tag:shop=bakery"
+			fi.href="http://wiki.openstreetmap.org/wiki/Fi:Tag:shop=bakery"
+			fr.href="http://wiki.openstreetmap.org/wiki/FR:Tag:shop=bakery"
+			ja.href="http://wiki.openstreetmap.org/wiki/JA:Tag:shop=bakery"
+			pt_BR.href="http://wiki.openstreetmap.org/wiki/Pt-br:Tag:shop=bakery"
+			ru.href="http://wiki.openstreetmap.org/wiki/RU:Tag:shop=bakery" />
+		<key key="shop" value="bakery" />
+		<text key="name" name="Name" />
+		<reference ref="eb.oh.label" />
+		<reference ref="eb.add.label" />
+	</item>
+	<item name="template.17">
+		<link href="http://wiki.openstreetmap.org/wiki/Tag:shop=butcher"
+			de.href="http://wiki.openstreetmap.org/wiki/DE:Tag:shop=butcher"
+			es.href="http://wiki.openstreetmap.org/wiki/ES:Tag:shop=butcher"
+			fi.href="http://wiki.openstreetmap.org/wiki/Fi:Tag:shop=butcher"
+			fr.href="http://wiki.openstreetmap.org/wiki/FR:Tag:shop=butcher"
+			it.href="http://wiki.openstreetmap.org/wiki/IT:Tag:shop=butcher"
+			pt_BR.href="http://wiki.openstreetmap.org/wiki/Pt-br:Tag:shop=butcher"
+			ru.href="http://wiki.openstreetmap.org/wiki/RU:Tag:shop=butcher" />
+		<key key="shop" value="butcher" />
+		<text key="name" name="Name" />
+		<reference ref="eb.oh.label" />
+		<reference ref="eb.add.label" />
+	</item>
+	<item name="template.18">
+		<link href="http://wiki.openstreetmap.org/wiki/Tag:shop=alcohol"
+			es.href="http://wiki.openstreetmap.org/wiki/ES:Tag:shop=alcohol"
+			fr.href="http://wiki.openstreetmap.org/wiki/FR:Tag:shop=alcohol"
+			ja.href="http://wiki.openstreetmap.org/wiki/JA:Tag:shop=alcohol"
+			pt_BR.href="http://wiki.openstreetmap.org/wiki/Pt-br:Tag:shop=alcohol"
+			ru.href="http://wiki.openstreetmap.org/wiki/RU:Tag:shop=alcohol" />
+		<key key="shop" value="beverages" />
+		<text key="name" name="Name" />
+		<reference ref="eb.oh.label" />
+		<reference ref="eb.add.label" />
+	</item>
+	<item name="template.19">
+		<link href="http://wiki.openstreetmap.org/wiki/Tag:shop=car"
+			de.href="http://wiki.openstreetmap.org/wiki/DE:Tag:shop=car" fi.href="http://wiki.openstreetmap.org/wiki/Fi:Tag:shop=car"
+			fr.href="http://wiki.openstreetmap.org/wiki/FR:Tag:shop=car" it.href="http://wiki.openstreetmap.org/wiki/IT:Tag:shop=car"
+			nl.href="http://wiki.openstreetmap.org/wiki/NL:Tag:shop=car"
+			pt_BR.href="http://wiki.openstreetmap.org/wiki/Pt-br:Tag:shop=car"
+			ru.href="http://wiki.openstreetmap.org/wiki/RU:Tag:shop=car" />
+		<key key="shop" value="car" />
+		<text key="name" name="Name" />
+		<text key="operator" />
+		<text key="service" />
+		<reference ref="eb.oh.label" />
+		<reference ref="eb.add.label" />
+	</item>
+	<item name="template.20">
+		<key key="shop" value="car_repair" />
+		<text key="name" name="Name" />
+		<reference ref="eb.oh.label" />
+		<reference ref="eb.add.label" />
+	</item>
+	<item name="template.21">
+		<link href="http://wiki.openstreetmap.org/wiki/Tag:shop=bicycle"
+			de.href="http://wiki.openstreetmap.org/wiki/DE:Tag:shop=bicycle"
+			fi.href="http://wiki.openstreetmap.org/wiki/Fi:Tag:shop=bicycle"
+			fr.href="http://wiki.openstreetmap.org/wiki/FR:Tag:shop=bicycle"
+			ja.href="http://wiki.openstreetmap.org/wiki/JA:Tag:shop=bicycle"
+			pl.href="http://wiki.openstreetmap.org/wiki/Pl:Tag:shop=bicycle"
+			pt_BR.href="http://wiki.openstreetmap.org/wiki/Pt-br:Tag:shop=bicycle"
+			ru.href="http://wiki.openstreetmap.org/wiki/RU:Tag:shop=bicycle"
+			uk.href="http://wiki.openstreetmap.org/wiki/Uk:Tag:shop=bicycle" />
+		<key key="shop" value="bicycle" />
+		<text key="name" name="Name" />
+		<reference ref="eb.oh.label" />
+		<reference ref="eb.add.label" />
+	</item>
+	<item name="template.22">
+		<link href="http://wiki.openstreetmap.org/wiki/Tag:shop=clothes"
+			de.href="http://wiki.openstreetmap.org/wiki/DE:Tag:shop=clothes"
+			fr.href="http://wiki.openstreetmap.org/wiki/FR:Tag:shop=clothes"
+			it.href="http://wiki.openstreetmap.org/wiki/IT:Tag:shop=clothes"
+			ja.href="http://wiki.openstreetmap.org/wiki/JA:Tag:shop=clothes"
+			pt_BR.href="http://wiki.openstreetmap.org/wiki/Pt-br:Tag:shop=clothes"
+			ru.href="http://wiki.openstreetmap.org/wiki/RU:Tag:shop=clothes" />
+		<key key="shop" value="clothes" />
+		<text key="name" name="Name" />
+		<reference ref="eb.oh.label" />
+		<reference ref="eb.add.label" />
+	</item>
+	<item name="template.23">
+		<link href="http://wiki.openstreetmap.org/wiki/Tag:shop=florist"
+			de.href="http://wiki.openstreetmap.org/wiki/DE:Tag:shop=florist"
+			it.href="http://wiki.openstreetmap.org/wiki/IT:Tag:shop=florist"
+			ja.href="http://wiki.openstreetmap.org/wiki/JA:Tag:shop=florist"
+			pt_BR.href="http://wiki.openstreetmap.org/wiki/Pt-br:Tag:shop=florist"
+			ru.href="http://wiki.openstreetmap.org/wiki/RU:Tag:shop=florist" />
+		<key key="shop" value="florist" />
+		<text key="name" name="Name" />
+		<reference ref="eb.oh.label" />
+		<reference ref="eb.add.label" />
+	</item>
+	<item name="template.24">
+		<link href="http://wiki.openstreetmap.org/wiki/Tag:shop=doityourself"
+			de.href="http://wiki.openstreetmap.org/wiki/DE:Tag:shop=doityourself"
+			fr.href="http://wiki.openstreetmap.org/wiki/FR:Tag:shop=doityourself"
+			ja.href="http://wiki.openstreetmap.org/wiki/JA:Tag:shop=doityourself"
+			pt_BR.href="http://wiki.openstreetmap.org/wiki/Pt-br:Tag:shop=doityourself"
+			ru.href="http://wiki.openstreetmap.org/wiki/RU:Tag:shop=doityourself" />
+		<key key="shop" value="doityourself" />
+		<text key="name" name="Name" />
+		<reference ref="eb.oh.label" />
+		<reference ref="eb.add.label" />
+	</item>
+	<item name="template.25">
+		<link href="http://wiki.openstreetmap.org/wiki/Tag:shop=electronics"
+			de.href="http://wiki.openstreetmap.org/wiki/DE:Tag:shop=electronics"
+			pt_BR.href="http://wiki.openstreetmap.org/wiki/Pt-br:Tag:shop=electronics"
+			ru.href="http://wiki.openstreetmap.org/wiki/RU:Tag:shop=electronics" />
+		<key key="shop" value="electronics" />
+		<text key="name" name="Name" />
+		<reference ref="eb.oh.label" />
+		<reference ref="eb.add.label" />
+	</item>
+	<item name="template.26">
+		<link href="http://wiki.openstreetmap.org/wiki/Tag:shop=laundry"
+			de.href="http://wiki.openstreetmap.org/wiki/DE:Tag:shop=laundry"
+			pt_BR.href="http://wiki.openstreetmap.org/wiki/Pt-br:Tag:shop=laundry"
+			ru.href="http://wiki.openstreetmap.org/wiki/RU:Tag:shop=laundry" />
+		<key key="shop" value="laundry" />
+		<text key="name" name="Name" />
+		<text key="self_service" value="no" />
+		<reference ref="eb.oh.label" />
+		<reference ref="eb.add.label" />
+	</item>
+	<item name="template.27">
+		<link href="http://wiki.openstreetmap.org/wiki/Tag:shop=hairdresser"
+			de.href="http://wiki.openstreetmap.org/wiki/DE:Tag:shop=hairdresser"
+			fr.href="http://wiki.openstreetmap.org/wiki/FR:Tag:shop=hairdresser"
+			ja.href="http://wiki.openstreetmap.org/wiki/JA:Tag:shop=hairdresser"
+			pt_BR.href="http://wiki.openstreetmap.org/wiki/Pt-br:Tag:shop=hairdresser"
+			ru.href="http://wiki.openstreetmap.org/wiki/RU:Tag:shop=hairdresser" />
+		<key key="shop" value="hairdresser" />
+		<text key="name" name="Name" />
+		<reference ref="eb.oh.label" />
+		<reference ref="eb.add.label" />
+	</item>
+	<item name="template.28">
+		<link
+			href="http://wiki.openstreetmap.org/wiki/Tag:amenity=place_of_worship"
+			da.href="http://wiki.openstreetmap.org/wiki/Da:Tag:amenity=place_of_worship"
+			de.href="http://wiki.openstreetmap.org/wiki/DE:Tag:amenity=place_of_worship"
+			es.href="http://wiki.openstreetmap.org/wiki/ES:Tag:amenity=place_of_worship"
+			fr.href="http://wiki.openstreetmap.org/wiki/FR:Tag:amenity=place_of_worship"
+			it.href="http://wiki.openstreetmap.org/wiki/IT:Tag:amenity=place_of_worship"
+			ja.href="http://wiki.openstreetmap.org/wiki/JA:Tag:amenity=place_of_worship"
+			no.href="http://wiki.openstreetmap.org/wiki/No:Tag:amenity=place_of_worship"
+			pl.href="http://wiki.openstreetmap.org/wiki/Pl:Tag:amenity=place_of_worship"
+			pt_BR.href="http://wiki.openstreetmap.org/wiki/Pt-br:Tag:amenity=place_of_worship"
+			ru.href="http://wiki.openstreetmap.org/wiki/RU:Tag:amenity=place_of_worship"
+			sv.href="http://wiki.openstreetmap.org/wiki/Sv:Tag:amenity=place_of_worship"
+			zh_TW.href="http://wiki.openstreetmap.org/wiki/Zh-hant:Tag:amenity=place_of_worship" />
+		<key key="amenity" value="place_of_worship" />
+		<text key="name" name="Name" />
+		<text key="religion" />
+		<text key="denomination" text="Denomination" />
+		<reference ref="eb.add.label" />
+	</item>
+</presets>

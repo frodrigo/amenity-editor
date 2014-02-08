@@ -37,8 +37,8 @@ public class TemplatesController {
 	Map<String, Object> get() {
 		Map<String, Object> result = new HashMap<String, Object>();
 
-		result.put("keyValueTemplates", templatesService.getLocalizedTagValueTemplates());
-		result.put("wizardData", templatesService.getLocalizedNodeTemplates());
+		result.put("keyValueTemplates", templatesService.getViewValueTemplates());
+		result.put("wizardData", templatesService.getViewTemplates());
 		return result;
 	}
 }

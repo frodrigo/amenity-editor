@@ -290,6 +290,18 @@
 							<generatePackage>org.osm.schema</generatePackage>
 						</configuration>
 					</execution>
+					<execution>
+						<id>generate-tagging-preset</id>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+						<configuration>
+							<schemaIncludes>
+								<include>tagging-preset-1.0.xsd</include>
+							</schemaIncludes>
+							<generatePackage>org.osm.preset.schema</generatePackage>
+						</configuration>
+					</execution>
 				</executions>
 				<configuration>
 					<schemaDirectory>src/main/schema</schemaDirectory>

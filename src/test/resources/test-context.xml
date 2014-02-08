@@ -23,10 +23,27 @@
 
 	<mvc:annotation-driven>
 		<mvc:message-converters>
-			<bean class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter"></bean>
+			<bean class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
+				<property name="objectMapper" ref="jacksonObjectMapper" />
+			</bean>
 		</mvc:message-converters>
 	</mvc:annotation-driven>
 	<context:property-placeholder location="classpath:config.properties" />
+
+	<bean id="jacksonObjectMapper" class="org.osmsurround.ae.templates.serializer.CustomObjectMapper">
+		<constructor-arg name="messageSource" ref="messageSource" />
+	</bean>
+	<bean id="jacksonSerializationConfig" class="org.codehaus.jackson.map.SerializationConfig"
+		factory-bean="jacksonObjectMapper" factory-method="getSerializationConfig" />
+	<bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+		<property name="targetObject" ref="jacksonSerializationConfig" />
+		<property name="targetMethod" value="setSerializationInclusion" />
+		<property name="arguments">
+			<list>
+				<value type="org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion">NON_NULL</value>
+			</list>
+		</property>
+	</bean>
 
 	<bean id="messageSource"
 		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
