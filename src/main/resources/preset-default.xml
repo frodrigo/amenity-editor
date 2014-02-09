@@ -12,20 +12,24 @@
 		<reference ref="eb.oh.label" />
 	</chunk>
 	<chunk id="eb.add.label" icon="/img/icons/book_addresses.png">
-		<text key="addr:street" text="Street name" />
-		<text key="addr:housenumber" text="City name" />
-		<text key="addr:postcode" text="Post code" />
-		<text key="addr:city" text="City name" />
-		<text key="addr:country" text="Country code" />
+		<optional text="Address">
+			<text key="addr:street" text="Street name" />
+			<text key="addr:housenumber" text="City name" />
+			<text key="addr:postcode" text="Post code" />
+			<text key="addr:city" text="City name" />
+			<text key="addr:country" text="Country code" />
+		</optional>
 	</chunk>
 	<chunk id="eb.tel.label" icon="/img/icons/telephone_add.png">
 		<text key="phone" text="Phone number" default="+49" />
 	</chunk>
 	<chunk id="eb.fuel.label" icon="/img/icons/car_add.png">
-		<check key="fuel:diesel" text="Diesel" default="on" />
-		<check key="fuel:octane_95" text="Octane 95" default="on" />
-		<check key="fuel:octane_98" text="Octane 98" default="on" />
-		<check key="fuel:lpg" text="LPG (Liquefied petroleum gas)" />
+		<checkgroup>
+			<check key="fuel:diesel" text="Diesel" default="on" />
+			<check key="fuel:octane_95" text="Octane 95" default="on" />
+			<check key="fuel:octane_98" text="Octane 98" default="on" />
+			<check key="fuel:lpg" text="LPG (Liquefied petroleum gas)" />
+		</checkgroup>
 	</chunk>
 	<item name="template.01">
 		<text key="" />

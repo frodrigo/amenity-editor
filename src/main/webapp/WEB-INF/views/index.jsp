@@ -305,6 +305,7 @@
 					case "Multiselect":
 						break;
 					case "Checkgroup":
+						createKeyValues(nodeId, formTag, amenity, object.check, create);
 						break;
 					case "Check":
 						if (create || amenity.keyValues[object.key] == null)
@@ -341,6 +342,10 @@
 						}
 						break;
 					case "Optional":
+						var fieldset = new Element("fieldset");
+						fieldset.insert(new Element("legend").update(object.text));
+						createKeyValues(nodeId, fieldset, amenity, object.optionalElements, create);
+						formTag.insert(fieldset);
 						break;
 				}
 			}
