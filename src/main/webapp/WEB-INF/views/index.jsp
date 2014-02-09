@@ -289,6 +289,7 @@
 				switch (tags[i].type)
 				{
 					case "Space":
+						formTag.insert(new Element("br"));
 						break;
 					case "Link":
 						formTag.insert(createLinkIcon("anchor.png",object.href,"Show Wiki"));
