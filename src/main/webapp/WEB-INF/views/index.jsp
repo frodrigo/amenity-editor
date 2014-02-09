@@ -296,7 +296,7 @@
 					case "Text":
 						if (create || object.key == "" || amenity.keyValues[object.key] == null)
 						{
-							amenity.keyValues[object.key] = amenity.keyValues[object.key] || object.otherAttributes.value || "";
+							amenity.keyValues[object.key] = amenity.keyValues[object.key] || object.default || "";
 							formTag.insert(createViewText(nodeId, object, amenity.keyValues[object.key]));
 						}
 						break;
@@ -307,8 +307,22 @@
 					case "Checkgroup":
 						break;
 					case "Check":
+						if (create || amenity.keyValues[object.key] == null)
+						{
+							if (!amenity.keyValues[object.key])
+							{
+								if (object.default)
+								{
+									amenity.keyValues[object.key] = object.default == "ON" ? "true" : "false";
+								} else {
+									amenity.keyValues[object.key] = "";
+								}
+							}
+							formTag.insert(createViewCheck(nodeId, object, amenity.keyValues[object.key]));
+						}
 						break;
 					case "Separator":
+						formTag.insert(new Element("hr"));
 						break;
 					case "Reference":
 						var ref = keyValueTemplates[object.ref];
@@ -382,11 +396,10 @@
 	    	return elem;
         }
 
-        function createViewText(nodeId, view, value, editable)
+        function createViewBase(nodeId, view, value)
         {
 			var keyId = "k_"+(idCounter)+"_"+nodeId;
 			var valueId = "v_"+(idCounter++)+"_"+nodeId;
-			var keyIdChoices = keyId+"_choices";
             var newDiv = new Element("div");
 			newDiv.insert(new Element("div").update(view.text));
 			if (view.key == "")
@@ -398,6 +411,14 @@
 				newDiv.insert(new Element("input", {type:"text", id:keyId+"_" , name: "key_", "class":"inputkey", size:24, "value":view.key, "disabled":"disabled"}));
 			}
 			newDiv.insert(new Element("span").update("&nbsp;"));
+			
+			return newDiv;
+		}
+
+        function createViewText(nodeId, view, value)
+        {
+            var newDiv = createViewBase(nodeId, view, value);
+			var valueId = "v_"+(idCounter++)+"_"+nodeId;
 			nextFocus = nextFocus || valueId;
 			newDiv.insert(new Element("input", {type:"text", id:valueId, name: "value", "class":"inputvalue", size:32, "value":value}));
 			if (view.key == "url" && value != "")
@@ -411,15 +432,24 @@
 			return newDiv;
         }
 
-        function createViewKey(nodeId, view, value, editable)
+        function createViewCheck(nodeId, view, value)
         {
-			var keyId = "k_"+(idCounter)+"_"+nodeId;
+            var newDiv = createViewBase(nodeId, view, value);
 			var valueId = "v_"+(idCounter++)+"_"+nodeId;
-			var keyIdChoices = keyId+"_choices";
-            var newDiv = new Element("div");
-			newDiv.insert(new Element("input", {type:"hidden", id:keyId , name: "key", "value":view.key}));
-			newDiv.insert(new Element("input", {type:"text", id:keyId+"_" , name: "key_", "class":"inputkey", size:24, "value":view.key, "disabled":"disabled"}));	
-			newDiv.insert(new Element("span").update("&nbsp;"));
+			nextFocus = nextFocus || valueId;
+			var select = new Element("select", {type:"text", id:valueId, name: "value", "class":"inputvalue"});
+			select.insert(new Element("option", {value: "", selected: ["true", "false", "yes", "no"].indexOf(value) < 0 ? "selected" : null}).update(""));
+			select.insert(new Element("option", {value: "true", selected: ["true", "yes"].indexOf(value) > -1 ? "selected" : null}).update("<spring:message code="check.true" />"));
+			select.insert(new Element("option", {value: "false", selected: ["false", "no"].indexOf(value) > -1 ? "selected" : null}).update("<spring:message code="check.false" />"));
+			newDiv.insert(select);
+
+			return newDiv;
+        }
+
+        function createViewKey(nodeId, view, value)
+        {
+            var newDiv = createViewBase(nodeId, view, value);
+			var valueId = "v_"+(idCounter++)+"_"+nodeId;
 			newDiv.insert(new Element("input", {type:"hidden", id:valueId , name: "value", "value":value}));
 			var valueInput = new Element("input", {type:"text", id:valueId+"_", name: "value", "class":"inputvalue", size:32, "value":value, "disabled":"disabled"});
 			newDiv.insert(valueInput);

@@ -22,10 +22,10 @@
 		<text key="phone" text="Phone number" default="+49" />
 	</chunk>
 	<chunk id="eb.fuel.label" icon="/img/icons/car_add.png">
-		<text key="fuel:diesel" text="Diesel" value="yes" />
-		<text key="fuel:octane_95" text="Octane 95" value="yes" />
-		<text key="fuel:octane_98" text="Octane 98" value="yes" />
-		<text key="fuel:lpg" text="LPG (Liquefied petroleum gas)" />
+		<check key="fuel:diesel" text="Diesel" default="on" />
+		<check key="fuel:octane_95" text="Octane 95" default="on" />
+		<check key="fuel:octane_98" text="Octane 98" default="on" />
+		<check key="fuel:lpg" text="LPG (Liquefied petroleum gas)" />
 	</chunk>
 	<item name="template.01">
 		<text key="" />
@@ -338,7 +338,7 @@
 			ru.href="http://wiki.openstreetmap.org/wiki/RU:Tag:shop=laundry" />
 		<key key="shop" value="laundry" />
 		<text key="name" name="Name" />
-		<text key="self_service" value="no" />
+		<check key="self_service" default="off" />
 		<reference ref="eb.oh.label" />
 		<reference ref="eb.add.label" />
 	</item>
