@@ -22,7 +22,7 @@
 <script src="<wt:ue>/OpenLayers.js</wt:ue>" type="text/javascript"></script>
 <script src="http://openstreetmap.org/openlayers/OpenStreetMap.js"
 	type="text/javascript"></script>
-<script src="<wt:ue>/js/prototype-1.6.1_rc2.js</wt:ue>" type="text/javascript"></script>
+<script src="<wt:ue>/js/prototype-1.7.1.js</wt:ue>" type="text/javascript"></script>
 <script src="<wt:ue>/js/scriptaculous.js?load=effects,controls</wt:ue>" type="text/javascript"></script>
 <script src="<wt:ue>/js/ae.js</wt:ue>" type="text/javascript"></script>
 <script src="<wt:ue>/js/chosen.proto.js</wt:ue>" type="text/javascript"></script>
@@ -312,6 +312,11 @@
 						}
 						break;
 					case "Multiselect":
+						if (create || amenity.keyValues[object.key] == null)
+						{
+							amenity.keyValues[object.key] = amenity.keyValues[object.key] || object.default || "";
+							formTag.insert(createViewMultiselect(nodeId, object, amenity.keyValues[object.key]));
+						}
 						break;
 					case "Checkgroup":
 						createKeyValues(nodeId, formTag, amenity, object.check, create);
@@ -346,7 +351,7 @@
 					case "Key":
 						if (create || amenity.keyValues[object.key] == null)
 						{
-							amenity.keyValues[object.key] = amenity.keyValues[object.key] || "";
+							amenity.keyValues[object.key] = amenity.keyValues[object.key] || object.value;
 							formTag.insert(createViewKey(nodeId, object, amenity.keyValues[object.key]));
 						}
 						break;
@@ -410,10 +415,9 @@
 	    	return elem;
         }
 
-        function createViewBase(nodeId, view, value)
+        function createViewBase(nodeId, view)
         {
 			var keyId = "k_"+(idCounter)+"_"+nodeId;
-			var valueId = "v_"+(idCounter++)+"_"+nodeId;
             var newDiv = new Element("div");
 			newDiv.insert(new Element("div").update(view.text));
 			if (view.key == "")
@@ -431,7 +435,7 @@
 
         function createViewText(nodeId, view, value)
         {
-            var newDiv = createViewBase(nodeId, view, value);
+            var newDiv = createViewBase(nodeId, view);
 			var valueId = "v_"+(idCounter++)+"_"+nodeId;
 			nextFocus = nextFocus || valueId;
 			newDiv.insert(new Element("input", {type:"text", id:valueId, name: "value", class: "inputvalue", size:32, value: value}));
@@ -448,7 +452,7 @@
 
         function createViewCombo(nodeId, view, value)
         {
-            var newDiv = createViewBase(nodeId, view, value);
+            var newDiv = createViewBase(nodeId, view);
 			var valueId = "v_"+(idCounter++)+"_"+nodeId;
 			nextFocus = nextFocus || valueId;
 			var select = new Element("select", {type:"text", id:valueId, name: "value", class: "inputvalue", "data-placeholder": "<spring:message code="combo.select_or_type" />"});
@@ -467,14 +471,42 @@
 			}
 			select.insert(new Element("option", {value: "", selected: !is_selected ? "selected" : null}).update(""));
 			newDiv.insert(select);
-			newDiv.insert(new Element("script").update("new Chosen($("+valueId+"),{create_option:true, persistent_create_option:true, skip_no_results:true, width:260});"));
+			newDiv.insert(new Element("script").update("new Chosen($('"+valueId+"'),{create_option:true, persistent_create_option:true, skip_no_results:true, width:'260px'});"));
+
+			return newDiv;
+        }
+
+        function createViewMultiselect(nodeId, view, value)
+        {
+            var newDiv = createViewBase(nodeId, view);
+			var valueId = "v_"+(idCounter++)+"_"+nodeId;
+			nextFocus = nextFocus || valueId;
+			var select = new Element("select", {type:"text", id:valueId, name: "value", class: "inputvalue", multiple: "multiple", "data-placeholder": "<spring:message code="combo.select_or_type" />"});
+			value = value.split(";");
+			var values = view.values.split(",");
+			for (var i=0; i<values.length; i++)
+			{
+				var index = value.indexOf(values[i]);
+				var selected = index > -1;
+				if (index > -1)
+				{
+					array.splice(value, 1);
+				}
+				select.insert(new Element("option", {value: values[i], selected: selected ? "selected" : null}).update(values[i]));
+			}
+			for (var i=0; i<value.length; i++)
+			{
+				select.insert(new Element("option", {value: value[i], selected: "selected"}).update(value[i]));
+			}
+			newDiv.insert(select);
+			newDiv.insert(new Element("script").update("new Chosen($('"+valueId+"'),{create_option:true, persistent_create_option:true, skip_no_results:true, width:'260px'});"));
 
 			return newDiv;
         }
 
         function createViewCheck(nodeId, view, value)
         {
-            var newDiv = createViewBase(nodeId, view, value);
+            var newDiv = createViewBase(nodeId, view);
 			var valueId = "v_"+(idCounter++)+"_"+nodeId;
 			nextFocus = nextFocus || valueId;
 			var select = new Element("select", {type:"text", id:valueId, name: "value", class: "inputvalue"});
@@ -488,7 +520,7 @@
 
         function createViewKey(nodeId, view, value)
         {
-            var newDiv = createViewBase(nodeId, view, value);
+            var newDiv = createViewBase(nodeId, view);
 			var valueId = "v_"+(idCounter++)+"_"+nodeId;
 			newDiv.insert(new Element("input", {type:"hidden", id:valueId , name: "value", "value":value}));
 			var valueInput = new Element("input", {type:"text", id:valueId+"_", name: "value", "class":"inputvalue", size:32, "value":value, "disabled":"disabled"});
