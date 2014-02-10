@@ -16,6 +16,8 @@
 
 <link rel="StyleSheet" type="text/css" href="<wt:ue>/stylesheet.css</wt:ue>"
 	media="screen" />
+<link rel="StyleSheet" type="text/css" href="<wt:ue>/js/chosen.css</wt:ue>"
+	media="screen" />
 <link rel="icon" type="image/png" href="favicon.png" />
 <script src="<wt:ue>/OpenLayers.js</wt:ue>" type="text/javascript"></script>
 <script src="http://openstreetmap.org/openlayers/OpenStreetMap.js"
@@ -23,6 +25,7 @@
 <script src="<wt:ue>/js/prototype-1.6.1_rc2.js</wt:ue>" type="text/javascript"></script>
 <script src="<wt:ue>/js/scriptaculous.js?load=effects,controls</wt:ue>" type="text/javascript"></script>
 <script src="<wt:ue>/js/ae.js</wt:ue>" type="text/javascript"></script>
+<script src="<wt:ue>/js/chosen.proto.js</wt:ue>" type="text/javascript"></script>
 
 <script type="text/javascript">
 
@@ -302,6 +305,11 @@
 						}
 						break;
 					case "Combo":
+						if (create || amenity.keyValues[object.key] == null)
+						{
+							amenity.keyValues[object.key] = amenity.keyValues[object.key] || object.default || "";
+							formTag.insert(createViewCombo(nodeId, object, amenity.keyValues[object.key]));
+						}
 						break;
 					case "Multiselect":
 						break;
@@ -411,7 +419,7 @@
 			if (view.key == "")
 			{
 				nextFocus = nextFocus || keyId;
-				newDiv.insert(new Element("input", {type:"text", id:keyId, name: "key", "class":"inputkey", size:24, "value":view.key}));
+				newDiv.insert(new Element("input", {type:"text", id:keyId, name: "key", class: "inputkey", size:24, value: view.key}));
 			} else {
 				newDiv.insert(new Element("input", {type:"hidden", id:keyId, name: "key", "value":view.key}));
 				newDiv.insert(new Element("input", {type:"text", id:keyId+"_" , name: "key_", "class":"inputkey", size:24, "value":view.key, "disabled":"disabled"}));
@@ -426,7 +434,7 @@
             var newDiv = createViewBase(nodeId, view, value);
 			var valueId = "v_"+(idCounter++)+"_"+nodeId;
 			nextFocus = nextFocus || valueId;
-			newDiv.insert(new Element("input", {type:"text", id:valueId, name: "value", "class":"inputvalue", size:32, "value":value}));
+			newDiv.insert(new Element("input", {type:"text", id:valueId, name: "value", class: "inputvalue", size:32, value: value}));
 			if (view.key == "url" && value != "")
 			{
 				newDiv.insert(createLinkIcon("world.png",value,"Show URL"));				
@@ -438,12 +446,38 @@
 			return newDiv;
         }
 
+        function createViewCombo(nodeId, view, value)
+        {
+            var newDiv = createViewBase(nodeId, view, value);
+			var valueId = "v_"+(idCounter++)+"_"+nodeId;
+			nextFocus = nextFocus || valueId;
+			var select = new Element("select", {type:"text", id:valueId, name: "value", class: "inputvalue", "data-placeholder": "<spring:message code="combo.select_or_type" />"});
+			var values = view.values.split(",");
+			var is_selected = false;
+			for (var i=0; i<values.length; i++)
+			{
+				var selected = value==values[i];
+				select.insert(new Element("option", {value: values[i], selected: selected ? "selected" : null}).update(values[i]));
+				is_selected = is_selected || selected;
+			}
+			if (!is_selected && value != "")
+			{
+				select.insert(new Element("option", {value: value, selected: "selected"}).update(value));
+				is_selected = true;
+			}
+			select.insert(new Element("option", {value: "", selected: !is_selected ? "selected" : null}).update(""));
+			newDiv.insert(select);
+			newDiv.insert(new Element("script").update("new Chosen($("+valueId+"),{create_option:true, persistent_create_option:true, skip_no_results:true, width:260});"));
+
+			return newDiv;
+        }
+
         function createViewCheck(nodeId, view, value)
         {
             var newDiv = createViewBase(nodeId, view, value);
 			var valueId = "v_"+(idCounter++)+"_"+nodeId;
 			nextFocus = nextFocus || valueId;
-			var select = new Element("select", {type:"text", id:valueId, name: "value", "class":"inputvalue"});
+			var select = new Element("select", {type:"text", id:valueId, name: "value", class: "inputvalue"});
 			select.insert(new Element("option", {value: "", selected: ["true", "false", "yes", "no"].indexOf(value) < 0 ? "selected" : null}).update(""));
 			select.insert(new Element("option", {value: "true", selected: ["true", "yes"].indexOf(value) > -1 ? "selected" : null}).update("<spring:message code="check.true" />"));
 			select.insert(new Element("option", {value: "false", selected: ["false", "no"].indexOf(value) > -1 ? "selected" : null}).update("<spring:message code="check.false" />"));

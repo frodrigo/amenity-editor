@@ -56,7 +56,8 @@
 			ru.href="http://wiki.openstreetmap.org/wiki/RU:Tag:amenity=restaurant" />
 		<key key="amenity" value="restaurant" />
 		<text key="name" name="Name" />
-		<text key="cuisine" text="Cuisine" />
+		<combo key="cuisine" text="Cuisine"
+			values="italian,chinese,pizza,burger,greek,german,indian,regional,kebab,turkish,asian,thai,mexican,japanese,french,sandwich,sushi,fish_and_chips,chicken" />
 		<reference ref="eb.oh.label" />
 		<reference ref="eb.add.label" />
 		<reference ref="eb.tel.label" />
@@ -70,7 +71,8 @@
 			ru.href="http://wiki.openstreetmap.org/wiki/RU:Tag:amenity=fast_food" />
 		<key key="amenity" value="fast_food" />
 		<text key="name" name="Name" />
-		<text key="cuisine" text="Cuisine" />
+		<combo key="cuisine" text="Cuisine"
+			values="italian,chinese,pizza,burger,greek,german,indian,regional,kebab,turkish,asian,thai,mexican,japanese,french,sandwich,sushi,fish_and_chips,chicken" />
 		<reference ref="eb.oh.label" />
 		<reference ref="eb.add.label" />
 		<reference ref="eb.tel.label" />
@@ -101,7 +103,8 @@
 			zh_CN.href="http://wiki.openstreetmap.org/wiki/Zh-hans:Tag:amenity=cafe" />
 		<key key="amenity" value="cafe" />
 		<text key="name" name="Name" />
-		<text key="cuisine" text="Cuisine" />
+		<combo key="cuisine" text="Cuisine"
+			values="italian,chinese,pizza,burger,greek,german,indian,regional,kebab,turkish,asian,thai,mexican,japanese,french,sandwich,sushi,fish_and_chips,chicken" />
 		<reference ref="eb.oh.label" />
 		<reference ref="eb.add.label" />
 		<reference ref="eb.tel.label" />
@@ -115,7 +118,8 @@
 			ru.href="http://wiki.openstreetmap.org/wiki/RU:Tag:amenity=pub" />
 		<key key="amenity" value="pub" />
 		<text key="name" name="Name" />
-		<text key="cuisine" text="Cuisine" />
+		<combo key="cuisine" text="Cuisine"
+			values="italian,chinese,pizza,burger,greek,german,indian,regional,kebab,turkish,asian,thai,mexican,japanese,french,sandwich,sushi,fish_and_chips,chicken" />
 		<reference ref="eb.oh.label" />
 		<reference ref="eb.add.label" />
 		<reference ref="eb.tel.label" />
@@ -171,8 +175,8 @@
 			ru.href="http://wiki.openstreetmap.org/wiki/RU:Tag:amenity=parking" />
 		<key key="amenity" value="parking" />
 		<text key="name" name="Name" />
-		<text key="fee" />
-		<text key="park_ride" />
+		<combo key="fee" text="Fee" values="yes,no" />
+		<combo key="park_ride" text="Park and Ride" values="yes,no,bus,train,tram,metro,ferry" />
 	</item>
 	<item name="template.13">
 		<link href="http://wiki.openstreetmap.org/wiki/Tag:shop=supermarket"
@@ -375,7 +379,8 @@
 			zh_TW.href="http://wiki.openstreetmap.org/wiki/Zh-hant:Tag:amenity=place_of_worship" />
 		<key key="amenity" value="place_of_worship" />
 		<text key="name" name="Name" />
-		<text key="religion" />
+		<combo key="religion" text="Religion"
+			values="animist,bahai,buddhist,christian,hindu,jain,jewish,multifaith,muslim,pagan,pastafarian,scientologist,shinto,sikh,spiritualist,taoist,unitarian,yazidi,zoroastrian" />
 		<text key="denomination" text="Denomination" />
 		<reference ref="eb.add.label" />
 	</item>
