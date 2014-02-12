@@ -8,7 +8,7 @@
 	</chunk>
 	<chunk id="eb.shop.label" icon="/img/icons/cart_add.png">
 		<text key="shop" />
-		<text key="name" name="Name" />
+		<text key="name" text="Name" />
 		<reference ref="eb.oh.label" />
 	</chunk>
 	<chunk id="eb.add.label" icon="/img/icons/book_addresses.png">
@@ -36,7 +36,7 @@
 	</item>
 	<item name="template.02">
 		<text key="amenity" />
-		<text key="name" name="Name" />
+		<text key="name" text="Name" />
 	</item>
 	<item name="template.03">
 		<reference ref="eb.shop.label" />
@@ -44,7 +44,7 @@
 	</item>
 	<item name="template.04">
 		<text key="tourism" />
-		<text key="name" name="Name" />
+		<text key="name" text="Name" />
 	</item>
 	<item name="template.05">
 		<link href="http://wiki.openstreetmap.org/wiki/Tag:amenity=restaurant"
@@ -55,7 +55,7 @@
 			pt_BR.href="http://wiki.openstreetmap.org/wiki/Pt-br:Tag:amenity=restaurant"
 			ru.href="http://wiki.openstreetmap.org/wiki/RU:Tag:amenity=restaurant" />
 		<key key="amenity" value="restaurant" />
-		<text key="name" name="Name" />
+		<text key="name" text="Name" />
 		<multiselect key="cuisine" text="Cuisine"
 			values="italian,chinese,pizza,burger,greek,german,indian,regional,kebab,turkish,asian,thai,mexican,japanese,french,sandwich,sushi,fish_and_chips,chicken" />
 		<reference ref="eb.oh.label" />
@@ -70,7 +70,7 @@
 			pt_BR.href="http://wiki.openstreetmap.org/wiki/Pt-br:Tag:amenity=fast_food"
 			ru.href="http://wiki.openstreetmap.org/wiki/RU:Tag:amenity=fast_food" />
 		<key key="amenity" value="fast_food" />
-		<text key="name" name="Name" />
+		<text key="name" text="Name" />
 		<multiselect key="cuisine" text="Cuisine"
 			values="italian,chinese,pizza,burger,greek,german,indian,regional,kebab,turkish,asian,thai,mexican,japanese,french,sandwich,sushi,fish_and_chips,chicken" />
 		<reference ref="eb.oh.label" />
@@ -85,7 +85,7 @@
 			pt_BR.href="http://wiki.openstreetmap.org/wiki/Pt-br:Tag:amenity=biergarten"
 			ru.href="http://wiki.openstreetmap.org/wiki/RU:Tag:amenity=biergarten" />
 		<key key="amenity" value="biergarten" />
-		<text key="name" name="Name" />
+		<text key="name" text="Name" />
 		<reference ref="eb.oh.label" />
 		<reference ref="eb.add.label" />
 		<reference ref="eb.tel.label" />
@@ -102,7 +102,7 @@
 			ru.href="http://wiki.openstreetmap.org/wiki/RU:Tag:amenity=cafe"
 			zh_CN.href="http://wiki.openstreetmap.org/wiki/Zh-hans:Tag:amenity=cafe" />
 		<key key="amenity" value="cafe" />
-		<text key="name" name="Name" />
+		<text key="name" text="Name" />
 		<multiselect key="cuisine" text="Cuisine"
 			values="italian,chinese,pizza,burger,greek,german,indian,regional,kebab,turkish,asian,thai,mexican,japanese,french,sandwich,sushi,fish_and_chips,chicken" />
 		<reference ref="eb.oh.label" />
@@ -117,7 +117,7 @@
 			pt_BR.href="http://wiki.openstreetmap.org/wiki/Pt-br:Tag:amenity=pub"
 			ru.href="http://wiki.openstreetmap.org/wiki/RU:Tag:amenity=pub" />
 		<key key="amenity" value="pub" />
-		<text key="name" name="Name" />
+		<text key="name" text="Name" />
 		<multiselect key="cuisine" text="Cuisine"
 			values="italian,chinese,pizza,burger,greek,german,indian,regional,kebab,turkish,asian,thai,mexican,japanese,french,sandwich,sushi,fish_and_chips,chicken" />
 		<reference ref="eb.oh.label" />
@@ -136,7 +136,7 @@
 			ro.href="http://wiki.openstreetmap.org/wiki/Ro:Tag:amenity=nightclub"
 			ru.href="http://wiki.openstreetmap.org/wiki/RU:Tag:amenity=nightclub" />
 		<key key="amenity" value="nightclub" />
-		<text key="name" name="Name" />
+		<text key="name" text="Name" />
 		<reference ref="eb.oh.label" />
 		<reference ref="eb.add.label" />
 		<reference ref="eb.tel.label" />
@@ -156,7 +156,7 @@
 			ru.href="http://wiki.openstreetmap.org/wiki/RU:Tag:amenity=fuel"
 			zh_TW.href="http://wiki.openstreetmap.org/wiki/Zh-hant:Tag:amenity=fuel" />
 		<key key="amenity" value="fuel" />
-		<text key="name" name="Name" />
+		<text key="name" text="Name" />
 		<text key="operator" />
 		<reference ref="eb.oh.label" />
 		<reference ref="eb.add.label" />
@@ -174,7 +174,7 @@
 			pt_BR.href="http://wiki.openstreetmap.org/wiki/Pt-br:Tag:amenity=parking"
 			ru.href="http://wiki.openstreetmap.org/wiki/RU:Tag:amenity=parking" />
 		<key key="amenity" value="parking" />
-		<text key="name" name="Name" />
+		<text key="name" text="Name" />
 		<combo key="fee" text="Fee" values="yes,no" />
 		<multiselect key="park_ride" text="Park and Ride"
 			values="yes,no,bus,train,tram,metro,ferry" />
@@ -187,7 +187,7 @@
 			pt_BR.href="http://wiki.openstreetmap.org/wiki/Pt-br:Tag:shop=supermarket"
 			ru.href="http://wiki.openstreetmap.org/wiki/RU:Tag:shop=supermarket" />
 		<key key="shop" value="supermarket" />
-		<text key="name" name="Name" />
+		<text key="name" text="Name" />
 		<reference ref="eb.oh.label" />
 		<reference ref="eb.add.label" />
 	</item>
@@ -201,7 +201,7 @@
 			pt_BR.href="http://wiki.openstreetmap.org/wiki/Pt-br:Tag:amenity=hospital"
 			ru.href="http://wiki.openstreetmap.org/wiki/RU:Tag:amenity=hospital" />
 		<key key="shop" value="pharmacy" />
-		<text key="name" name="Name" />
+		<text key="name" text="Name" />
 		<reference ref="eb.oh.label" />
 		<reference ref="eb.add.label" />
 	</item>
@@ -212,7 +212,7 @@
 			pt_BR.href="http://wiki.openstreetmap.org/wiki/Pt-br:Tag:amenity=doctors"
 			ru.href="http://wiki.openstreetmap.org/wiki/RU:Tag:amenity=doctors" />
 		<key key="amenity" value="doctor" />
-		<text key="name" name="Name" />
+		<text key="name" text="Name" />
 		<reference ref="eb.oh.label" />
 		<reference ref="eb.add.label" />
 		<reference ref="eb.tel.label" />
@@ -228,7 +228,7 @@
 			pt_BR.href="http://wiki.openstreetmap.org/wiki/Pt-br:Tag:shop=bakery"
 			ru.href="http://wiki.openstreetmap.org/wiki/RU:Tag:shop=bakery" />
 		<key key="shop" value="bakery" />
-		<text key="name" name="Name" />
+		<text key="name" text="Name" />
 		<reference ref="eb.oh.label" />
 		<reference ref="eb.add.label" />
 	</item>
@@ -242,7 +242,7 @@
 			pt_BR.href="http://wiki.openstreetmap.org/wiki/Pt-br:Tag:shop=butcher"
 			ru.href="http://wiki.openstreetmap.org/wiki/RU:Tag:shop=butcher" />
 		<key key="shop" value="butcher" />
-		<text key="name" name="Name" />
+		<text key="name" text="Name" />
 		<reference ref="eb.oh.label" />
 		<reference ref="eb.add.label" />
 	</item>
@@ -254,7 +254,7 @@
 			pt_BR.href="http://wiki.openstreetmap.org/wiki/Pt-br:Tag:shop=alcohol"
 			ru.href="http://wiki.openstreetmap.org/wiki/RU:Tag:shop=alcohol" />
 		<key key="shop" value="beverages" />
-		<text key="name" name="Name" />
+		<text key="name" text="Name" />
 		<reference ref="eb.oh.label" />
 		<reference ref="eb.add.label" />
 	</item>
@@ -266,7 +266,7 @@
 			pt_BR.href="http://wiki.openstreetmap.org/wiki/Pt-br:Tag:shop=car"
 			ru.href="http://wiki.openstreetmap.org/wiki/RU:Tag:shop=car" />
 		<key key="shop" value="car" />
-		<text key="name" name="Name" />
+		<text key="name" text="Name" />
 		<text key="operator" />
 		<text key="service" />
 		<reference ref="eb.oh.label" />
@@ -274,7 +274,7 @@
 	</item>
 	<item name="template.20">
 		<key key="shop" value="car_repair" />
-		<text key="name" name="Name" />
+		<text key="name" text="Name" />
 		<reference ref="eb.oh.label" />
 		<reference ref="eb.add.label" />
 	</item>
@@ -289,7 +289,7 @@
 			ru.href="http://wiki.openstreetmap.org/wiki/RU:Tag:shop=bicycle"
 			uk.href="http://wiki.openstreetmap.org/wiki/Uk:Tag:shop=bicycle" />
 		<key key="shop" value="bicycle" />
-		<text key="name" name="Name" />
+		<text key="name" text="Name" />
 		<reference ref="eb.oh.label" />
 		<reference ref="eb.add.label" />
 	</item>
@@ -302,7 +302,7 @@
 			pt_BR.href="http://wiki.openstreetmap.org/wiki/Pt-br:Tag:shop=clothes"
 			ru.href="http://wiki.openstreetmap.org/wiki/RU:Tag:shop=clothes" />
 		<key key="shop" value="clothes" />
-		<text key="name" name="Name" />
+		<text key="name" text="Name" />
 		<reference ref="eb.oh.label" />
 		<reference ref="eb.add.label" />
 	</item>
@@ -314,7 +314,7 @@
 			pt_BR.href="http://wiki.openstreetmap.org/wiki/Pt-br:Tag:shop=florist"
 			ru.href="http://wiki.openstreetmap.org/wiki/RU:Tag:shop=florist" />
 		<key key="shop" value="florist" />
-		<text key="name" name="Name" />
+		<text key="name" text="Name" />
 		<reference ref="eb.oh.label" />
 		<reference ref="eb.add.label" />
 	</item>
@@ -326,7 +326,7 @@
 			pt_BR.href="http://wiki.openstreetmap.org/wiki/Pt-br:Tag:shop=doityourself"
 			ru.href="http://wiki.openstreetmap.org/wiki/RU:Tag:shop=doityourself" />
 		<key key="shop" value="doityourself" />
-		<text key="name" name="Name" />
+		<text key="name" text="Name" />
 		<reference ref="eb.oh.label" />
 		<reference ref="eb.add.label" />
 	</item>
@@ -336,7 +336,7 @@
 			pt_BR.href="http://wiki.openstreetmap.org/wiki/Pt-br:Tag:shop=electronics"
 			ru.href="http://wiki.openstreetmap.org/wiki/RU:Tag:shop=electronics" />
 		<key key="shop" value="electronics" />
-		<text key="name" name="Name" />
+		<text key="name" text="Name" />
 		<reference ref="eb.oh.label" />
 		<reference ref="eb.add.label" />
 	</item>
@@ -346,7 +346,7 @@
 			pt_BR.href="http://wiki.openstreetmap.org/wiki/Pt-br:Tag:shop=laundry"
 			ru.href="http://wiki.openstreetmap.org/wiki/RU:Tag:shop=laundry" />
 		<key key="shop" value="laundry" />
-		<text key="name" name="Name" />
+		<text key="name" text="Name" />
 		<check key="self_service" default="off" />
 		<reference ref="eb.oh.label" />
 		<reference ref="eb.add.label" />
@@ -359,7 +359,7 @@
 			pt_BR.href="http://wiki.openstreetmap.org/wiki/Pt-br:Tag:shop=hairdresser"
 			ru.href="http://wiki.openstreetmap.org/wiki/RU:Tag:shop=hairdresser" />
 		<key key="shop" value="hairdresser" />
-		<text key="name" name="Name" />
+		<text key="name" text="Name" />
 		<reference ref="eb.oh.label" />
 		<reference ref="eb.add.label" />
 	</item>
@@ -379,7 +379,7 @@
 			sv.href="http://wiki.openstreetmap.org/wiki/Sv:Tag:amenity=place_of_worship"
 			zh_TW.href="http://wiki.openstreetmap.org/wiki/Zh-hant:Tag:amenity=place_of_worship" />
 		<key key="amenity" value="place_of_worship" />
-		<text key="name" name="Name" />
+		<text key="name" text="Name" />
 		<combo key="religion" text="Religion"
 			values="animist,bahai,buddhist,christian,hindu,jain,jewish,multifaith,muslim,pagan,pastafarian,scientologist,shinto,sikh,spiritualist,taoist,unitarian,yazidi,zoroastrian" />
 		<text key="denomination" text="Denomination" />

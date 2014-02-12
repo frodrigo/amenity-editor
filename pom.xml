@@ -207,6 +207,13 @@
 			<artifactId>h2</artifactId>
 			<version>1.3.158</version>
 		</dependency>
+
+		<!-- Translation with gettext -->
+		<dependency>
+			<groupId>com.googlecode.gettext-commons</groupId>
+			<artifactId>gettext-commons</artifactId>
+			<version>0.9.8</version>
+		</dependency>
 	</dependencies>
 	<repositories>
 		<!-- For testing against latest Spring snapshots -->
@@ -327,6 +334,24 @@
 					<includes>
 						<include>src/main/java/**</include>
 					</includes>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>com.googlecode.gettext-commons</groupId>
+				<artifactId>gettext-maven-plugin</artifactId>
+				<version>1.2.4</version>
+				<executions>
+					<execution>
+						<id>convert-po-class</id>
+						<phase>compile</phase>
+						<goals>
+							<goal>dist</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<poDirectory>${basedir}/src/main/resources/preset-po</poDirectory>
+					<targetBundle>org.osm.preset.Messages</targetBundle>
 				</configuration>
 			</plugin>
 		</plugins>

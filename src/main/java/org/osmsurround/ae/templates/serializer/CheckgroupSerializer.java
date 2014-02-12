@@ -8,13 +8,13 @@ import org.codehaus.jackson.map.JsonSerializer;
 import org.codehaus.jackson.map.SerializerProvider;
 import org.osm.preset.schema.Check;
 import org.osm.preset.schema.Checkgroup;
-import org.springframework.context.MessageSource;
+import org.xnap.commons.i18n.I18n;
 
 public class CheckgroupSerializer extends JsonSerializer<Checkgroup> {
-	private MessageSource messageSource;
+	private I18n i18n ;
 
-	public CheckgroupSerializer(MessageSource messageSource) {
-		this.messageSource = messageSource;
+	public CheckgroupSerializer(I18n i18n ) {
+		this.i18n = i18n;
 	}
 
 	@Override

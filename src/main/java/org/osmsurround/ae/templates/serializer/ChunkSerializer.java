@@ -1,21 +1,19 @@
 package org.osmsurround.ae.templates.serializer;
 
 import java.io.IOException;
-import java.util.Locale;
 
 import org.codehaus.jackson.JsonGenerator;
 import org.codehaus.jackson.JsonProcessingException;
 import org.codehaus.jackson.map.JsonSerializer;
 import org.codehaus.jackson.map.SerializerProvider;
 import org.osm.preset.schema.Chunk;
-import org.springframework.context.MessageSource;
-import org.springframework.context.i18n.LocaleContextHolder;
+import org.xnap.commons.i18n.I18n;
 
 public class ChunkSerializer extends JsonSerializer<Chunk> {
-	private MessageSource messageSource;
+	private I18n i18n;
 
-	public ChunkSerializer(MessageSource messageSource) {
-		this.messageSource = messageSource;
+	public ChunkSerializer(I18n i18n) {
+		this.i18n = i18n;
 	}
 
 	@Override
@@ -34,8 +32,7 @@ public class ChunkSerializer extends JsonSerializer<Chunk> {
 		}
 		jgen.writeEndArray();
 
-		Locale locale = LocaleContextHolder.getLocale();
-		String id = messageSource.getMessage(value.getId(), null, locale);
+		String id = i18n.tr(value.getId());
 		jgen.writeStringField("id", id);
 
 		jgen.writeStringField("icon", value.getIcon());

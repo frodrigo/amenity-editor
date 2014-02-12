@@ -8,13 +8,13 @@ import org.codehaus.jackson.map.JsonSerializer;
 import org.codehaus.jackson.map.SerializerProvider;
 import org.osm.preset.schema.Chunk;
 import org.osm.preset.schema.Reference;
-import org.springframework.context.MessageSource;
+import org.xnap.commons.i18n.I18n;
 
 public class ReferenceSerializer extends JsonSerializer<Reference> {
-	private MessageSource messageSource;
+	private I18n i18n ;
 
-	public ReferenceSerializer(MessageSource messageSource) {
-		this.messageSource = messageSource;
+	public ReferenceSerializer(I18n i18n ) {
+		this.i18n = i18n;
 	}
 
 	@Override

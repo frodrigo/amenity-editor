@@ -8,14 +8,14 @@ import org.codehaus.jackson.JsonProcessingException;
 import org.codehaus.jackson.map.JsonSerializer;
 import org.codehaus.jackson.map.SerializerProvider;
 import org.osm.preset.schema.Item;
-import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
+import org.xnap.commons.i18n.I18n;
 
 public class ItemSerializer extends JsonSerializer<Item> {
-	private MessageSource messageSource;
+	private I18n i18n;
 
-	public ItemSerializer(MessageSource messageSource) {
-		this.messageSource = messageSource;
+	public ItemSerializer(I18n i18n) {
+		this.i18n = i18n;
 	}
 
 	@Override
@@ -34,8 +34,7 @@ public class ItemSerializer extends JsonSerializer<Item> {
 		}
 		jgen.writeEndArray();
 
-		Locale locale = LocaleContextHolder.getLocale();
-		String name = messageSource.getMessage(value.getName(), null, value.getName(), locale);
+		String name = i18n.tr(value.getName());
 		jgen.writeStringField("name", name);
 
 		if (value.getIcon() != null) {

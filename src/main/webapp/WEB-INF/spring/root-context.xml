@@ -17,9 +17,7 @@
 	</mvc:annotation-driven>
 	<context:property-placeholder location="classpath:config.properties" />
 
-	<bean id="jacksonObjectMapper" class="org.osmsurround.ae.templates.serializer.CustomObjectMapper">
-		<constructor-arg name="messageSource" ref="messageSource" />
-	</bean>
+	<bean id="jacksonObjectMapper" class="org.osmsurround.ae.templates.serializer.CustomObjectMapper" />
 	<bean id="jacksonSerializationConfig" class="org.codehaus.jackson.map.SerializationConfig"
 		factory-bean="jacksonObjectMapper" factory-method="getSerializationConfig" />
 	<bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">

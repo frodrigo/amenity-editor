@@ -1,7 +1,6 @@
 package org.osmsurround.ae.templates.serializer;
 
 import java.io.IOException;
-import java.util.Locale;
 
 import javax.xml.namespace.QName;
 
@@ -10,14 +9,13 @@ import org.codehaus.jackson.JsonProcessingException;
 import org.codehaus.jackson.map.JsonSerializer;
 import org.codehaus.jackson.map.SerializerProvider;
 import org.osm.preset.schema.Link;
-import org.springframework.context.MessageSource;
-import org.springframework.context.i18n.LocaleContextHolder;
+import org.xnap.commons.i18n.I18n;
 
 public class LinkSerializer extends JsonSerializer<Link> {
-	private MessageSource messageSource;
+	private I18n i18n;
 
-	public LinkSerializer(MessageSource messageSource) {
-		this.messageSource = messageSource;
+	public LinkSerializer(I18n i18n) {
+		this.i18n = i18n;
 	}
 
 	@Override
@@ -25,19 +23,18 @@ public class LinkSerializer extends JsonSerializer<Link> {
 			JsonProcessingException {
 		jgen.writeStartObject();
 
-		Locale locale = LocaleContextHolder.getLocale();
 		if (value.getText() != null) {
-			String text = messageSource.getMessage(value.getText(), null, value.getText(), locale);
+			String text = i18n.tr(value.getText());
 			jgen.writeStringField("text", text);
 		}
 
 		if (value.getTextContext() != null) {
-			String textContext = messageSource.getMessage(value.getTextContext(), null, value.getTextContext(), locale);
+			String textContext = i18n.tr(value.getTextContext());
 			jgen.writeStringField("text_context", textContext);
 		}
 
 		if (value.getHref() != null) {
-			QName lkey = new QName(locale.getLanguage() + ".href");
+			QName lkey = new QName(i18n.getLocale().getLanguage() + ".href");
 			String href = value.getOtherAttributes().containsKey(lkey) ? value.getOtherAttributes().get(lkey) : value
 					.getHref();
 			jgen.writeStringField("href", href);
