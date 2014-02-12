@@ -381,6 +381,10 @@
             formTag.insert(new Element("input",{"type":"hidden","name":"_method","value":nodeId > 0 ? "put" : "post"}));
 
 			if (views) {
+				if (views.icon)
+				{
+					formTag.insert(new Element("img",{"src":contextPath+views.icon}));
+				}
 	            formTag.insert(new Element("span",{}).update(views.name));
 	            createKeyValues(nodeId, formTag, amenity, views.tags, true);
 			} else {
@@ -586,7 +590,13 @@
 			for (var i=0; i<wizardData.length; i++)
 			{
 				var wizard = wizardData[i];
-				elem.insert(new Element("a",{"href":"#","class":"ae-create-amenity",onclick:"addDefaultTags('"+nodeId+"',"+Object.toJSON(wizard)+")"}).update(wizard.name));
+				var a = new Element("a",{"href":"#","class":"ae-create-amenity",onclick:"addDefaultTags('"+nodeId+"',"+Object.toJSON(wizard)+")"})
+				if (wizard.icon)
+				{
+					a.insert(new Element("img",{"src":contextPath+wizard.icon}));
+				}
+				a.insert(wizard.name);
+				elem.insert(a);
 			}
         	
         	return elem;			

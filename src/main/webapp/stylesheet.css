@@ -155,6 +155,7 @@ a.ae-create-amenity {
 	border: 1px solid #e7e7e7;
 	font-size: 11px;
 	width: 95px;
+	min-height: 53px;
 	margin: 0px 0px 2px 2px;
 	padding: 2px;
 	display: block;
