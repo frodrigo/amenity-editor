@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <presets xmlns="http://josm.openstreetmap.de/tagging-preset-1.0">
-	<chunk id="eb.tag.button.add.label" icon="/img/icons/add.png">
+	<chunk id="eb.tag.button.add.label" name="eb.tag.button.add.label" icon="/img/icons/add.png">
 		<text key="" />
 	</chunk>
-	<chunk id="eb.oh.label" icon="/img/icons/time_add.png">
+	<chunk id="eb.oh.label" name="eb.oh.label" icon="/img/icons/time_add.png">
 		<text key="opening_hours" text="Opening Hours" />
 	</chunk>
-	<chunk id="eb.shop.label" icon="/img/icons/cart_add.png">
+	<chunk id="eb.shop.label" name="eb.shop.label" icon="/img/icons/cart_add.png">
 		<text key="shop" />
 		<text key="name" text="Name" />
 		<reference ref="eb.oh.label" />
 	</chunk>
-	<chunk id="eb.add.label" icon="/img/icons/book_addresses.png">
+	<chunk id="eb.add.label" name="eb.add.label" icon="/img/icons/book_addresses.png">
 		<optional text="Address">
 			<text key="addr:street" text="Street name" />
 			<text key="addr:housenumber" text="City name" />
@@ -20,10 +20,10 @@
 			<text key="addr:country" text="Country code" />
 		</optional>
 	</chunk>
-	<chunk id="eb.tel.label" icon="/img/icons/telephone_add.png">
+	<chunk id="eb.tel.label" name="eb.tel.label" icon="/img/icons/telephone_add.png">
 		<text key="phone" text="Phone number" default="+49" />
 	</chunk>
-	<chunk id="eb.fuel.label" icon="/img/icons/car_add.png">
+	<chunk id="eb.fuel.label" name="eb.fuel.label" icon="/img/icons/car_add.png">
 		<checkgroup>
 			<check key="fuel:diesel" text="Diesel" default="on" />
 			<check key="fuel:octane_95" text="Octane 95" default="on" />

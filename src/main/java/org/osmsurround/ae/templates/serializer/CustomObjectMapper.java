@@ -29,12 +29,12 @@ public class CustomObjectMapper extends ObjectMapper {
 		I18n i18n = I18nFactory.getI18n(getClass(), "org.osm.preset.Messages", locale);
 
 		CustomSerializerFactory sf = new CustomSerializerFactory();
-		sf.addSpecificMapping(Item.class, new ItemSerializer(i18n));
-		sf.addSpecificMapping(Chunk.class, new ChunkSerializer(i18n));
-		sf.addSpecificMapping(Reference.class, new ReferenceSerializer(i18n));
-		sf.addSpecificMapping(Optional.class, new OptionalSerializer(i18n));
-		sf.addSpecificMapping(Checkgroup.class, new CheckgroupSerializer(i18n));
-		sf.addSpecificMapping(Link.class, new LinkSerializer(i18n));
+		sf.addSpecificMapping(Item.class, new IntrospectionSerializer(i18n));
+		sf.addSpecificMapping(Chunk.class, new IntrospectionSerializer(i18n));
+		sf.addSpecificMapping(Reference.class, new ReferenceSerializer());
+		sf.addSpecificMapping(Optional.class, new IntrospectionSerializer(i18n));
+		sf.addSpecificMapping(Checkgroup.class, new IntrospectionSerializer(i18n));
+		sf.addSpecificMapping(Link.class, new IntrospectionSerializer(i18n));
 		sf.addSpecificMapping(Text.class, new IntrospectionSerializer(i18n));
 		sf.addSpecificMapping(ListEntry.class, new IntrospectionSerializer(i18n));
 		sf.addSpecificMapping(Label.class, new IntrospectionSerializer(i18n));

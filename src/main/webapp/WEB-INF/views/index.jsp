@@ -319,7 +319,7 @@
 						}
 						break;
 					case "Checkgroup":
-						createKeyValues(nodeId, formTag, amenity, object.check, create);
+						createKeyValues(nodeId, formTag, amenity, object.tags, create);
 						break;
 					case "Check":
 						if (create || amenity.keyValues[object.key] == null)
@@ -358,7 +358,7 @@
 					case "Optional":
 						var fieldset = new Element("fieldset");
 						fieldset.insert(new Element("legend").update(object.text));
-						createKeyValues(nodeId, fieldset, amenity, object.optionalElements, create);
+						createKeyValues(nodeId, fieldset, amenity, object.tags, create);
 						formTag.insert(fieldset);
 						break;
 				}
@@ -638,8 +638,11 @@
 			for (var id in keyValueTemplates)
 			{
 				var template = keyValueTemplates[id];
-				buttonDiv1.insert(createAddTagIcon(amenity.nodeId,contextPath+template.icon,
+				if (template.icon)
+				{
+				    buttonDiv1.insert(createAddTagIcon(amenity.nodeId,contextPath+template.icon,
 						template.id,template.tags));
+				}
 			}
 
 			newDiv.insert(buttonDiv1); 

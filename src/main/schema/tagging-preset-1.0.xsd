@@ -93,6 +93,7 @@
             </choice>
         </sequence>
         <attribute name="id" type="ID" use="required" />
+        <attribute name="name" type="string" /> <!-- Added for AE -->
         <attribute name="icon" type="string" /> <!-- Added for AE -->
     </complexType>
 
