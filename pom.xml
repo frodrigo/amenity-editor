@@ -305,6 +305,7 @@
 				</executions>
 				<configuration>
 					<schemaDirectory>src/main/schema</schemaDirectory>
+					<forceRegenerate>true</forceRegenerate>
 				</configuration>
 			</plugin>
 
