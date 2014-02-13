@@ -651,7 +651,7 @@
 				if (template.icon)
 				{
 				    buttonDiv1.insert(createAddTagIcon(amenity.nodeId,contextPath+template.icon,
-						template.id,template.tags));
+						template.name,template.tags));
 				}
 			}
 

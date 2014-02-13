@@ -1,7 +1,5 @@
 package org.osmsurround.ae.templates.serializer;
 
-import java.util.Locale;
-
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.ser.CustomSerializerFactory;
 import org.osm.preset.schema.Check;
@@ -16,31 +14,25 @@ import org.osm.preset.schema.Optional;
 import org.osm.preset.schema.Reference;
 import org.osm.preset.schema.Role;
 import org.osm.preset.schema.Text;
-import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Component;
-import org.xnap.commons.i18n.I18n;
-import org.xnap.commons.i18n.I18nFactory;
 
 @Component("jacksonObjectMapper")
 public class CustomObjectMapper extends ObjectMapper {
 
 	public CustomObjectMapper() {
-		Locale locale = LocaleContextHolder.getLocale();
-		I18n i18n = I18nFactory.getI18n(getClass(), "org.osm.preset.Messages", locale);
-
 		CustomSerializerFactory sf = new CustomSerializerFactory();
-		sf.addSpecificMapping(Item.class, new IntrospectionSerializer(i18n));
-		sf.addSpecificMapping(Chunk.class, new IntrospectionSerializer(i18n));
+		sf.addSpecificMapping(Item.class, new IntrospectionSerializer());
+		sf.addSpecificMapping(Chunk.class, new IntrospectionSerializer());
 		sf.addSpecificMapping(Reference.class, new ReferenceSerializer());
-		sf.addSpecificMapping(Optional.class, new IntrospectionSerializer(i18n));
-		sf.addSpecificMapping(Checkgroup.class, new IntrospectionSerializer(i18n));
-		sf.addSpecificMapping(Link.class, new IntrospectionSerializer(i18n));
-		sf.addSpecificMapping(Text.class, new IntrospectionSerializer(i18n));
-		sf.addSpecificMapping(ListEntry.class, new IntrospectionSerializer(i18n));
-		sf.addSpecificMapping(Label.class, new IntrospectionSerializer(i18n));
-		sf.addSpecificMapping(Multiselect.class, new IntrospectionSerializer(i18n));
-		sf.addSpecificMapping(Role.class, new IntrospectionSerializer(i18n));
-		sf.addSpecificMapping(Check.class, new IntrospectionSerializer(i18n));
+		sf.addSpecificMapping(Optional.class, new IntrospectionSerializer());
+		sf.addSpecificMapping(Checkgroup.class, new IntrospectionSerializer());
+		sf.addSpecificMapping(Link.class, new IntrospectionSerializer());
+		sf.addSpecificMapping(Text.class, new IntrospectionSerializer());
+		sf.addSpecificMapping(ListEntry.class, new IntrospectionSerializer());
+		sf.addSpecificMapping(Label.class, new IntrospectionSerializer());
+		sf.addSpecificMapping(Multiselect.class, new IntrospectionSerializer());
+		sf.addSpecificMapping(Role.class, new IntrospectionSerializer());
+		sf.addSpecificMapping(Check.class, new IntrospectionSerializer());
 		this.setSerializerFactory(sf);
 	}
 }

@@ -3,6 +3,9 @@ package org.osmsurround.ae.templates.serializer;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
 
 import javax.xml.namespace.QName;
 
@@ -12,13 +15,25 @@ import org.codehaus.jackson.map.JsonSerializer;
 import org.codehaus.jackson.map.SerializerProvider;
 import org.osm.preset.schema.Link;
 import org.osm.preset.schema.Space;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.xnap.commons.i18n.I18n;
+import org.xnap.commons.i18n.I18nFactory;
 
 public class IntrospectionSerializer extends JsonSerializer<Object> {
-	private I18n i18n;
 
-	public IntrospectionSerializer(I18n i18n) {
-		this.i18n = i18n;
+	private static Map<String, I18n> I18N_CACHE = new HashMap<String, I18n>();
+
+	private static I18n getI18n() {
+		Locale locale = LocaleContextHolder.getLocale();
+		String key = locale.toString();
+
+		if (I18N_CACHE.containsKey(key)) {
+			return I18N_CACHE.get(key);
+		} else {
+			I18n i18n = I18nFactory.getI18n(IntrospectionSerializer.class, "org.osm.preset.Messages", locale);
+			I18N_CACHE.put(key, i18n);
+			return i18n;
+		}
 	}
 
 	@Override
@@ -55,7 +70,8 @@ public class IntrospectionSerializer extends JsonSerializer<Object> {
 
 							// Pick the href for current language
 							Link link = (Link) value;
-							QName lkey = new QName(i18n.getLocale().getLanguage() + ".href");
+							Locale locale = LocaleContextHolder.getLocale();
+							QName lkey = new QName(locale.getLanguage().substring(1, 2) + ".href");
 							String href = link.getOtherAttributes().containsKey(lkey) ? link.getOtherAttributes().get(
 									lkey) : link.getHref();
 							jgen.writeStringField("href", href);
@@ -70,7 +86,7 @@ public class IntrospectionSerializer extends JsonSerializer<Object> {
 									|| (className.equals("ListEntry") && (methodName.equals("getDisplayValue") || methodName
 											.equals("getShortDescription")))) {
 								// Translate
-								String t = i18n.tr(text);
+								String t = getI18n().tr(text);
 								if (t != null) {
 									text = t;
 								}
