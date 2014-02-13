@@ -165,6 +165,17 @@ a.ae-create-amenity {
 	color: #000;
 }
 
+a.ae-create-amenity img {
+	width: 32px;
+	height: 37px;
+}
+
+a.ae-create-amenity div {
+	width: 32px;
+	height: 37px;
+	display: inline-block;
+}
+
 a.ae-create-amenity:hover {
 	background-color: #e7e7e7;
 	color: #000;

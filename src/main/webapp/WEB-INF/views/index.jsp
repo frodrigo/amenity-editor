@@ -593,8 +593,11 @@
 				var a = new Element("a",{"href":"#","class":"ae-create-amenity",onclick:"addDefaultTags('"+nodeId+"',"+Object.toJSON(wizard)+")"})
 				if (wizard.icon)
 				{
-					a.insert(new Element("img",{"src":contextPath+wizard.icon}));
+					a.insert(new Element("img",{src:contextPath+wizard.icon}));
+				} else {
+					a.insert(new Element("div"));
 				}
+				a.insert(new Element("br"));
 				a.insert(wizard.name);
 				elem.insert(a);
 			}
