@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <presets xmlns="http://josm.openstreetmap.de/tagging-preset-1.0">
-	<chunk id="eb.tag.button.add.label" name="eb.tag.button.add.label" icon="/img/icons/add.png">
+	<chunk id="eb.tag.button.add.label" name="Adds an empty tag" icon="/img/icons/add.png">
 		<text key="" />
 	</chunk>
-	<chunk id="eb.oh.label" name="eb.oh.label" icon="/img/icons/time_add.png">
+	<chunk id="eb.oh.label" name="Add opening hours" icon="/img/icons/time_add.png">
 		<text key="opening_hours" text="Opening Hours" />
 	</chunk>
-	<chunk id="eb.shop.label" name="eb.shop.label" icon="/img/icons/cart_add.png">
+	<chunk id="eb.shop.label" name="Add shop" icon="/img/icons/cart_add.png">
 		<text key="shop" />
 		<text key="name" text="Name" />
 		<reference ref="eb.oh.label" />
 	</chunk>
-	<chunk id="eb.add.label" name="eb.add.label" icon="/img/icons/book_addresses.png">
+	<chunk id="eb.add.label" name="Add address" icon="/img/icons/book_addresses.png">
 		<optional text="Address">
 			<text key="addr:street" text="Street name" />
 			<text key="addr:housenumber" text="City name" />
@@ -20,10 +20,10 @@
 			<text key="addr:country" text="Country code" />
 		</optional>
 	</chunk>
-	<chunk id="eb.tel.label" name="eb.tel.label" icon="/img/icons/telephone_add.png">
+	<chunk id="eb.tel.label" name="Add telephone" icon="/img/icons/telephone_add.png">
 		<text key="phone" text="Phone number" default="+49" />
 	</chunk>
-	<chunk id="eb.fuel.label" name="eb.fuel.label" icon="/img/icons/car_add.png">
+	<chunk id="eb.fuel.label" name="Add fuel station tags" icon="/img/icons/car_add.png">
 		<checkgroup>
 			<check key="fuel:diesel" text="Diesel" default="on" />
 			<check key="fuel:octane_95" text="Octane 95" default="on" />
@@ -31,22 +31,22 @@
 			<check key="fuel:lpg" text="LPG (Liquefied petroleum gas)" />
 		</checkgroup>
 	</chunk>
-	<item name="template.01">
+	<item name="empty node">
 		<text key="" />
 	</item>
-	<item name="template.02">
+	<item name="empty amenity">
 		<text key="amenity" />
 		<text key="name" text="Name" />
 	</item>
-	<item name="template.03" icon="/img/map/shoppingmall.png">
+	<item name="empty shop" icon="/img/map/shoppingmall.png">
 		<reference ref="eb.shop.label" />
 		<reference ref="eb.oh.label" />
 	</item>
-	<item name="template.04">
+	<item name="tourism">
 		<text key="tourism" />
 		<text key="name" text="Name" />
 	</item>
-	<item name="template.05" icon="/img/map/restaurant.png">
+	<item name="restaurant" icon="/img/map/restaurant.png">
 		<link href="http://wiki.openstreetmap.org/wiki/Tag:amenity=restaurant"
 			de.href="http://wiki.openstreetmap.org/wiki/DE:Tag:amenity=restaurant"
 			es.href="http://wiki.openstreetmap.org/wiki/ES:Tag:amenity=restaurant"
@@ -63,7 +63,7 @@
 		<reference ref="eb.tel.label" />
 		<text key="url" />
 	</item>
-	<item name="template.06" icon="/img/map/fastfood.png">
+	<item name="fast food" icon="/img/map/fastfood.png">
 		<link href="http://wiki.openstreetmap.org/wiki/Tag:amenity=fast_food"
 			de.href="http://wiki.openstreetmap.org/wiki/DE:Tag:amenity=fast_food"
 			ja.href="http://wiki.openstreetmap.org/wiki/JA:Tag:amenity=fast_food"
@@ -78,7 +78,7 @@
 		<reference ref="eb.tel.label" />
 		<text key="url" />
 	</item>
-	<item name="template.07">
+	<item name="biergarten">
 		<link href="http://wiki.openstreetmap.org/wiki/Tag:amenity=biergarten"
 			de.href="http://wiki.openstreetmap.org/wiki/DE:Tag:amenity=biergarten"
 			ja.href="http://wiki.openstreetmap.org/wiki/JA:Tag:amenity=biergarten"
@@ -91,7 +91,7 @@
 		<reference ref="eb.tel.label" />
 		<text key="url" />
 	</item>
-	<item name="template.08" icon="/img/map/coffee.png">
+	<item name="cafe" icon="/img/map/coffee.png">
 		<link href="http://wiki.openstreetmap.org/wiki/Tag:amenity=cafe"
 			de.href="http://wiki.openstreetmap.org/wiki/DE:Tag:amenity=cafe"
 			et.href="http://wiki.openstreetmap.org/wiki/Et:Tag:amenity=cafe"
@@ -110,7 +110,7 @@
 		<reference ref="eb.tel.label" />
 		<text key="url" />
 	</item>
-	<item name="template.09">
+	<item name="pub">
 		<link href="http://wiki.openstreetmap.org/wiki/Tag:amenity=pub"
 			de.href="http://wiki.openstreetmap.org/wiki/DE:Tag:amenity=pub"
 			ja.href="http://wiki.openstreetmap.org/wiki/JA:Tag:amenity=pub"
@@ -125,7 +125,7 @@
 		<reference ref="eb.tel.label" />
 		<text key="url" />
 	</item>
-	<item name="template.10" icon="/img/map/club.png">
+	<item name="nightclub/Disco" icon="/img/map/club.png">
 		<link href="http://wiki.openstreetmap.org/wiki/Tag:amenity=nightclub"
 			da.href="http://wiki.openstreetmap.org/wiki/Da:Tag:amenity=nightclub"
 			de.href="http://wiki.openstreetmap.org/wiki/DE:Tag:amenity=nightclub"
@@ -142,7 +142,7 @@
 		<reference ref="eb.tel.label" />
 		<text key="url" />
 	</item>
-	<item name="template.11" icon="/img/map/gazstation.png">
+	<item name="fuel" icon="/img/map/gazstation.png">
 		<link href="http://wiki.openstreetmap.org/wiki/Tag:amenity=fuel"
 			de.href="http://wiki.openstreetmap.org/wiki/DE:Tag:amenity=fuel"
 			es.href="http://wiki.openstreetmap.org/wiki/ES:Tag:amenity=fuel"
@@ -162,7 +162,7 @@
 		<reference ref="eb.add.label" />
 		<reference ref="eb.fuel.label" />
 	</item>
-	<item name="template.12" icon="/img/map/parking.png">
+	<item name="parking" icon="/img/map/parking.png">
 		<link href="http://wiki.openstreetmap.org/wiki/Tag:amenity=parking"
 			de.href="http://wiki.openstreetmap.org/wiki/DE:Tag:amenity=parking"
 			fr.href="http://wiki.openstreetmap.org/wiki/FR:Tag:amenity=parking"
@@ -179,7 +179,7 @@
 		<multiselect key="park_ride" text="Park and Ride"
 			values="yes,no,bus,train,tram,metro,ferry" />
 	</item>
-	<item name="template.13" icon="/img/map/supermarket.png">
+	<item name="supermarket" icon="/img/map/supermarket.png">
 		<link href="http://wiki.openstreetmap.org/wiki/Tag:shop=supermarket"
 			de.href="http://wiki.openstreetmap.org/wiki/DE:Tag:shop=supermarket"
 			fr.href="http://wiki.openstreetmap.org/wiki/FR:Tag:shop=supermarket"
@@ -191,7 +191,7 @@
 		<reference ref="eb.oh.label" />
 		<reference ref="eb.add.label" />
 	</item>
-	<item name="template.14">
+	<item name="pharmacy">
 		<link href="http://wiki.openstreetmap.org/wiki/Tag:amenity=hospital"
 			de.href="http://wiki.openstreetmap.org/wiki/DE:Tag:amenity=hospital"
 			fr.href="http://wiki.openstreetmap.org/wiki/FR:Tag:amenity=hospital"
@@ -205,7 +205,7 @@
 		<reference ref="eb.oh.label" />
 		<reference ref="eb.add.label" />
 	</item>
-	<item name="template.15" icon="/img/map/doctor.png">
+	<item name="doctor" icon="/img/map/doctor.png">
 		<link href="http://wiki.openstreetmap.org/wiki/Tag:amenity=doctors"
 			ja.href="http://wiki.openstreetmap.org/wiki/JA:Tag:amenity=doctors"
 			pl.href="http://wiki.openstreetmap.org/wiki/Pl:Tag:amenity=doctors"
@@ -217,7 +217,7 @@
 		<reference ref="eb.add.label" />
 		<reference ref="eb.tel.label" />
 	</item>
-	<item name="template.16" icon="/img/map/bread.png">
+	<item name="bakery" icon="/img/map/bread.png">
 		<link href="http://wiki.openstreetmap.org/wiki/Tag:shop=bakery"
 			ar.href="http://wiki.openstreetmap.org/wiki/Ar:Tag:shop=bakery"
 			de.href="http://wiki.openstreetmap.org/wiki/DE:Tag:shop=bakery"
@@ -232,7 +232,7 @@
 		<reference ref="eb.oh.label" />
 		<reference ref="eb.add.label" />
 	</item>
-	<item name="template.17" icon="/img/map/butcher.png">
+	<item name="butcher" icon="/img/map/butcher.png">
 		<link href="http://wiki.openstreetmap.org/wiki/Tag:shop=butcher"
 			de.href="http://wiki.openstreetmap.org/wiki/DE:Tag:shop=butcher"
 			es.href="http://wiki.openstreetmap.org/wiki/ES:Tag:shop=butcher"
@@ -246,7 +246,7 @@
 		<reference ref="eb.oh.label" />
 		<reference ref="eb.add.label" />
 	</item>
-	<item name="template.18">
+	<item name="beverages">
 		<link href="http://wiki.openstreetmap.org/wiki/Tag:shop=alcohol"
 			es.href="http://wiki.openstreetmap.org/wiki/ES:Tag:shop=alcohol"
 			fr.href="http://wiki.openstreetmap.org/wiki/FR:Tag:shop=alcohol"
@@ -258,7 +258,7 @@
 		<reference ref="eb.oh.label" />
 		<reference ref="eb.add.label" />
 	</item>
-	<item name="template.19" icon="/img/map/car.png">
+	<item name="shop/car" icon="/img/map/car.png">
 		<link href="http://wiki.openstreetmap.org/wiki/Tag:shop=car"
 			de.href="http://wiki.openstreetmap.org/wiki/DE:Tag:shop=car" fi.href="http://wiki.openstreetmap.org/wiki/Fi:Tag:shop=car"
 			fr.href="http://wiki.openstreetmap.org/wiki/FR:Tag:shop=car" it.href="http://wiki.openstreetmap.org/wiki/IT:Tag:shop=car"
@@ -272,13 +272,13 @@
 		<reference ref="eb.oh.label" />
 		<reference ref="eb.add.label" />
 	</item>
-	<item name="template.20" icon="/img/map/carrepair.png">
+	<item name="shop/car repair" icon="/img/map/carrepair.png">
 		<key key="shop" value="car_repair" />
 		<text key="name" text="Name" />
 		<reference ref="eb.oh.label" />
 		<reference ref="eb.add.label" />
 	</item>
-	<item name="template.21">
+	<item name="shop/bicycle">
 		<link href="http://wiki.openstreetmap.org/wiki/Tag:shop=bicycle"
 			de.href="http://wiki.openstreetmap.org/wiki/DE:Tag:shop=bicycle"
 			fi.href="http://wiki.openstreetmap.org/wiki/Fi:Tag:shop=bicycle"
@@ -293,7 +293,7 @@
 		<reference ref="eb.oh.label" />
 		<reference ref="eb.add.label" />
 	</item>
-	<item name="template.22" icon="/img/map/clothes.png">
+	<item name="shop/clothes" icon="/img/map/clothes.png">
 		<link href="http://wiki.openstreetmap.org/wiki/Tag:shop=clothes"
 			de.href="http://wiki.openstreetmap.org/wiki/DE:Tag:shop=clothes"
 			fr.href="http://wiki.openstreetmap.org/wiki/FR:Tag:shop=clothes"
@@ -306,7 +306,7 @@
 		<reference ref="eb.oh.label" />
 		<reference ref="eb.add.label" />
 	</item>
-	<item name="template.23" icon="/img/map/flowers.png">
+	<item name="shop/florist" icon="/img/map/flowers.png">
 		<link href="http://wiki.openstreetmap.org/wiki/Tag:shop=florist"
 			de.href="http://wiki.openstreetmap.org/wiki/DE:Tag:shop=florist"
 			it.href="http://wiki.openstreetmap.org/wiki/IT:Tag:shop=florist"
@@ -318,7 +318,7 @@
 		<reference ref="eb.oh.label" />
 		<reference ref="eb.add.label" />
 	</item>
-	<item name="template.24">
+	<item name="doityourself">
 		<link href="http://wiki.openstreetmap.org/wiki/Tag:shop=doityourself"
 			de.href="http://wiki.openstreetmap.org/wiki/DE:Tag:shop=doityourself"
 			fr.href="http://wiki.openstreetmap.org/wiki/FR:Tag:shop=doityourself"
@@ -330,7 +330,7 @@
 		<reference ref="eb.oh.label" />
 		<reference ref="eb.add.label" />
 	</item>
-	<item name="template.25">
+	<item name="electronics">
 		<link href="http://wiki.openstreetmap.org/wiki/Tag:shop=electronics"
 			de.href="http://wiki.openstreetmap.org/wiki/DE:Tag:shop=electronics"
 			pt_BR.href="http://wiki.openstreetmap.org/wiki/Pt-br:Tag:shop=electronics"
@@ -340,7 +340,7 @@
 		<reference ref="eb.oh.label" />
 		<reference ref="eb.add.label" />
 	</item>
-	<item name="template.26" icon="/img/map/laundromat.png">
+	<item name="laundry" icon="/img/map/laundromat.png">
 		<link href="http://wiki.openstreetmap.org/wiki/Tag:shop=laundry"
 			de.href="http://wiki.openstreetmap.org/wiki/DE:Tag:shop=laundry"
 			pt_BR.href="http://wiki.openstreetmap.org/wiki/Pt-br:Tag:shop=laundry"
@@ -351,7 +351,7 @@
 		<reference ref="eb.oh.label" />
 		<reference ref="eb.add.label" />
 	</item>
-	<item name="template.27" icon="/img/map/hairsalon.png">
+	<item name="hairdresser" icon="/img/map/hairsalon.png">
 		<link href="http://wiki.openstreetmap.org/wiki/Tag:shop=hairdresser"
 			de.href="http://wiki.openstreetmap.org/wiki/DE:Tag:shop=hairdresser"
 			fr.href="http://wiki.openstreetmap.org/wiki/FR:Tag:shop=hairdresser"
@@ -363,7 +363,7 @@
 		<reference ref="eb.oh.label" />
 		<reference ref="eb.add.label" />
 	</item>
-	<item name="template.28" icon="/img/map/church2.png">
+	<item name="place of worship" icon="/img/map/church2.png">
 		<link
 			href="http://wiki.openstreetmap.org/wiki/Tag:amenity=place_of_worship"
 			da.href="http://wiki.openstreetmap.org/wiki/Da:Tag:amenity=place_of_worship"

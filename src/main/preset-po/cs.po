@@ -1,0 +1,232 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: josm\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-02-13 15:10+0100\n"
+"PO-Revision-Date: 2014-02-09 10:22+0000\n"
+"Language: cs\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+
+#: preset-default.java:3
+msgid "Adds an empty tag"
+msgstr "Přidá prázdný popisek"
+
+#: preset-default.java:6
+msgid "Add opening hours"
+msgstr "Přidat otevírací hodiny"
+
+#: preset-default.java:7
+msgid "Opening Hours"
+msgstr "Otevírací doba"
+
+#: preset-default.java:9
+msgid "Add shop"
+msgstr "Přidat obchod"
+
+#: preset-default.java:11 preset-default.java:39 preset-default.java:47
+#: preset-default.java:58 preset-default.java:73 preset-default.java:88
+#: preset-default.java:105 preset-default.java:120 preset-default.java:139
+#: preset-default.java:159 preset-default.java:177 preset-default.java:190
+#: preset-default.java:204 preset-default.java:215 preset-default.java:231
+#: preset-default.java:245 preset-default.java:257 preset-default.java:269
+#: preset-default.java:277 preset-default.java:292 preset-default.java:305
+#: preset-default.java:317 preset-default.java:329 preset-default.java:339
+#: preset-default.java:349 preset-default.java:362 preset-default.java:382
+msgid "Name"
+msgstr "Název"
+
+#: preset-default.java:14
+msgid "Add address"
+msgstr "Přidat adresu"
+
+#: preset-default.java:15
+msgid "Address"
+msgstr "Adresa"
+
+#: preset-default.java:16
+msgid "Street name"
+msgstr "Jméno ulice"
+
+#: preset-default.java:17 preset-default.java:19
+msgid "City name"
+msgstr "Jméno města"
+
+#: preset-default.java:18
+msgid "Post code"
+msgstr "Poštovní směrovací číslo"
+
+#: preset-default.java:20
+msgid "Country code"
+msgstr "Kód země"
+
+#: preset-default.java:23
+msgid "Add telephone"
+msgstr "Přidat telefon"
+
+#: preset-default.java:24
+msgid "Phone number"
+msgstr "Telefonní číslo"
+
+#: preset-default.java:26
+msgid "Add fuel station tags"
+msgstr ""
+
+#: preset-default.java:28
+msgid "Diesel"
+msgstr "Nafta"
+
+#: preset-default.java:29
+msgid "Octane 95"
+msgstr "95 oktanů"
+
+#: preset-default.java:30
+msgid "Octane 98"
+msgstr "98 oktanů"
+
+#: preset-default.java:31
+msgid "LPG (Liquefied petroleum gas)"
+msgstr "LPG (propan-butan)"
+
+#: preset-default.java:34
+msgid "empty node"
+msgstr "Prázdný bod"
+
+#: preset-default.java:37
+msgid "empty amenity"
+msgstr "Prázdný bod občanské vybavenosti"
+
+#: preset-default.java:41
+msgid "empty shop"
+msgstr "Prázdný bod obchodu"
+
+#: preset-default.java:45
+msgid "tourism"
+msgstr "turistika"
+
+#: preset-default.java:49
+msgid "restaurant"
+msgstr "Restaurace"
+
+#: preset-default.java:59 preset-default.java:74 preset-default.java:106
+#: preset-default.java:121
+msgid "Cuisine"
+msgstr "Kuchyně"
+
+#: preset-default.java:66
+msgid "fast food"
+msgstr "Rychlé občersvení"
+
+#: preset-default.java:81
+msgid "biergarten"
+msgstr "Pivní zahrádka"
+
+#: preset-default.java:94
+msgid "cafe"
+msgstr "Kafé"
+
+#: preset-default.java:113
+msgid "pub"
+msgstr "Hospoda"
+
+#: preset-default.java:128
+msgid "nightclub/Disco"
+msgstr "Nightclub/Disko"
+
+#: preset-default.java:145
+msgid "fuel"
+msgstr "Benzinová pumpa"
+
+#: preset-default.java:165
+msgid "parking"
+msgstr "parkoviště"
+
+#: preset-default.java:178
+msgid "Fee"
+msgstr "Poplatek"
+
+#: preset-default.java:178
+msgid "yes"
+msgstr "ano"
+
+#: preset-default.java:178
+msgid "no"
+msgstr "ne"
+
+#: preset-default.java:179
+msgid "Park and Ride"
+msgstr "Parkoviště P+R"
+
+#: preset-default.java:182
+msgid "supermarket"
+msgstr "Supermarket"
+
+#: preset-default.java:194
+msgid "pharmacy"
+msgstr "Lékárna"
+
+#: preset-default.java:208
+msgid "doctor"
+msgstr "Lékař"
+
+#: preset-default.java:220
+msgid "bakery"
+msgstr "Pekařství"
+
+#: preset-default.java:235
+msgid "butcher"
+msgstr "Řeznictví"
+
+#: preset-default.java:249
+msgid "beverages"
+msgstr "Nápoje"
+
+#: preset-default.java:261
+msgid "shop/car"
+msgstr "Obchod/Auta"
+
+#: preset-default.java:275
+msgid "shop/car repair"
+msgstr "Obchod/Autoopravna"
+
+#: preset-default.java:281
+msgid "shop/bicycle"
+msgstr "Obchod/Bbicykly"
+
+#: preset-default.java:296
+msgid "shop/clothes"
+msgstr "Obchod/Oblečení"
+
+#: preset-default.java:309
+msgid "shop/florist"
+msgstr "Obchod/Květiny"
+
+#: preset-default.java:321
+msgid "doityourself"
+msgstr "Kutilství"
+
+#: preset-default.java:333
+msgid "electronics"
+msgstr "Elektronika"
+
+#: preset-default.java:343
+msgid "laundry"
+msgstr "Prádelna"
+
+#: preset-default.java:354
+msgid "hairdresser"
+msgstr "Kadeřnictví"
+
+#: preset-default.java:366
+msgid "place of worship"
+msgstr "Pobožné místo"
+
+#: preset-default.java:383
+msgid "Religion"
+msgstr "Náboženství"
+
+#: preset-default.java:385
+msgid "Denomination"
+msgstr "Vyznání"

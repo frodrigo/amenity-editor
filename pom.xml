@@ -350,7 +350,9 @@
 					</execution>
 				</executions>
 				<configuration>
-					<poDirectory>${basedir}/src/main/resources/preset-po</poDirectory>
+					<xgettextCmd>${basedir}/src/main/preset-po/xgettext-preset.sh</xgettextCmd>
+					<sourceDirectory>${basedir}/target/generated-sources/</sourceDirectory>
+					<poDirectory>${basedir}/src/main/preset-po</poDirectory>
 					<targetBundle>org.osm.preset.Messages</targetBundle>
 				</configuration>
 			</plugin>
