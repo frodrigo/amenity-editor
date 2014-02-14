@@ -26,6 +26,7 @@
 <script src="<wt:ue>/js/scriptaculous.js?load=effects,controls</wt:ue>" type="text/javascript"></script>
 <script src="<wt:ue>/js/ae.js</wt:ue>" type="text/javascript"></script>
 <script src="<wt:ue>/js/chosen.proto.js</wt:ue>" type="text/javascript"></script>
+<script src="<wt:ue>/js/accordion.js</wt:ue>" type="text/javascript"></script>
 
 <script type="text/javascript">
 
@@ -589,16 +590,18 @@
 				switch (groupData[i].type)
 				{
 					case "Group":
-						var title = new Element("h2");
+						var title = new Element("h2",{class:"accordion_toggle"});
 						if (object.icon)
 						{
 							title.insert(new Element("img",{src:contextPath+object.icon}));
 						}
 						title.insert(object.name);
 						elem.insert(title);
-						var group = new Element("div",{class:"ae-create-amenity-group"});
+						var wrizard_group_id = "wrizard_group_"+(idCounter++);
+						var group = new Element("div",{id:wrizard_group_id,class:"ae-create-amenity-group accordion_content"});
 						createNewAmenityWizardGroup(amenity, group, object.tags);
 						elem.insert(group);
+						elem.insert(new Element("script").update("new accordion('"+wrizard_group_id+"');"));
 						break;
 					case "Item":
 						var a = new Element("a",{"href":"#","class":"ae-create-amenity",onclick:"addDefaultTags('"+nodeId+"',"+Object.toJSON(object)+")"});
@@ -622,8 +625,12 @@
         function createNewAmenityWizard(amenity)
         {
         	var elem = new Element("div");
-        	elem.insert(new Element("div",{"class":"ae-simple-text"}).update(MSG.templateInfo));
-			createNewAmenityWizardGroup(amenity, elem, wizardData[0].tags);
+        	elem.insert(new Element("div",{class:"ae-simple-text"}).update(MSG.templateInfo));
+			var wrizard_group_id = "wrizard_group_"+(idCounter++);
+        	var groups = new Element("div",{id:wrizard_group_id});
+			createNewAmenityWizardGroup(amenity, groups, wizardData[0].tags);
+			groups.insert(new Element("script").update("new accordion('"+wrizard_group_id+"');"));
+			elem.insert(groups);
         	return elem;			
         }
 
