@@ -14,6 +14,7 @@ import org.codehaus.jackson.JsonProcessingException;
 import org.codehaus.jackson.map.JsonSerializer;
 import org.codehaus.jackson.map.SerializerProvider;
 import org.osm.preset.schema.Link;
+import org.osm.preset.schema.Separator;
 import org.osm.preset.schema.Space;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.xnap.commons.i18n.I18n;
@@ -59,7 +60,7 @@ public class IntrospectionSerializer extends JsonSerializer<Object> {
 								jgen.writeStartObject();
 								String simpleName = ele.getClass().getSimpleName();
 								jgen.writeStringField("type", simpleName);
-								if (!(ele instanceof Space)) {
+								if (!(ele instanceof Space) && !(ele instanceof Separator)) {
 									// Space make serialize fail
 									jgen.writeObjectField("object", ele);
 								}
