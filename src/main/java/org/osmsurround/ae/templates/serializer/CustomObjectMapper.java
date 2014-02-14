@@ -5,6 +5,7 @@ import org.codehaus.jackson.map.ser.CustomSerializerFactory;
 import org.osm.preset.schema.Check;
 import org.osm.preset.schema.Checkgroup;
 import org.osm.preset.schema.Chunk;
+import org.osm.preset.schema.Group;
 import org.osm.preset.schema.Item;
 import org.osm.preset.schema.Label;
 import org.osm.preset.schema.Link;
@@ -13,6 +14,7 @@ import org.osm.preset.schema.Multiselect;
 import org.osm.preset.schema.Optional;
 import org.osm.preset.schema.Reference;
 import org.osm.preset.schema.Role;
+import org.osm.preset.schema.Root;
 import org.osm.preset.schema.Text;
 import org.springframework.stereotype.Component;
 
@@ -21,6 +23,8 @@ public class CustomObjectMapper extends ObjectMapper {
 
 	public CustomObjectMapper() {
 		CustomSerializerFactory sf = new CustomSerializerFactory();
+		sf.addSpecificMapping(Root.class, new IntrospectionSerializer());
+		sf.addSpecificMapping(Group.class, new IntrospectionSerializer());
 		sf.addSpecificMapping(Item.class, new IntrospectionSerializer());
 		sf.addSpecificMapping(Chunk.class, new IntrospectionSerializer());
 		sf.addSpecificMapping(Reference.class, new ReferenceSerializer());

@@ -81,6 +81,7 @@ public class IntrospectionSerializer extends JsonSerializer<Object> {
 							String text = object.toString();
 							if (methodName.equals("getText")
 									|| methodName.equals("getTextContext")
+									|| (className.equals("Group") && methodName.equals("getName"))
 									|| (className.equals("Chunk") && methodName.equals("getName"))
 									|| (className.equals("Item") && methodName.equals("getName"))
 									|| (className.equals("ListEntry") && (methodName.equals("getDisplayValue") || methodName

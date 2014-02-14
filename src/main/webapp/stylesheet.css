@@ -151,6 +151,15 @@ div.ae-editarea {
 	overflow: hide;
 }
 
+div.ae-keyvaluetab h2 {
+	clear: both;
+	font-size: 100%;
+}
+
+div.ae-create-amenity-group {
+	clear: both;
+}
+
 a.ae-create-amenity {
 	border: 1px solid #e7e7e7;
 	font-size: 11px;

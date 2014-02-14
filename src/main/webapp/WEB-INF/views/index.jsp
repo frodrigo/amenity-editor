@@ -580,28 +580,50 @@
         	return elem;
         }
 
+        function createNewAmenityWizardGroup(amenity, elem, groupData)
+        {
+            var nodeId = amenity.nodeId;
+			for (var i=0; i<groupData.length; i++)
+			{
+				var object = groupData[i].object;
+				switch (groupData[i].type)
+				{
+					case "Group":
+						var title = new Element("h2");
+						if (object.icon)
+						{
+							title.insert(new Element("img",{src:contextPath+object.icon}));
+						}
+						title.insert(object.name);
+						elem.insert(title);
+						var group = new Element("div",{class:"ae-create-amenity-group"});
+						createNewAmenityWizardGroup(amenity, group, object.tags);
+						elem.insert(group);
+						break;
+					case "Item":
+						var a = new Element("a",{"href":"#","class":"ae-create-amenity",onclick:"addDefaultTags('"+nodeId+"',"+Object.toJSON(object)+")"});
+						if (object.icon)
+						{
+							a.insert(new Element("img",{src:contextPath+object.icon}));
+						} else {
+							a.insert(new Element("div"));
+						}
+						a.insert(new Element("br"));
+						a.insert(object.name);
+						elem.insert(a);
+						break;
+					case "Sparator":
+						elem.insert(new Element("hr"));
+						break;
+				}
+			}
+        }
 
         function createNewAmenityWizard(amenity)
         {
-            var nodeId = amenity.nodeId;
         	var elem = new Element("div");
         	elem.insert(new Element("div",{"class":"ae-simple-text"}).update(MSG.templateInfo));
-
-			for (var i=0; i<wizardData.length; i++)
-			{
-				var wizard = wizardData[i];
-				var a = new Element("a",{"href":"#","class":"ae-create-amenity",onclick:"addDefaultTags('"+nodeId+"',"+Object.toJSON(wizard)+")"})
-				if (wizard.icon)
-				{
-					a.insert(new Element("img",{src:contextPath+wizard.icon}));
-				} else {
-					a.insert(new Element("div"));
-				}
-				a.insert(new Element("br"));
-				a.insert(wizard.name);
-				elem.insert(a);
-			}
-        	
+			createNewAmenityWizardGroup(amenity, elem, wizardData[0].tags);
         	return elem;			
         }
 

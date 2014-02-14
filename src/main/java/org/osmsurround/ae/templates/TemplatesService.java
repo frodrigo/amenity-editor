@@ -18,6 +18,7 @@
 package org.osmsurround.ae.templates;
 
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -30,11 +31,8 @@ import javax.xml.bind.Unmarshaller;
 import javax.xml.transform.stream.StreamSource;
 
 import org.osm.preset.schema.Chunk;
-import org.osm.preset.schema.Group;
 import org.osm.preset.schema.GroupParent;
-import org.osm.preset.schema.Item;
 import org.osm.preset.schema.Root;
-import org.osm.preset.schema.Separator;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -44,7 +42,7 @@ public class TemplatesService {
 
 	private Root root;
 	private Map<String, Chunk> viewValueTemplates = new LinkedHashMap<String, Chunk>();
-	private List<Item> viewTemplates = new LinkedList<Item>();
+	private List<Object> viewTemplates = new LinkedList<Object>();
 
 	public TemplatesService() {
 		file = "/preset-default.xml";
@@ -64,26 +62,23 @@ public class TemplatesService {
 	}
 
 	private void initNodeTemplates(GroupParent root) {
+		viewTemplates.add(root);
+		List<Chunk> chunks = new ArrayList<Chunk>(root.getChunkOrGroupOrItem().size());
 		for (Object chunkOrGroupOrItem : root.getChunkOrGroupOrItem()) {
 			if (chunkOrGroupOrItem instanceof Chunk) {
 				Chunk chunk = (Chunk) chunkOrGroupOrItem;
 				viewValueTemplates.put(chunk.getId(), chunk);
-			} else if (chunkOrGroupOrItem instanceof Group) {
-				Group group = (Group) chunkOrGroupOrItem;
-				initNodeTemplates(group);
-			} else if (chunkOrGroupOrItem instanceof Item) {
-				Item item = (Item) chunkOrGroupOrItem;
-				viewTemplates.add(item);
-			} else if (chunkOrGroupOrItem instanceof Separator) {
+				chunks.add(chunk);
 			}
 		}
+		root.getChunkOrGroupOrItem().removeAll(chunks);
 	}
 
 	public Map<String, Chunk> getViewValueTemplates() {
 		return viewValueTemplates;
 	}
 
-	public List<Item> getViewTemplates() {
+	public List<Object> getViewTemplates() {
 		return viewTemplates;
 	}
 }
