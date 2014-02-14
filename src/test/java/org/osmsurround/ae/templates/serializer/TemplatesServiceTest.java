@@ -1,7 +1,6 @@
 package org.osmsurround.ae.templates.serializer;
 
 import java.io.ByteArrayOutputStream;
-import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -19,7 +18,7 @@ public class TemplatesServiceTest extends TestBase {
 
 	@Test
 	public void testSerialization() throws Exception {
-		List<Object> localizedNodeTemplates = templatesService.getViewTemplates();
+		Object localizedNodeTemplates = templatesService.getViewTemplate(null);
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
 		mapper.writeValue(out, localizedNodeTemplates);
 		Assert.assertTrue(out.size() > 0);

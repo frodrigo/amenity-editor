@@ -154,7 +154,6 @@ div.ae-editarea {
 div.ae-keyvaluetab h2 {
 	clear: both;
 	font-size: 100%;
-	border: 1px solid #e7e7e7;
 	margin: 0px 0px 2px 2px;
 	padding: 2px;
 	display: block;
@@ -163,13 +162,17 @@ div.ae-keyvaluetab h2 {
 	cursor: pointer;
 }
 
+div.ae-keyvaluetab h2.accordion_toggle_active {
+	background-color: #777;
+}
+
 div.ae-keyvaluetab h2 img {
 	vertical-align: middle;
 }
 
 div.ae-create-amenity-group {
-	float: left;
 	overflow: hidden;
+	margin-left: 10px;
 }
 
 a.ae-create-amenity {

@@ -34,11 +34,16 @@ public class TemplatesController {
 
 	@RequestMapping(value = "/templates", method = RequestMethod.GET)
 	public @ResponseBody
-	Map<String, Object> get() {
+	Map<String, Object> get(String template) {
 		Map<String, Object> result = new HashMap<String, Object>();
 
-		result.put("keyValueTemplates", templatesService.getViewValueTemplates());
-		result.put("wizardData", templatesService.getViewTemplates());
+		if (template == null || template.length() == 0) {
+			template = "preset-default";
+		}
+		template = "/" + template + ".xml";
+
+		result.put("keyValueTemplates", templatesService.getViewValueTemplates(template));
+		result.put("wizardData", templatesService.getViewTemplate(template));
 		return result;
 	}
 }

@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="wt" uri="http://www.grundid.de/webtools" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" buffer="128kb" %>
 <html>
 <head>
@@ -165,21 +166,22 @@
           return new OpenLayers.LonLat(lon2x(ll.lon), lat2y(ll.lat));
         }
         
-        
+        function loadTemplate()
+        {
+			new Ajax.Request(URL.templates+"?template="+$('ae-template-select').value, {
+				method: 'get', 
+					onSuccess: function(transport) {
+						var jsonData = transport.responseJSON;
+			
+						keyValueTemplates = jsonData.keyValueTemplates;
+						wizardData = jsonData.wizardData;  		  	
+					}
+			});
+		}
+
         function init()
         {
-
-			new Ajax.Request(URL.templates, {
-		  		  method: 'get', 
-		  		  onSuccess: function(transport) {
-		  		  	var jsonData = transport.responseJSON;
-
-			  		  keyValueTemplates = jsonData.keyValueTemplates;
-			  		  wizardData = jsonData.wizardData;
-		  		  	
-		  		  }
-		  		});
-            
+			loadTemplate();
 
 	        	map = new OpenLayers.Map('map', {
 	                    maxExtent: new OpenLayers.Bounds(-20037508,-20037508,20037508,20037508),
@@ -581,7 +583,7 @@
         	return elem;
         }
 
-        function createNewAmenityWizardGroup(amenity, elem, groupData)
+        function createNewAmenityWizardGroup(amenity, elem, groupData, accordion_id)
         {
             var nodeId = amenity.nodeId;
 			for (var i=0; i<groupData.length; i++)
@@ -590,7 +592,7 @@
 				switch (groupData[i].type)
 				{
 					case "Group":
-						var title = new Element("h2",{class:"accordion_toggle"});
+						var title = new Element("h2",{class:"accordion_toggle_"+accordion_id});
 						if (object.icon)
 						{
 							title.insert(new Element("img",{src:contextPath+object.icon}));
@@ -598,10 +600,11 @@
 						title.insert(object.name);
 						elem.insert(title);
 						var wrizard_group_id = "wrizard_group_"+(idCounter++);
-						var group = new Element("div",{id:wrizard_group_id,class:"ae-create-amenity-group accordion_content"});
-						createNewAmenityWizardGroup(amenity, group, object.tags);
+						var group = new Element("div",{id:wrizard_group_id,class:"ae-create-amenity-group accordion_content_"+accordion_id});
+						var sub_accordion_id = idCounter++;
+						createNewAmenityWizardGroup(amenity, group, object.tags, sub_accordion_id);
 						elem.insert(group);
-						elem.insert(new Element("script").update("new accordion('"+wrizard_group_id+"');"));
+						elem.insert(new Element("script").update("new accordion('"+wrizard_group_id+"',{classNames:{toggle:'accordion_toggle_"+sub_accordion_id+"',content:'accordion_content_"+sub_accordion_id+"',toggleActive:'accordion_toggle_active_"+sub_accordion_id+"'}});"));
 						break;
 					case "Item":
 						var a = new Element("a",{"href":"#","class":"ae-create-amenity",onclick:"addDefaultTags('"+nodeId+"',"+Object.toJSON(object)+")"});
@@ -628,8 +631,9 @@
         	elem.insert(new Element("div",{class:"ae-simple-text"}).update(MSG.templateInfo));
 			var wrizard_group_id = "wrizard_group_"+(idCounter++);
         	var groups = new Element("div",{id:wrizard_group_id});
-			createNewAmenityWizardGroup(amenity, groups, wizardData[0].tags);
-			groups.insert(new Element("script").update("new accordion('"+wrizard_group_id+"');"));
+        	var accordion_id = idCounter++;
+			createNewAmenityWizardGroup(amenity, groups, wizardData.tags, accordion_id);
+			groups.insert(new Element("script").update("new accordion('"+wrizard_group_id+"',{classNames:{toggle:'accordion_toggle_"+accordion_id+"',content:'accordion_content_"+accordion_id+"',toggleActive:'accordion_toggle_active_"+accordion_id+"'}});"));
 			elem.insert(groups);
         	return elem;			
         }
@@ -972,14 +976,20 @@
 
 <body>
 <div id="content" style="overflow: hidden; height: 100%">
-<div style="padding:5px;height: 32px; position:absolute; left: 80px; top: 0px; right:60px; z-index:750; -moz-border-radius:0px 0px 6px 6px; border-radius:0px 0px 6px 6px; background-color: #FFFFFF; background-repeat: repeat-x; border:1px solid #000000;border-top:none">
+<div style="padding:5px;height: 32px; position:absolute; left: 60px; top: 0px; right:50px; z-index:750; -moz-border-radius:0px 0px 6px 6px; border-radius:0px 0px 6px 6px; background-color: #FFFFFF; background-repeat: repeat-x; border:1px solid #000000;border-top:none">
 <div style="font-weight:bold;font-size:14px;">OSM Amenity Editor (${startParameters.version})</div>
 <div style="position:relative; bottom:-5px; left:0px;font-size:9px;font-weight: normal"><spring:message code="info.credit" />, <spring:message code="info.contact" /></div>
-<div style="position:absolute; right:5px; top: 5px; width:780px;text-align: right">
+<div style="position:absolute; right:5px; top: 5px; width:900px;text-align: right">
 <c:if test="${startParameters.oauthTokenAvailable}"><span style="padding:2px;background-color:#ffe7cd;font-size:14px">OAuth OK!</span></c:if>
 <input type="button" class="ae-small-button" value="<spring:message code="button.max.zoom" />" title="<spring:message code="button.max.zoom.hint" />" onclick="setMaxZoom();" />
 <input type="button" class="ae-small-button" value="<spring:message code="button.home.base" />" title="<spring:message code="button.home.base.hint" />" onclick="goToHomeBase();" />
-<input type="button" class="ae-small-button" value="<spring:message code="button.create.node" />" id="newNodeButton" title="<spring:message code="button.create.node.hint" />" onclick="switchAdding();" style="width:150px" />
+<select id="ae-template-select" class="ae-small-button" onchange="loadTemplate();">
+	<c:set var="templates"><spring:eval expression="@propertyConfigurer['templates']" /></c:set>
+	<c:forEach items="${fn:split(templates, ',')}" var="preset">
+		<option value="${preset}">${preset}</option>
+	</c:forEach>
+</select>
+<input type="button" class="ae-small-button" value="<spring:message code="button.create.node" />" id="newNodeButton" title="<spring:message code="button.create.node.hint" />" onclick="switchAdding();" />
 <input type="button" class="ae-small-button" value="<spring:message code="button.rod" />" id="loadOsmDataButton" title="<spring:message code="button.rod.hint" />" onclick="loadBbox();"/>
 <input type="button" class="ae-small-button" value="<spring:message code="button.settings" />" title="<spring:message code="button.settings.hint" />" onclick="showFilterSettings();">
 <input type="button" class="ae-small-button" value="<spring:message code="button.help" />" title="<spring:message code="button.help.hint" />" onclick="$('help').toggle();">
