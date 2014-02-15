@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-02-13 15:10+0100\n"
+"POT-Creation-Date: 2014-02-15 13:15+0100\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -13,220 +13,236 @@ msgstr ""
 msgid "Adds an empty tag"
 msgstr "Fügt einen neuen Tag hinzu"
 
-#: preset-default.java:6
+#: preset-default.java:7
 msgid "Add opening hours"
 msgstr "Öffnungszeiten hinzufügen"
 
-#: preset-default.java:7
+#: preset-default.java:8
 msgid "Opening Hours"
 msgstr "Öffnungszeiten"
 
-#: preset-default.java:9
+#: preset-default.java:10
 msgid "Add shop"
 msgstr "Shop hinzufügen"
 
-#: preset-default.java:11 preset-default.java:39 preset-default.java:47
-#: preset-default.java:58 preset-default.java:73 preset-default.java:88
-#: preset-default.java:105 preset-default.java:120 preset-default.java:139
-#: preset-default.java:159 preset-default.java:177 preset-default.java:190
-#: preset-default.java:204 preset-default.java:215 preset-default.java:231
-#: preset-default.java:245 preset-default.java:257 preset-default.java:269
-#: preset-default.java:277 preset-default.java:292 preset-default.java:305
-#: preset-default.java:317 preset-default.java:329 preset-default.java:339
-#: preset-default.java:349 preset-default.java:362 preset-default.java:382
+#: preset-default.java:12 preset-default.java:40 preset-default.java:52
+#: preset-default.java:67 preset-default.java:82 preset-default.java:99
+#: preset-default.java:114 preset-default.java:136 preset-default.java:151
+#: preset-default.java:165 preset-default.java:177 preset-default.java:190
+#: preset-default.java:202 preset-default.java:214 preset-default.java:224
+#: preset-default.java:234 preset-default.java:247 preset-default.java:263
+#: preset-default.java:274 preset-default.java:295 preset-default.java:313
+#: preset-default.java:328 preset-default.java:336 preset-default.java:351
+#: preset-default.java:358 preset-default.java:371 preset-default.java:393
 msgid "Name"
 msgstr "Name"
 
-#: preset-default.java:14
+#: preset-default.java:15
 #, fuzzy
 msgid "Add address"
 msgstr "Adresse"
 
-#: preset-default.java:15
+#: preset-default.java:16
 msgid "Address"
 msgstr "Adresse"
 
-#: preset-default.java:16
+#: preset-default.java:17
 msgid "Street name"
 msgstr "Straßenname"
 
-#: preset-default.java:17 preset-default.java:19
+#: preset-default.java:18 preset-default.java:20
 msgid "City name"
 msgstr "Ortsname"
 
-#: preset-default.java:18
+#: preset-default.java:19
 msgid "Post code"
 msgstr "Postleitzahl"
 
-#: preset-default.java:20
+#: preset-default.java:21
 msgid "Country code"
 msgstr "Ländercode"
 
-#: preset-default.java:23
+#: preset-default.java:24
 msgid "Add telephone"
 msgstr "Telefon hinzufügen"
 
-#: preset-default.java:24
+#: preset-default.java:25
 msgid "Phone number"
 msgstr "Telefonnummer"
 
-#: preset-default.java:26
+#: preset-default.java:27
 msgid "Add fuel station tags"
 msgstr "Benzinsorten Tags hinzufügen"
 
-#: preset-default.java:28
+#: preset-default.java:29
 msgid "Diesel"
 msgstr "Diesel"
 
-#: preset-default.java:29
+#: preset-default.java:30
 msgid "Octane 95"
 msgstr "Super (95)"
 
-#: preset-default.java:30
+#: preset-default.java:31
 msgid "Octane 98"
 msgstr "Super plus (98)"
 
-#: preset-default.java:31
+#: preset-default.java:32
 msgid "LPG (Liquefied petroleum gas)"
 msgstr "LPG (Flüssiggas)"
 
-#: preset-default.java:34
+#: preset-default.java:35
 msgid "empty node"
 msgstr "Leerer Knoten"
 
-#: preset-default.java:37
+#: preset-default.java:38
 msgid "empty amenity"
 msgstr "Amenity"
 
-#: preset-default.java:41
-msgid "empty shop"
-msgstr "Shop"
+#: preset-default.java:42
+msgid "Food+Drinks"
+msgstr ""
 
-#: preset-default.java:45
-msgid "tourism"
-msgstr "Tourismus"
-
-#: preset-default.java:49
+#: preset-default.java:43
 msgid "restaurant"
 msgstr "Restaurant"
 
-#: preset-default.java:59 preset-default.java:74 preset-default.java:106
-#: preset-default.java:121
+#: preset-default.java:53 preset-default.java:68 preset-default.java:100
+#: preset-default.java:115
 msgid "Cuisine"
 msgstr "Küche"
 
-#: preset-default.java:66
+#: preset-default.java:60
 msgid "fast food"
 msgstr "Fast Food"
 
-#: preset-default.java:81
+#: preset-default.java:75
 msgid "biergarten"
 msgstr "Biergarten"
 
-#: preset-default.java:94
+#: preset-default.java:88
 msgid "cafe"
 msgstr "Cafe"
 
-#: preset-default.java:113
+#: preset-default.java:107
 msgid "pub"
 msgstr "Pub"
 
+#: preset-default.java:123
+msgid "Shops"
+msgstr ""
+
+#: preset-default.java:124
+msgid "empty shop"
+msgstr "Shop"
+
 #: preset-default.java:128
-msgid "nightclub/Disco"
-msgstr "Nightclub/Disco"
-
-#: preset-default.java:145
-msgid "fuel"
-msgstr "Tankstelle"
-
-#: preset-default.java:165
-msgid "parking"
-msgstr "Parkplatz"
-
-#: preset-default.java:178
-msgid "Fee"
-msgstr "Gebühr"
-
-#: preset-default.java:178
-msgid "yes"
-msgstr "ja"
-
-#: preset-default.java:178
-msgid "no"
-msgstr "nein"
-
-#: preset-default.java:179
-msgid "Park and Ride"
-msgstr "Park and Ride"
-
-#: preset-default.java:182
 msgid "supermarket"
 msgstr "Supermarkt"
 
-#: preset-default.java:194
-msgid "pharmacy"
-msgstr "Apotheke"
-
-#: preset-default.java:208
-msgid "doctor"
-msgstr "Arzt"
-
-#: preset-default.java:220
+#: preset-default.java:140
 msgid "bakery"
 msgstr "Bäckerei"
 
-#: preset-default.java:235
+#: preset-default.java:155
 msgid "butcher"
 msgstr "Metzger"
 
-#: preset-default.java:249
+#: preset-default.java:169
 msgid "beverages"
 msgstr "Getränkemarkt"
 
-#: preset-default.java:261
-msgid "shop/car"
-msgstr "Autohaus"
-
-#: preset-default.java:275
-msgid "shop/car repair"
-msgstr "Werkstatt"
-
-#: preset-default.java:281
-msgid "shop/bicycle"
-msgstr "Fahrradladen"
-
-#: preset-default.java:296
+#: preset-default.java:181
 msgid "shop/clothes"
 msgstr "Kleiderladen"
 
-#: preset-default.java:309
+#: preset-default.java:194
 msgid "shop/florist"
 msgstr "Blumenladen"
 
-#: preset-default.java:321
+#: preset-default.java:206
 msgid "doityourself"
 msgstr "Baumarkt"
 
-#: preset-default.java:333
+#: preset-default.java:218
 msgid "electronics"
 msgstr "Elektromarkt"
 
-#: preset-default.java:343
+#: preset-default.java:228
 msgid "laundry"
 msgstr "Wäscherei"
 
-#: preset-default.java:354
+#: preset-default.java:239
 msgid "hairdresser"
 msgstr "Frisör"
 
-#: preset-default.java:366
+#: preset-default.java:252
+msgid "Health"
+msgstr ""
+
+#: preset-default.java:253
+msgid "pharmacy"
+msgstr "Apotheke"
+
+#: preset-default.java:267
+msgid "doctor"
+msgstr "Arzt"
+
+#: preset-default.java:280
+msgid "Car"
+msgstr ""
+
+#: preset-default.java:281
+msgid "fuel"
+msgstr "Tankstelle"
+
+#: preset-default.java:301
+msgid "parking"
+msgstr "Parkplatz"
+
+#: preset-default.java:314
+msgid "Fee"
+msgstr "Gebühr"
+
+#: preset-default.java:314
+msgid "yes"
+msgstr "ja"
+
+#: preset-default.java:314
+msgid "no"
+msgstr "nein"
+
+#: preset-default.java:315
+msgid "Park and Ride"
+msgstr "Park and Ride"
+
+#: preset-default.java:318
+msgid "shop/car"
+msgstr "Autohaus"
+
+#: preset-default.java:334
+msgid "shop/car repair"
+msgstr "Werkstatt"
+
+#: preset-default.java:340
+msgid "shop/bicycle"
+msgstr "Fahrradladen"
+
+#: preset-default.java:356
+msgid "tourism"
+msgstr "Tourismus"
+
+#: preset-default.java:360
+msgid "nightclub/Disco"
+msgstr "Nightclub/Disco"
+
+#: preset-default.java:377
 msgid "place of worship"
 msgstr "Kirche"
 
-#: preset-default.java:383
+#: preset-default.java:394
 msgid "Religion"
 msgstr "Religion"
 
-#: preset-default.java:385
+#: preset-default.java:396
 msgid "Denomination"
 msgstr "Konfession"
