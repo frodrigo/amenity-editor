@@ -34,14 +34,15 @@ public class NodeUpdate extends SqlUpdate {
 	@Autowired
 	public NodeUpdate(DataSource dataSource) {
 		setDataSource(dataSource);
-		setSql("UPDATE nodes SET version=?, lon=?, lat=? WHERE node_id=?");
+		setSql("UPDATE nodes SET version=?, lon=?, lat=? WHERE osm_type=? AND node_id=?");
 		declareParameter(new SqlParameter(Types.INTEGER));
 		declareParameter(new SqlParameter(Types.INTEGER));
 		declareParameter(new SqlParameter(Types.INTEGER));
+		declareParameter(new SqlParameter(Types.CHAR));
 		declareParameter(new SqlParameter(Types.INTEGER));
 	}
 
 	public void updateNode(Amenity node) {
-		update(node.getVersion(), GeoConverter.toDb(node.getLon()), GeoConverter.toDb(node.getLat()), node.getNodeId());
+		update(node.getVersion(), GeoConverter.toDb(node.getLon()), GeoConverter.toDb(node.getLat()), node.getOsmType().toString(), node.getNodeId());
 	}
 }

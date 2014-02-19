@@ -22,7 +22,7 @@ import java.io.ByteArrayOutputStream;
 import org.apache.http.client.methods.HttpEntityEnclosingRequestBase;
 import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.entity.ByteArrayEntity;
-import org.osm.schema.OsmNode;
+import org.osm.schema.OsmBasicType;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -33,11 +33,11 @@ public class OsmDeleteRequest extends OsmSignedRequestTemplate {
 	}
 
 	@Override
-	protected HttpRequestBase createRequest(OsmNode amenity, int changesetId) throws Exception {
+	protected HttpRequestBase createRequest(OsmBasicType amenity, int changesetId) throws Exception {
 		ByteArrayOutputStream baos = marshallIntoBaos(amenity, changesetId);
 
-		HttpEntityEnclosingRequestBase request = new HttpDeleteWithBody(osmApiBaseUrl + "/api/0.6/node/"
-				+ amenity.getId());
+		HttpEntityEnclosingRequestBase request = new HttpDeleteWithBody(osmApiBaseUrl + "/api/0.6/"
+				+ OsmBasicTypeMap.get(amenity.getClass()) + "/" + amenity.getId());
 		request.setEntity(new ByteArrayEntity(baos.toByteArray()));
 
 		return request;

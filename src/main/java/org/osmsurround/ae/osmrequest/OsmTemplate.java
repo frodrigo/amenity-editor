@@ -36,4 +36,16 @@ public class OsmTemplate implements OsmOperations {
 		return restOperations.getForObject(osmApiBaseUrl + "/api/0.6/node/{nodeId}", OsmRoot.class,
 				String.valueOf(nodeId));
 	}
+
+	@Override
+	public OsmRoot getForWay(long nodeId) {
+		return restOperations.getForObject(osmApiBaseUrl + "/api/0.6/way/{nodeId}", OsmRoot.class,
+				String.valueOf(nodeId));
+	}
+
+	@Override
+	public OsmRoot getForRelation(long nodeId) {
+		return restOperations.getForObject(osmApiBaseUrl + "/api/0.6/relation/{nodeId}", OsmRoot.class,
+				String.valueOf(nodeId));
+	}
 }

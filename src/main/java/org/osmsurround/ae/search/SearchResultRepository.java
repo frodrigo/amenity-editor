@@ -25,6 +25,7 @@ import java.util.List;
 import javax.sql.DataSource;
 
 import org.osmsurround.ae.dao.GeoConverter;
+import org.osmsurround.ae.entity.Node;
 import org.osmsurround.ae.osm.BoundingBox;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.object.MappingSqlQuery;
@@ -34,7 +35,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class SearchResultRepository extends MappingSqlQuery<SearchResult> {
 
-	private final String QUERY = "SELECT n.node_id, n.lon, n.lat, nt.k, nt.v "
+	private final String QUERY = "SELECT n.osm_type, n.node_id, n.lon, n.lat, nt.k, nt.v "
 			+ "FROM nodes AS n JOIN node_tags AS nt ON n.node_id = nt.node_id "
 			+ "WHERE n.lon <= ? AND n.lon >= ? AND n.lat <= ? AND n.lat >= ? ORDER BY n.node_id";
 
@@ -49,8 +50,8 @@ public class SearchResultRepository extends MappingSqlQuery<SearchResult> {
 
 	@Override
 	protected SearchResult mapRow(ResultSet rs, int rowNum) throws SQLException {
-		return new SearchResult(rs.getLong(1), GeoConverter.fromDb(rs.getLong(2)), GeoConverter.fromDb(rs.getLong(3)),
-				rs.getString(4), rs.getString(5));
+		return new SearchResult(Node.OsmType.getEnum(rs.getString(1)), rs.getLong(2),
+				GeoConverter.fromDb(rs.getLong(3)), GeoConverter.fromDb(rs.getLong(4)), rs.getString(5), rs.getString(6));
 	}
 
 	public List<SearchResult> search(BoundingBox boundingBox) {

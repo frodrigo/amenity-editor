@@ -42,7 +42,7 @@ public class OsmServerUpdateServiceTest extends TestBase {
 		mockServer
 				.expect(RequestMatchers
 						.requestTo(overpassApiBaseUrl
-								+ "?data=(node%5B'amenity'%5D(49.27,9.15,49.3,9.19);node%5B'shop'%5D(49.27,9.15,49.3,9.19);node%5B'man_made'%5D(49.27,9.15,49.3,9.19););out;"))
+								+ "?data=(node%5B'amenity'%5D(49.27,9.15,49.3,9.19);node%5B'shop'%5D(49.27,9.15,49.3,9.19);node%5B'man_made'%5D(49.27,9.15,49.3,9.19);way%5B'amenity'%5D(49.27,9.15,49.3,9.19);way%5B'shop'%5D(49.27,9.15,49.3,9.19);way%5B'man_made'%5D(49.27,9.15,49.3,9.19););out%20body;%3E;out%20skel;"))
 				.andExpect(RequestMatchers.method(HttpMethod.GET))
 				.andRespond(
 						ResponseCreators.withResponse(new ClassPathResource("/bbox.xml", getClass()), responseHeaders));

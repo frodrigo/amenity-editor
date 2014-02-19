@@ -25,9 +25,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.http.HttpResponse;
 import org.apache.log4j.Logger;
+import org.osm.schema.OsmBasicType;
 import org.osm.schema.OsmNode;
+import org.osm.schema.OsmRelation;
+import org.osm.schema.OsmWay;
 import org.osmsurround.ae.dao.InternalDataService;
 import org.osmsurround.ae.entity.Amenity;
+import org.osmsurround.ae.entity.Node;
 import org.osmsurround.ae.model.NewPosition;
 import org.osmsurround.ae.osm.OsmConvertService;
 import org.osmsurround.ae.osmrequest.OsmDeleteRequest;
@@ -56,37 +60,67 @@ public class AmenityService {
 	@Autowired
 	private OsmOperations osmOperations;
 
-	public Amenity getAmenity(long nodeId) {
-		return osmConvertService.osmToAmenity(osmOperations.getForNode(nodeId)).get(0);
+	public Amenity getAmenity(Node.OsmType osmType, long nodeId) {
+		switch (osmType) {
+		case NODE:
+			return osmConvertService.osmToAmenity(osmOperations.getForNode(nodeId)).get(0);
+		case WAY:
+			return osmConvertService.osmToAmenity(osmOperations.getForWay(nodeId)).get(0);
+		case RELATION:
+			return osmConvertService.osmToAmenity(osmOperations.getForRelation(nodeId)).get(0);
+		default:
+			return null;
+		}
 	}
 
 	private OsmNode getNode(long nodeId) {
 		return osmOperations.getForNode(nodeId).getNode().get(0);
 	}
 
-	public void deleteAmenity(long nodeId) {
+	private OsmWay getWay(long wayId) {
+		return osmOperations.getForWay(wayId).getWay().get(0);
+	}
+
+	private OsmRelation getRelation(long relationId) {
+		return osmOperations.getForRelation(relationId).getRelation().get(0);
+	}
+
+	
+	public void deleteAmenity(Node.OsmType osmType, long nodeId) {
 		HttpResponse httpResponse = osmDeleteRequest.execute(getNode(nodeId));
 		if (httpResponse.getStatusLine().getStatusCode() == HttpServletResponse.SC_OK) {
-			internalDataService.deleteInternalData(nodeId);
+			internalDataService.deleteInternalData(osmType, nodeId);
 		}
 		else {
 			throw RequestUtils.createExceptionFromHttpResponse(httpResponse);
 		}
 	}
 
-	public void updateAmenity(long nodeId, Map<String, String> data, NewPosition newPosition) {
-		OsmNode amenity = getNode(nodeId);
-
-		// save the original amenity position
-		newPosition.setLat(Double.valueOf(amenity.getLat()));
-		newPosition.setLon(Double.valueOf(amenity.getLon()));
-
-		updateAmenityValues(amenity, data, newPosition);
+	public void updateAmenity(Node.OsmType osmType, long nodeId, Map<String, String> data, NewPosition newPosition) {
+		OsmBasicType amenity = null;
+		switch (osmType) {
+		case NODE:
+			OsmNode amenityNode = getNode(nodeId);
+			amenity = amenityNode;
+			// save the original amenity position
+			newPosition.setLat(Double.valueOf(amenityNode.getLat()));
+			newPosition.setLon(Double.valueOf(amenityNode.getLon()));
+			updateAmenityValues(amenityNode, data, newPosition);
+			break;
+		case WAY:
+			amenity = getWay(nodeId);
+			updateAmenityValues(amenity, data);
+			break;
+		case RELATION:
+			amenity = getRelation(nodeId);
+			updateAmenityValues(amenity, data);
+			break;
+		}
 
 		HttpResponse httpResponse = osmUpdateRequest.execute(amenity);
 		if (httpResponse.getStatusLine().getStatusCode() == HttpServletResponse.SC_OK) {
-			Amenity amenityFromOsm = getAmenity(nodeId);
-			internalDataService.updateInternalData(nodeId, amenityFromOsm);
+			Amenity amenityFromOsm = getAmenity(osmType, nodeId);
+			internalDataService.updateInternalData(osmType, nodeId, amenityFromOsm);
 		}
 		else {
 			throw RequestUtils.createExceptionFromHttpResponse(httpResponse);
@@ -94,9 +128,7 @@ public class AmenityService {
 	}
 
 	private void updateAmenityValues(OsmNode amenity, Map<String, String> data, NewPosition newPosition) {
-
-		amenity.getTag().clear();
-		osmConvertService.setNodeTags(amenity, data);
+		updateAmenityValues(amenity, data);
 
 		if (newPosition.hasNewPosition()) {
 			amenity.setLon(newPosition.getNewlon().floatValue());
@@ -111,6 +143,18 @@ public class AmenityService {
 		}
 	}
 
+	private void updateAmenityValues(OsmBasicType amenity, Map<String, String> data) {
+		// Bad design, but it the simplest choose, better then complicate the XSD
+		if (amenity instanceof OsmNode) {
+			((OsmNode) amenity).getTag().clear();
+		} else if (amenity instanceof OsmWay) {
+			((OsmWay) amenity).getTag().clear();
+		} else if (amenity instanceof OsmRelation) {
+			((OsmRelation) amenity).getTag().clear();
+		}
+		osmConvertService.setTags(amenity, data);
+	}
+
 	public void insertAmenity(Map<String, String> data, NewPosition newPosition) {
 		OsmNode amenity = osmConvertService.amenityToNode(new Amenity());
 		updateAmenityValues(amenity, data, newPosition);
@@ -121,7 +165,7 @@ public class AmenityService {
 			try {
 				BufferedReader reader = new BufferedReader(new InputStreamReader(httpResponse.getEntity().getContent()));
 				nodeId = Long.parseLong(reader.readLine());
-				internalDataService.insertInternalData(nodeId, getAmenity(nodeId));
+				internalDataService.insertInternalData(Node.OsmType.NODE, nodeId, getAmenity(Node.OsmType.NODE, nodeId));
 			}
 			catch (Exception e) {
 				log.warn("", e);

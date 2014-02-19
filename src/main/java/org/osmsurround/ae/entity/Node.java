@@ -17,16 +17,53 @@
  */
 package org.osmsurround.ae.entity;
 
+import org.codehaus.jackson.annotate.JsonValue;
+
 public class Node {
 
+	public enum OsmType {
+		NODE("n"), WAY("w"), RELATION("r");
+
+		private String discriminator;
+
+		OsmType(String discriminator) {
+			this.discriminator = discriminator;
+		}
+
+		@JsonValue
+		@Override
+		public String toString() {
+			return discriminator;
+		}
+
+		public static OsmType getEnum(String value) {
+			if (value == null) {
+				throw new IllegalArgumentException();
+			} else {
+				for (OsmType v : values()) {
+					if (value.equalsIgnoreCase(v.discriminator)) {
+						return v;
+					}
+				}
+				throw new IllegalArgumentException();
+			}
+		}
+	}
+
+	private OsmType osmType;
 	private long nodeId;
 	private double lon;
 	private double lat;
 
-	public Node(long nodeId, double lon, double lat) {
+	public Node(OsmType osmType, long nodeId, double lon, double lat) {
+		this.osmType = osmType;
 		this.nodeId = nodeId;
 		this.lon = lon;
 		this.lat = lat;
+	}
+
+	public OsmType getOsmType() {
+		return osmType;
 	}
 
 	public long getNodeId() {

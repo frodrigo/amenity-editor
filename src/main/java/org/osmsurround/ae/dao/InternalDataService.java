@@ -19,6 +19,7 @@ package org.osmsurround.ae.dao;
 
 import org.apache.log4j.Logger;
 import org.osmsurround.ae.entity.Amenity;
+import org.osmsurround.ae.entity.Node;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -39,33 +40,33 @@ public class InternalDataService {
 	@Autowired
 	private NodeTagDelete nodeTagDelete;
 
-	public void updateInternalData(long nodeId, Amenity amenity) {
-		log.debug("Internal Update with nodeId: " + nodeId + " amenity: " + amenity);
+	public void updateInternalData(Node.OsmType osmType, long nodeId, Amenity amenity) {
+		log.debug("Internal Update with osmType: " + osmType + " nodeId: " + nodeId + " amenity: " + amenity);
 		nodeUpdate.updateNode(amenity);
-		updateNodeTags(nodeId, amenity);
+		updateNodeTags(osmType, nodeId, amenity);
 	}
 
-	private void updateNodeTags(long nodeId, Amenity amenity) {
-		nodeTagDelete.delete(nodeId);
-		nodeTagInsert.insert(nodeId, amenity.getKeyValues());
+	private void updateNodeTags(Node.OsmType osmType, long nodeId, Amenity amenity) {
+		nodeTagDelete.delete(osmType, nodeId);
+		nodeTagInsert.insert(osmType, nodeId, amenity.getKeyValues());
 	}
 
-	public void insertInternalData(long nodeId, Amenity amenity) {
-		log.debug("Internal Update with nodeId: " + nodeId + " amenity: " + amenity);
+	public void insertInternalData(Node.OsmType osmType, long nodeId, Amenity amenity) {
+		log.debug("Internal Update with osmType: " + osmType + "nodeId: " + nodeId + " amenity: " + amenity);
 		nodeInsert.insert(amenity);
-		updateNodeTags(nodeId, amenity);
+		updateNodeTags(osmType, nodeId, amenity);
 	}
 
-	public void deleteInternalData(long nodeId) {
-		nodeDelete.delete(nodeId);
-		nodeTagDelete.delete(nodeId);
+	public void deleteInternalData(Node.OsmType osmType, long nodeId) {
+		nodeDelete.delete(osmType, nodeId);
+		nodeTagDelete.delete(osmType, nodeId);
 	}
 
 	public void updateAmenities(Iterable<Amenity> amenities) {
 		for (Amenity amenity : amenities) {
-			deleteInternalData(amenity.getNodeId());
+			deleteInternalData(amenity.getOsmType(), amenity.getNodeId());
 			nodeInsert.insert(amenity);
-			nodeTagInsert.insert(amenity.getNodeId(), amenity.getKeyValues());
+			nodeTagInsert.insert(amenity.getOsmType(), amenity.getNodeId(), amenity.getKeyValues());
 		}
 	}
 

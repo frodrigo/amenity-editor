@@ -21,15 +21,15 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.log4j.Logger;
-import org.osm.schema.OsmNode;
+import org.osm.schema.OsmBasicType;
 
 public abstract class OsmRequestTemplate {
 
 	protected Logger log = Logger.getLogger(OsmRequestTemplate.class);
 
-	protected abstract HttpRequestBase createRequest(OsmNode amenity, int changesetId) throws Exception;
+	protected abstract HttpRequestBase createRequest(OsmBasicType amenity, int changesetId) throws Exception;
 
-	public HttpResponse execute(OsmNode amenity) {
+	public HttpResponse execute(OsmBasicType amenity) {
 		try {
 			DefaultHttpClient httpClient = createHttpClient();
 

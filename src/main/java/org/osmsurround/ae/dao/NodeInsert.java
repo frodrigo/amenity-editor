@@ -34,7 +34,8 @@ public class NodeInsert extends SqlUpdate {
 	@Autowired
 	public NodeInsert(DataSource dataSource) {
 		setDataSource(dataSource);
-		setSql("INSERT INTO nodes (node_id, version, lon, lat) VALUES (?,?,?,?)");
+		setSql("INSERT INTO nodes (osm_type, node_id, version, lon, lat) VALUES (?,?,?,?,?)");
+		declareParameter(new SqlParameter(Types.CHAR));
 		declareParameter(new SqlParameter(Types.INTEGER));
 		declareParameter(new SqlParameter(Types.INTEGER));
 		declareParameter(new SqlParameter(Types.INTEGER));
@@ -42,6 +43,6 @@ public class NodeInsert extends SqlUpdate {
 	}
 
 	public void insert(Amenity node) {
-		update(node.getNodeId(), node.getVersion(), GeoConverter.toDb(node.getLon()), GeoConverter.toDb(node.getLat()));
+		update(node.getOsmType().toString(), node.getNodeId(), node.getVersion(), GeoConverter.toDb(node.getLon()), GeoConverter.toDb(node.getLat()));
 	}
 }

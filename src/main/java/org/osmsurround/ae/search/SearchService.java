@@ -22,6 +22,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.osmsurround.ae.entity.Amenity;
+import org.osmsurround.ae.entity.Node;
 import org.osmsurround.ae.filter.FilterSet;
 import org.osmsurround.ae.filter.NodeFilterService;
 import org.osmsurround.ae.osm.BoundingBox;
@@ -45,17 +46,18 @@ public class SearchService {
 		return amenities;
 	}
 
-	@SuppressWarnings("null")
 	private void mapReduce(List<Amenity> amenities, List<SearchResult> searchResult) {
 		long mapId = -1;
+		Node.OsmType osmType = null;
 		Amenity amenity = null;
 		for (Iterator<SearchResult> it = searchResult.iterator(); it.hasNext();) {
 			SearchResult sr = it.next();
 
-			if (mapId != sr.getNodeId()) {
+			if (osmType != sr.getOsmType() || mapId != sr.getNodeId()) {
 				addAmenityIfValid(amenities, amenity);
+				osmType = sr.getOsmType();
 				mapId = sr.getNodeId();
-				amenity = new Amenity(mapId, sr.getLon(), sr.getLat());
+				amenity = new Amenity(osmType, mapId, sr.getLon(), sr.getLat());
 			}
 
 			if (!nodeFilterService.isIgnoreTag(sr.getKey().toLowerCase()))

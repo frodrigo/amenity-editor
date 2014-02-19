@@ -24,6 +24,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.osmsurround.ae.ResultMessage;
+import org.osmsurround.ae.entity.Node;
 import org.osmsurround.ae.model.NewPosition;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -44,10 +45,10 @@ public class AmenityEditorController {
 
 	@RequestMapping(method = RequestMethod.PUT)
 	public @ResponseBody
-	ResultMessage put(@RequestParam(value = "_nodeId") long nodeId, @ModelAttribute NewPosition newPosition,
-			HttpServletRequest request) throws IOException {
+	ResultMessage put(@RequestParam(value = "_osmType") String osmType, @RequestParam(value = "_nodeId") long nodeId,
+			@ModelAttribute NewPosition newPosition, HttpServletRequest request) throws IOException {
 		Map<String, String> dataFromRequest = loadDataFromRequest(request);
-		amenityService.updateAmenity(nodeId, dataFromRequest, newPosition);
+		amenityService.updateAmenity(Node.OsmType.getEnum(osmType), nodeId, dataFromRequest, newPosition);
 		return new ResultMessage("Ok.");
 	}
 
@@ -61,15 +62,17 @@ public class AmenityEditorController {
 
 	@RequestMapping(method = RequestMethod.DELETE)
 	public @ResponseBody
-	ResultMessage delete(@RequestParam(value = "_nodeId") long nodeId) throws IOException {
-		amenityService.deleteAmenity(nodeId);
+	ResultMessage delete(@RequestParam(value = "_osmType") String osmType, @RequestParam(value = "_nodeId") long nodeId)
+			throws IOException {
+		amenityService.deleteAmenity(Node.OsmType.getEnum(osmType), nodeId);
 		return new ResultMessage("Ok.");
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
 	public @ResponseBody
-	Object get(@RequestParam(value = "nodeId") long nodeId) throws IOException {
-		return amenityService.getAmenity(nodeId);
+	Object get(@RequestParam(value = "_osmType") String osmType, @RequestParam(value = "nodeId") long nodeId)
+			throws IOException {
+		return amenityService.getAmenity(Node.OsmType.getEnum(osmType), nodeId);
 	}
 
 	@ExceptionHandler

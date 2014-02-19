@@ -66,7 +66,10 @@ public class OsmUpdateService {
 		for (String key : getOverpassApiKeyFilterList()) {
 			sb.append("node['").append(key).append("'](" + bbox + ");");
 		}
-		sb.append(");out;");
+		for (String key : getOverpassApiKeyFilterList()) {
+			sb.append("way['").append(key).append("'](" + bbox + ");");
+		}
+		sb.append(");out body;>;out skel;");
 
 		return sb.toString();
 	}

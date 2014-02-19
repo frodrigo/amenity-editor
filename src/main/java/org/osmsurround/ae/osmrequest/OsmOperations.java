@@ -22,4 +22,8 @@ import org.osm.schema.OsmRoot;
 public interface OsmOperations {
 
 	OsmRoot getForNode(long nodeId);
+
+	OsmRoot getForWay(long nodeId);
+
+	OsmRoot getForRelation(long nodeId);
 }

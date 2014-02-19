@@ -22,6 +22,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.math.BigInteger;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.bind.JAXBException;
@@ -33,14 +35,24 @@ import org.apache.http.client.methods.HttpPut;
 import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.entity.ByteArrayEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.osm.schema.OsmBasicType;
 import org.osm.schema.OsmNode;
+import org.osm.schema.OsmRelation;
 import org.osm.schema.OsmRoot;
+import org.osm.schema.OsmWay;
 import org.osmsurround.ae.oauth.OauthService;
 import org.osmsurround.ae.osm.OsmConvertService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
 public abstract class OsmSignedRequestTemplate extends OsmRequestTemplate {
+
+	protected static final Map<Class<? extends OsmBasicType>, String> OsmBasicTypeMap  = new HashMap<Class<? extends OsmBasicType>, String>();
+	static {
+		OsmBasicTypeMap.put(OsmNode.class, "node");
+		OsmBasicTypeMap.put(OsmWay.class, "way");
+		OsmBasicTypeMap.put(OsmRelation.class, "relation");
+	}
 
 	protected String requestComment;
 
@@ -60,7 +72,7 @@ public abstract class OsmSignedRequestTemplate extends OsmRequestTemplate {
 	}
 
 	@Override
-	public HttpResponse execute(OsmNode amenity) {
+	public HttpResponse execute(OsmBasicType amenity) {
 		try {
 			int changesetId = openChangeset(requestComment);
 			try {
@@ -91,10 +103,10 @@ public abstract class OsmSignedRequestTemplate extends OsmRequestTemplate {
 		HttpEntityEnclosingRequestBase request = new HttpPut(osmApiBaseUrl + "/api/0.6/changeset/create");
 
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
-		OsmRoot node = osmConvertService.createOsmNode();
-		osmEditorService.addChangeset(node, comment);
+		OsmRoot root = osmConvertService.createOsmRoot();
+		osmEditorService.addChangeset(root, comment);
 
-		schemaService.createOsmMarshaller().marshal(osmConvertService.toJaxbElement(node), baos);
+		schemaService.createOsmMarshaller().marshal(osmConvertService.toJaxbElement(root), baos);
 		request.setEntity(new ByteArrayEntity(baos.toByteArray()));
 
 		oAuthService.signRequest(request);
@@ -122,7 +134,7 @@ public abstract class OsmSignedRequestTemplate extends OsmRequestTemplate {
 		return httpResponse;
 	}
 
-	protected ByteArrayOutputStream marshallIntoBaos(OsmNode amenity, int changesetId) throws JAXBException {
+	protected ByteArrayOutputStream marshallIntoBaos(OsmBasicType amenity, int changesetId) throws JAXBException {
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		amenity.setChangeset(BigInteger.valueOf(changesetId));
 		schemaService.createOsmMarshaller().marshal(osmConvertService.toJaxbElement(amenity), baos);

@@ -17,20 +17,28 @@
  */
 package org.osmsurround.ae.search;
 
+import org.osmsurround.ae.entity.Node;
+
 public class SearchResult {
 
+	private Node.OsmType osmType;
 	private long nodeId;
 	private double lon;
 	private double lat;
 	private String key;
 	private String value;
 
-	public SearchResult(long nodeId, double lon, double lat, String key, String value) {
+	public SearchResult(Node.OsmType osmType, long nodeId, double lon, double lat, String key, String value) {
+		this.osmType = osmType;
 		this.nodeId = nodeId;
 		this.lon = lon;
 		this.lat = lat;
 		this.key = key;
 		this.value = value;
+	}
+
+	public Node.OsmType getOsmType() {
+		return osmType;
 	}
 
 	public long getNodeId() {

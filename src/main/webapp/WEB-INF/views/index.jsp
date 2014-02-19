@@ -149,6 +149,7 @@
 
         function Amenity(lon,lat)
         {
+            this.osmType = 'n';
             this.nodeId = 0;
             this.lon = lon;
             this.lat = lat;
@@ -287,7 +288,7 @@
 			}
 		}
 
-        function createKeyValues(nodeId, formTag, amenity, tags, create)
+        function createKeyValues(osmType, nodeId, formTag, amenity, tags, create)
         {
 			for (var i = 0; i < tags.length; i++)
 			{
@@ -304,25 +305,25 @@
 						if (create || object.key == "" || amenity.keyValues[object.key] == null)
 						{
 							amenity.keyValues[object.key] = amenity.keyValues[object.key] || object.default || "";
-							formTag.insert(createViewText(nodeId, object, amenity.keyValues[object.key]));
+							formTag.insert(createViewText(osmType, nodeId, object, amenity.keyValues[object.key]));
 						}
 						break;
 					case "Combo":
 						if (create || amenity.keyValues[object.key] == null)
 						{
 							amenity.keyValues[object.key] = amenity.keyValues[object.key] || object.default || "";
-							formTag.insert(createViewCombo(nodeId, object, amenity.keyValues[object.key]));
+							formTag.insert(createViewCombo(osmType, nodeId, object, amenity.keyValues[object.key]));
 						}
 						break;
 					case "Multiselect":
 						if (create || amenity.keyValues[object.key] == null)
 						{
 							amenity.keyValues[object.key] = amenity.keyValues[object.key] || object.default || "";
-							formTag.insert(createViewMultiselect(nodeId, object, amenity.keyValues[object.key]));
+							formTag.insert(createViewMultiselect(osmType, nodeId, object, amenity.keyValues[object.key]));
 						}
 						break;
 					case "Checkgroup":
-						createKeyValues(nodeId, formTag, amenity, object.tags, create);
+						createKeyValues(osmType, nodeId, formTag, amenity, object.tags, create);
 						break;
 					case "Check":
 						if (create || amenity.keyValues[object.key] == null)
@@ -336,7 +337,7 @@
 									amenity.keyValues[object.key] = "";
 								}
 							}
-							formTag.insert(createViewCheck(nodeId, object, amenity.keyValues[object.key]));
+							formTag.insert(createViewCheck(osmType, nodeId, object, amenity.keyValues[object.key]));
 						}
 						break;
 					case "Separator":
@@ -348,20 +349,20 @@
 						{
 							formTag.insert(new Element("div").update("Missing ref "+object.ref));
 						} else {
-							createKeyValues(nodeId, formTag, amenity, ref.tags, create);
+							createKeyValues(osmType, nodeId, formTag, amenity, ref.tags, create);
 						}
 						break;
 					case "Key":
 						if (create || amenity.keyValues[object.key] == null)
 						{
 							amenity.keyValues[object.key] = amenity.keyValues[object.key] || object.value;
-							formTag.insert(createViewKey(nodeId, object, amenity.keyValues[object.key]));
+							formTag.insert(createViewKey(osmType, nodeId, object, amenity.keyValues[object.key]));
 						}
 						break;
 					case "Optional":
 						var fieldset = new Element("fieldset");
 						fieldset.insert(new Element("legend").update(object.text));
-						createKeyValues(nodeId, fieldset, amenity, object.tags, create);
+						createKeyValues(osmType, nodeId, fieldset, amenity, object.tags, create);
 						formTag.insert(fieldset);
 						break;
 				}
@@ -370,9 +371,11 @@
 
         function createKeyValueTable(amenity, views)
         {
+            var osmType = amenity.osmType;
             var nodeId = amenity.nodeId;
 
-            var formTag = new Element("form",{"id":"form_"+nodeId,"action":URL.amenity,"method":"post"});
+            var formTag = new Element("form",{"id":"form_"+osmType+nodeId,"action":URL.amenity,"method":"post"});
+            formTag.insert(new Element("input",{"type":"hidden","name":"_osmType","value":osmType}));
             formTag.insert(new Element("input",{"type":"hidden","name":"_nodeId","value":nodeId}));
             formTag.insert(new Element("input",{"type":"hidden","name":"lon","value":amenity.lon}));
             formTag.insert(new Element("input",{"type":"hidden","name":"lat","value":amenity.lat}));
@@ -389,26 +392,27 @@
 					formTag.insert(new Element("img",{"src":contextPath+views.icon}));
 				}
 	            formTag.insert(new Element("span",{}).update(views.name));
-	            createKeyValues(nodeId, formTag, amenity, views.tags, true);
+	            createKeyValues(osmType, nodeId, formTag, amenity, views.tags, true);
 			} else {
 				for (var key in amenity.keyValues)
 				{
-					formTag.insert(createTagValue(nodeId, key, amenity.keyValues[key]));
+					formTag.insert(createTagValue(osmType, nodeId, key, amenity.keyValues[key]));
 				}
 			}
 
 			return formTag;
         }
 
-        function updateKeyValueTable(nodeId)
+        function updateKeyValueTable(osmType, nodeId)
         {
 			var params = new Object();
+			params["osmType"] = osmType;
 			params["nodeId"] = nodeId;
 
         	new Ajax.Request(URL.amenity, {
       		  method: 'get', parameters : params, 
       		  onSuccess: function(transport) {
-                createEditBox($("amenity_"+transport.responseJSON.nodeId), transport.responseJSON);
+                createEditBox($("amenity_"+transport.responseJSON.osmType+transport.responseJSON.nodeId), transport.responseJSON);
                 alert("OK");
       		  }
       		});
@@ -422,9 +426,9 @@
 	    	return elem;
         }
 
-        function createViewBase(nodeId, view)
+        function createViewBase(osmType, nodeId, view)
         {
-			var keyId = "k_"+(idCounter)+"_"+nodeId;
+			var keyId = "k_"+(idCounter)+"_"+osmType+nodeId;
             var newDiv = new Element("div");
 			newDiv.insert(new Element("div").update(view.text));
 			if (view.key == "")
@@ -440,10 +444,10 @@
 			return newDiv;
 		}
 
-        function createViewText(nodeId, view, value)
+        function createViewText(osmType, nodeId, view, value)
         {
-            var newDiv = createViewBase(nodeId, view);
-			var valueId = "v_"+(idCounter++)+"_"+nodeId;
+            var newDiv = createViewBase(osmType, nodeId, view);
+			var valueId = "v_"+(idCounter++)+"_"+osmType+nodeId;
 			nextFocus = nextFocus || valueId;
 			newDiv.insert(new Element("input", {type:"text", id:valueId, name: "value", class: "inputvalue", size:32, value: value}));
 			if (view.key == "url" && value != "")
@@ -457,10 +461,10 @@
 			return newDiv;
         }
 
-        function createViewCombo(nodeId, view, value)
+        function createViewCombo(osmType, nodeId, view, value)
         {
-            var newDiv = createViewBase(nodeId, view);
-			var valueId = "v_"+(idCounter++)+"_"+nodeId;
+            var newDiv = createViewBase(osmType, nodeId, view);
+			var valueId = "v_"+(idCounter++)+"_"+osmType+nodeId;
 			nextFocus = nextFocus || valueId;
 			var select = new Element("select", {type:"text", id:valueId, name: "value", class: "inputvalue", "data-placeholder": "<spring:message code="combo.select_or_type" />"});
 			var values = view.values.split(",");
@@ -483,10 +487,10 @@
 			return newDiv;
         }
 
-        function createViewMultiselect(nodeId, view, value)
+        function createViewMultiselect(osmType, nodeId, view, value)
         {
-            var newDiv = createViewBase(nodeId, view);
-			var valueId = "v_"+(idCounter++)+"_"+nodeId;
+            var newDiv = createViewBase(osmType, nodeId, view);
+			var valueId = "v_"+(idCounter++)+"_"+osmType+nodeId;
 			nextFocus = nextFocus || valueId;
 			var select = new Element("select", {type:"text", id:valueId, name: "value", class: "inputvalue", multiple: "multiple", "data-placeholder": "<spring:message code="combo.select_or_type" />"});
 			value = value.split(";");
@@ -511,10 +515,10 @@
 			return newDiv;
         }
 
-        function createViewCheck(nodeId, view, value)
+        function createViewCheck(osmType, nodeId, view, value)
         {
-            var newDiv = createViewBase(nodeId, view);
-			var valueId = "v_"+(idCounter++)+"_"+nodeId;
+            var newDiv = createViewBase(osmType, nodeId, view);
+			var valueId = "v_"+(idCounter++)+"_"+osmType+nodeId;
 			nextFocus = nextFocus || valueId;
 			var select = new Element("select", {type:"text", id:valueId, name: "value", class: "inputvalue"});
 			select.insert(new Element("option", {value: "", selected: ["true", "false", "yes", "no"].indexOf(value) < 0 ? "selected" : null}).update(""));
@@ -525,10 +529,10 @@
 			return newDiv;
         }
 
-        function createViewKey(nodeId, view, value)
+        function createViewKey(osmType, nodeId, view, value)
         {
-            var newDiv = createViewBase(nodeId, view);
-			var valueId = "v_"+(idCounter++)+"_"+nodeId;
+            var newDiv = createViewBase(osmType, nodeId, view);
+			var valueId = "v_"+(idCounter++)+"_"+osmType+nodeId;
 			newDiv.insert(new Element("input", {type:"hidden", id:valueId , name: "value", "value":value}));
 			var valueInput = new Element("input", {type:"text", id:valueId+"_", name: "value", "class":"inputvalue", size:32, "value":value, "disabled":"disabled"});
 			newDiv.insert(valueInput);
@@ -536,10 +540,10 @@
 			return newDiv;
         }        
 
-        function createTagValue(nodeId, key, value)
+        function createTagValue(osmType, nodeId, key, value)
         {
-			var keyId = "k_"+(idCounter)+"_"+nodeId;
-			var valueId = "v_"+(idCounter++)+"_"+nodeId;
+			var keyId = "k_"+(idCounter)+"_"+osmType+nodeId;
+			var valueId = "v_"+(idCounter++)+"_"+osmType+nodeId;
 			var keyIdChoices = keyId+"_choices";
             var newDiv = new Element("div");
 			newDiv.insert(new Element("input", {type:"text", id:keyId , name: "key", "class":"inputkey", size:24, "value":key}));	
@@ -562,11 +566,11 @@
 			return newDiv;
         }
 
-        function addTags(nodeId, tags)
+        function addTags(osmType, nodeId, tags)
         {
-            var amenity = AE.getAmenity(nodeId);
-            var formTag = $("form_"+nodeId);
-            createKeyValues(nodeId, formTag, amenity, tags, false);
+            var amenity = AE.getAmenity(osmType, nodeId);
+            var formTag = $("form_"+osmType+nodeId);
+            createKeyValues(osmType, nodeId, formTag, amenity, tags, false);
 			if (nextFocus)
 			{
 				$(nextFocus).focus();
@@ -576,15 +580,16 @@
 
         
 
-        function createAddTagIcon(nodeId, iconUrl, iconTitle, tags)
+        function createAddTagIcon(osmType, nodeId, iconUrl, iconTitle, tags)
         {
-        	var elem = new Element("a",{"href":"#","class":"ae-add-tag-icon",onclick:"addTags('"+nodeId+"',"+Object.toJSON(tags)+")"});
+        	var elem = new Element("a",{"href":"#","class":"ae-add-tag-icon",onclick:"addTags('"+osmType+"','"+nodeId+"',"+Object.toJSON(tags)+")"});
         	elem.insert(new Element("img",{"src":iconUrl,"title":iconTitle,"alt":iconTitle}));
         	return elem;
         }
 
         function createNewAmenityWizardGroup(amenity, elem, groupData, accordion_id)
         {
+            var osmType = amenity.osmType;
             var nodeId = amenity.nodeId;
 			for (var i=0; i<groupData.length; i++)
 			{
@@ -607,7 +612,7 @@
 						elem.insert(new Element("script").update("new accordion('"+wrizard_group_id+"',{classNames:{toggle:'accordion_toggle_"+sub_accordion_id+"',content:'accordion_content_"+sub_accordion_id+"',toggleActive:'accordion_toggle_active_"+sub_accordion_id+"'}});"));
 						break;
 					case "Item":
-						var a = new Element("a",{"href":"#","class":"ae-create-amenity",onclick:"addDefaultTags('"+nodeId+"',"+Object.toJSON(object)+")"});
+						var a = new Element("a",{"href":"#","class":"ae-create-amenity",onclick:"addDefaultTags('"+osmType+"','"+nodeId+"',"+Object.toJSON(object)+")"});
 						if (object.icon)
 						{
 							a.insert(new Element("img",{src:contextPath+object.icon}));
@@ -638,13 +643,13 @@
         	return elem;			
         }
 
-        function addDefaultTags(nodeId, wizard)
+        function addDefaultTags(osmType, nodeId, wizard)
         {
-            var amenity = AE.getAmenity(nodeId);
+            var amenity = AE.getAmenity(osmType, nodeId);
             amenity.keyValues = new Object();
-            $("keyvaluetab_"+nodeId).update(createKeyValueTable(amenity,wizard));
-            $("naw_"+nodeId).hide();
-            $("keyvaluetab_"+nodeId).show();
+            $("keyvaluetab_"+osmType+nodeId).update(createKeyValueTable(amenity,wizard));
+            $("naw_"+osmType+nodeId).hide();
+            $("keyvaluetab_"+osmType+nodeId).show();
             
 			if (nextFocus)
 			{
@@ -657,7 +662,14 @@
         {
             var div = new Element("div",{"class":"ae-nodedetails"});
             if (amenity.nodeId != 0)
-	            div.insert(new Element("a",{"href":"http://www.openstreetmap.org/browse/node/"+amenity.nodeId,"target":"_blank"}).update("Id: "+amenity.nodeId));
+            {
+            	if (amenity.osmType == 'n')
+	            	div.insert(new Element("a",{"href":"http://www.openstreetmap.org/browse/node/"+amenity.nodeId,"target":"_blank"}).update("Id: n"+amenity.nodeId));
+            	else if (amenity.osmType == 'w')
+	            	div.insert(new Element("a",{"href":"http://www.openstreetmap.org/browse/way/"+amenity.nodeId,"target":"_blank"}).update("Id: w"+amenity.nodeId));
+            	else if (amenity.osmType == 'r')
+	            	div.insert(new Element("a",{"href":"http://www.openstreetmap.org/browse/relation/"+amenity.nodeId,"target":"_blank"}).update("Id: r"+amenity.nodeId));
+	        }
             else
                 div.insert("<spring:message code="eb.newnode" />");
             div.insert(" lon: "+amenity.lon+" lat: "+amenity.lat);
@@ -669,11 +681,11 @@
 			newDiv.update(new Element("div",{"class":"ae-nodename"}).update("<spring:message code="eb.nodename" /> "+amenity.name));
 			newDiv.insert(createTitleDiv(amenity));
 			var editArea = new Element("div",{"class":"ae-editarea"});
-			var keyValueTab = new Element("div",{"class":"ae-keyvaluetab","id":"keyvaluetab_"+amenity.nodeId}).update(createKeyValueTable(amenity, null));
+			var keyValueTab = new Element("div",{"class":"ae-keyvaluetab","id":"keyvaluetab_"+amenity.osmType+amenity.nodeId}).update(createKeyValueTable(amenity, null));
 			if (amenity.nodeId == 0)
 			{
 				keyValueTab.hide();
-				var newAmenityWizard = new Element("div",{"class":"ae-keyvaluetab","id":"naw_"+amenity.nodeId}).update(createNewAmenityWizard(amenity));
+				var newAmenityWizard = new Element("div",{"class":"ae-keyvaluetab","id":"naw_"+amenity.osmType+amenity.nodeId}).update(createNewAmenityWizard(amenity));
 				editArea.insert(newAmenityWizard);
 			}
 			editArea.insert(keyValueTab);
@@ -686,7 +698,7 @@
 				var template = keyValueTemplates[id];
 				if (template.icon)
 				{
-				    buttonDiv1.insert(createAddTagIcon(amenity.nodeId,contextPath+template.icon,
+				    buttonDiv1.insert(createAddTagIcon(amenity.osmType,amenity.nodeId,contextPath+template.icon,
 						template.name,template.tags));
 				}
 			}
@@ -694,21 +706,21 @@
 			newDiv.insert(buttonDiv1); 
 
 			var buttonDiv = new Element("div",{"class":"ae-buttons"});
-			var updateOsmButton = new Element("input",{"type":"button","class":"ae-edit-button","value":MSG.ebOsmButton,"title":MSG.ebOsmButtonTitle,"onclick":"updateKeyValueTable("+amenity.nodeId+")"});
+			var updateOsmButton = new Element("input",{"type":"button","class":"ae-edit-button","value":MSG.ebOsmButton,"title":MSG.ebOsmButtonTitle,"onclick":"updateKeyValueTable('"+amenity.osmType+"',"+amenity.nodeId+")"});
 			if ((amenity.nodeId == 0) || AE.isMoving())
 				updateOsmButton.setAttribute("disabled","disabled");
 			buttonDiv.insert(updateOsmButton);
 
-			var moveButton = new Element("input",{type:"button","class":"ae-edit-button",value:MSG.ebMoveButton,onclick:"moveAmenity("+amenity.nodeId+")"});
-			if ((amenity.nodeId == 0) || AE.isMoving())
+			var moveButton = new Element("input",{type:"button","class":"ae-edit-button",value:MSG.ebMoveButton,onclick:"moveAmenity('"+amenity.osmType+"',"+amenity.nodeId+")"});
+			if ((amenity.osmtType != 'n') || (amenity.nodeId == 0) || AE.isMoving())
 				moveButton.setAttribute("disabled","disabled");
 			buttonDiv.insert(moveButton);
 
-			var deleteButton = new Element("input",{type:"button","class":"ae-edit-button",value:MSG.ebDeleteButton,onclick:"deleteAmenity("+amenity.nodeId+")"});
-			if ((amenity.nodeId == 0) || AE.isMoving())
+			var deleteButton = new Element("input",{type:"button","class":"ae-edit-button",value:MSG.ebDeleteButton,onclick:"deleteAmenity('"+amenity.osmType+"',"+amenity.nodeId+")"});
+			if ((amenity.osmtType == 'n') && ((amenity.nodeId == 0) || AE.isMoving()))
 				deleteButton.setAttribute("disabled","disabled");
 			buttonDiv.insert(deleteButton);
-			buttonDiv.insert(new Element("input",{type:"button","class":"ae-edit-button",value:MSG.ebSaveButton,onclick:"saveAmenity("+amenity.nodeId+")"}));
+			buttonDiv.insert(new Element("input",{type:"button","class":"ae-edit-button",value:MSG.ebSaveButton,onclick:"saveAmenity('"+amenity.osmType+"',"+amenity.nodeId+")"}));
 			var closeButton = new Element("input",{type:"button","class":"ae-edit-button",value:MSG.ebCloseButton});
 			buttonDiv.insert(closeButton);			
 
@@ -824,12 +836,12 @@
         	$('filter').toggle();
         }     
 
-        function moveAmenity(nodeId)
+        function moveAmenity(osmType, nodeId)
         {
             $("moving").show();
         	document.body.style.cursor='crosshair';
-            AE.movingAmenity = AE.getAmenity(nodeId);
-            AE.removeFeature(nodeId);
+            AE.movingAmenity = AE.getAmenity(osmType, nodeId);
+            AE.removeFeature(osmType, nodeId);
         }
 
         function cancelMoving()
@@ -854,9 +866,9 @@
         }
         
 
-        function saveAmenity(nodeId)
+        function saveAmenity(osmType, nodeId)
         {
-			var f = $("form_"+nodeId);
+			var f = $("form_"+osmType+nodeId);
 			if (checkAccessRights())
         	{
             	var params = new Object();
@@ -878,7 +890,7 @@
             	new Ajax.Request(URL.amenity, {
           		  method: requestMethod, parameters : params, 
           		  onSuccess: function(transport) {
-        			AE.closePopup(nodeId);
+        			AE.closePopup(osmType,nodeId);
 					updateAmenities(null,null,true);
 					$("storing").hide();
 					$("moving").hide();
@@ -891,11 +903,11 @@
         	}
         }            
 
-        function deleteAmenity(nodeId)
+        function deleteAmenity(osmType, nodeId)
         {
             if (confirm("<spring:message code="confirm.delete" />"))
             {
-				var f = $("form_"+nodeId);
+				var f = $("form_"+osmType+nodeId);
 				if (checkAccessRights())
 	        	{
 	            	var params = new Object();
@@ -904,7 +916,7 @@
 	            	new Ajax.Request(URL.amenity, {
 	          		  method: 'delete', parameters : params, 
 	          		  onSuccess: function(transport) {
-	        			AE.closePopup(nodeId);
+	        			AE.closePopup(osmType,nodeId);
 						updateAmenities(null,null,true);
 	        			alert(transport.responseJSON.message);
 	          		  }

@@ -21,6 +21,7 @@ import java.sql.Types;
 
 import javax.sql.DataSource;
 
+import org.osmsurround.ae.entity.Node;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.SqlParameter;
 import org.springframework.jdbc.object.SqlUpdate;
@@ -32,11 +33,12 @@ public class NodeTagDelete extends SqlUpdate {
 	@Autowired
 	public NodeTagDelete(DataSource dataSource) {
 		setDataSource(dataSource);
-		setSql("DELETE FROM node_tags WHERE node_id = ?");
+		setSql("DELETE FROM node_tags WHERE osm_type = ? AND node_id = ?");
+		declareParameter(new SqlParameter(Types.CHAR));
 		declareParameter(new SqlParameter(Types.INTEGER));
 	}
 
-	public void delete(long nodeId) {
-		update(nodeId);
+	public void delete(Node.OsmType osmType, long nodeId) {
+		update(osmType.toString(), nodeId);
 	}
 }

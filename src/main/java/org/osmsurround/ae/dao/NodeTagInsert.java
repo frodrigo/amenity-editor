@@ -22,6 +22,7 @@ import java.util.Map;
 
 import javax.sql.DataSource;
 
+import org.osmsurround.ae.entity.Node;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.SqlParameter;
 import org.springframework.jdbc.object.BatchSqlUpdate;
@@ -33,15 +34,16 @@ public class NodeTagInsert extends BatchSqlUpdate {
 	@Autowired
 	public NodeTagInsert(DataSource dataSource) {
 		setDataSource(dataSource);
-		setSql("INSERT INTO node_tags (node_id, k, v) VALUES (?,?,?)");
+		setSql("INSERT INTO node_tags (osm_type, node_id, k, v) VALUES (?,?,?,?)");
+		declareParameter(new SqlParameter(Types.CHAR));
 		declareParameter(new SqlParameter(Types.INTEGER));
 		declareParameter(new SqlParameter(Types.VARCHAR));
 		declareParameter(new SqlParameter(Types.VARCHAR));
 	}
 
-	public void insert(long nodeId, Map<String, String> keyValues) {
+	public void insert(Node.OsmType osmType, long nodeId, Map<String, String> keyValues) {
 		for (String k : keyValues.keySet()) {
-			update(nodeId, k, keyValues.get(k));
+			update(osmType.toString(), nodeId, k, keyValues.get(k));
 		}
 		flush();
 	}

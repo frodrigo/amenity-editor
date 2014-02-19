@@ -27,12 +27,12 @@ var AE = {
 
 	showPopup : function(feature) {
 		if (feature.popup == null) {
-			feature.data.popupContentHTML = "<div id=\"amenity_" + feature.amenity.nodeId
+			feature.data.popupContentHTML = "<div id=\"amenity_" + feature.amenity.osmType + feature.amenity.nodeId
 					+ "\"  style=\"padding:5px\"><\/div>";
 			feature.popup = feature.createPopup();
 			this.map.addPopup(feature.popup);
 
-			createEditBox($("amenity_" + feature.amenity.nodeId), feature.amenity, feature);
+			createEditBox($("amenity_" + feature.amenity.osmType + feature.amenity.nodeId), feature.amenity, feature);
 			feature.popup.updateSize();
 		} else {
 			feature.popup.show();
@@ -49,19 +49,20 @@ var AE = {
 
 	closePopupHandler : function(event) {
 		// special case: this is an amenity object
+		var osmType = this.osmType;
 		var nodeId = this.nodeId;
-		AE.closePopup(nodeId);
+		AE.closePopup(osmType, nodeId);
 	},
 
-	closePopup : function(nodeId) {
+	closePopup : function(osmType, nodeId) {
 		var feature = null;
 		if (nodeId > 0)
-			feature = AE.features[nodeId];
+			feature = AE.features[osmType+nodeId];
 		else
 			feature = this.newAmenityFeature;
 		if (feature == null) {
 			// wir verschieben gerade einen Knoten
-			if (this.newAmenityFeature.amenity.nodeId == nodeId)
+			if (this.newAmenityFeature.amenity.osmType == osmType && this.newAmenityFeature.amenity.nodeId == nodeId)
 				feature = this.newAmenityFeature;
 		}
 		if (feature != null) {
@@ -141,36 +142,39 @@ var AE = {
 		return this.movingAmenity != null;
 	},
 
-	getAmenity : function(nodeId) {
-		var feature = this.features[nodeId];
+	getAmenity : function(osmType, nodeId) {
+		var feature = this.features[osmType+nodeId];
 		if (feature != null) {
 			return feature.amenity;
 		} else {
-			if (this.newAmenityFeature.amenity.nodeId == nodeId)
+			if (this.newAmenityFeature.amenity.osmType == osmType && this.newAmenityFeature.amenity.nodeId == nodeId)
 				return this.newAmenityFeature.amenity;
 			else
 				return null;
 		}
 	},
 
-	removeFeature : function(nodeId) {
-		var feature = this.features[nodeId];
+	removeFeatureByKey : function(key) {
+		var feature = this.features[key];
 		if (feature != null) {
 			this.layerMarkers.removeMarker(feature.marker);
 			feature.destroy();
-			delete this.features[nodeId];
+			delete this.features[key];
 		}
+	},
+	removeFeature : function(osmType, nodeId) {
+		this.removeFeatureByKey(osmType+nodeId);
 	},
 	addFeature : function(feature) {
 		this.layerMarkers.addMarker(feature.marker);
-		this.features[feature.amenity.nodeId] = feature;
+		this.features[feature.amenity.osmType+feature.amenity.nodeId] = feature;
 	},
 	refreshAmenities : function(amenityArray) {
 		try {
 			var feature = null;
 			// Delete all features
-			for ( var nodeId in this.features) {
-				this.removeFeature(nodeId);
+			for ( var key in this.features) {
+				this.removeFeature(key);
 			}
 			this.features = new Object();
 

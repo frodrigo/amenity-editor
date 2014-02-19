@@ -8,10 +8,9 @@ import java.util.Map;
 import org.junit.Before;
 import org.junit.Test;
 import org.osmsurround.ae.TestBase;
-import org.osmsurround.ae.dao.InternalDataService;
 import org.osmsurround.ae.entity.Amenity;
+import org.osmsurround.ae.entity.Node;
 import org.springframework.beans.factory.annotation.Autowired;
-
 
 public class InternalDataServiceTest extends TestBase {
 
@@ -29,35 +28,35 @@ public class InternalDataServiceTest extends TestBase {
 
 	@Test
 	public void testUpdateInternalData() throws Exception {
-		Amenity amenity = createAmenity(1);
-		internalDataService.updateInternalData(1, amenity);
+		Amenity amenity = createAmenity(Node.OsmType.NODE, 1);
+		internalDataService.updateInternalData(amenity.getOsmType(), 1, amenity);
 	}
 
 	@Test
 	public void testInsertInternalData() throws Exception {
-		Amenity amenity = new Amenity(200, 49.1, 10.0, newDataMap);
+		Amenity amenity = new Amenity(Node.OsmType.NODE, 200, 49.1, 10.0, newDataMap);
 		amenity.setVersion(2);
-		internalDataService.insertInternalData(amenity.getNodeId(), amenity);
+		internalDataService.insertInternalData(amenity.getOsmType(), amenity.getNodeId(), amenity);
 	}
 
 	@Test
 	public void testDeleteInternalData() throws Exception {
-		internalDataService.deleteInternalData(1);
-		internalDataService.deleteInternalData(2);
+		internalDataService.deleteInternalData(Node.OsmType.NODE, 1);
+		internalDataService.deleteInternalData(Node.OsmType.NODE, 2);
 	}
 
 	@Test
 	public void testUpdateAmenities() throws Exception {
 		List<Amenity> amenities = new ArrayList<Amenity>();
-		amenities.add(createAmenity(1));
-		amenities.add(createAmenity(2));
-		amenities.add(createAmenity(3));
+		amenities.add(createAmenity(Node.OsmType.NODE, 1));
+		amenities.add(createAmenity(Node.OsmType.NODE, 2));
+		amenities.add(createAmenity(Node.OsmType.NODE, 3));
 		internalDataService.updateAmenities(amenities);
 
 	}
 
-	private Amenity createAmenity(long nodeId) {
-		Amenity amenity = new Amenity(nodeId, 49.1, 10.0, newDataMap);
+	private Amenity createAmenity(Node.OsmType osmType, long nodeId) {
+		Amenity amenity = new Amenity(osmType, nodeId, 49.1, 10.0, newDataMap);
 		amenity.setVersion(2);
 		return amenity;
 	}

@@ -26,21 +26,21 @@ public class Amenity extends Node {
 	private String matchedIcon;
 	private Map<String, String> keyValues = new TreeMap<String, String>();
 
-	public Amenity(long id, double longitude, double latitude, Map<String, String> keyValues) {
-		super(id, longitude, latitude);
+	public Amenity(OsmType osmType, long id, double longitude, double latitude, Map<String, String> keyValues) {
+		super(osmType, id, longitude, latitude);
 		this.keyValues = keyValues;
 	}
 
 	public Amenity(long id) {
-		super(id, 0, 0);
+		super(Node.OsmType.NODE, id, 0, 0);
 	}
 
 	public Amenity() {
-		super(0, 0, 0);
+		super(Node.OsmType.NODE, 0, 0, 0);
 	}
 
-	public Amenity(long id, double longitude, double latitude) {
-		super(id, longitude, latitude);
+	public Amenity(OsmType osmType, long id, double longitude, double latitude) {
+		super(osmType, id, longitude, latitude);
 	}
 
 	public String getName() {
