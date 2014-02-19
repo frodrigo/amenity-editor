@@ -40,7 +40,8 @@
 			ebMoveButton : '<spring:message code="eb.move.button" />', 
 			ebDeleteButton : '<spring:message code="eb.delete.button" />', 
 			ebSaveButton : '<spring:message code="eb.save.button" />', 
-			ebCloseButton : '<spring:message code="eb.close.button" />'
+			ebCloseButton : '<spring:message code="eb.close.button" />',
+			linkShowWiki : '<spring:message code="link.show_wiki" />'
 		};
 
 		var URL = {
@@ -300,7 +301,7 @@
 						formTag.insert(new Element("br"));
 						break;
 					case "Link":
-						formTag.insert(createLinkIcon("anchor.png",object.href,"Show Wiki"));
+						formTag.insert(createLinkIcon("anchor.png",object.href,MSG.linkShowWiki));
 						break;
 					case "Text":
 						if (create || object.key == "" || amenity.keyValues[object.key] == null)
@@ -639,7 +640,7 @@
 			}
 			if ((key == "amenity") || (key == "shop"))
 			{
-				newDiv.insert(createLinkIcon("anchor.png","http://wiki.openstreetmap.org/wiki/Tag:"+key+"="+value,"Show Wiki"));
+				newDiv.insert(createLinkIcon("anchor.png","http://wiki.openstreetmap.org/wiki/Tag:"+key+"="+value,MSG.linkShowWiki));
 			}
 			newDiv.insert(new Element("div", {id:valueId+"_choices", "class":"autocomplete"}));
 			newDiv.insert(new Element("script").update("new Ajax.Autocompleter('"+valueId+"', '"+valueId+"_choices', '"+URL.acValue+"', {paramName: 'input', method: 'get', minChars: 1, frequency: 0.5, callback:autoCompleteCallBack});"));
