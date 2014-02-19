@@ -694,16 +694,23 @@
 						elem.insert(new Element("script").update("new accordion('"+wrizard_group_id+"',{classNames:{toggle:'accordion_toggle_"+sub_accordion_id+"',content:'accordion_content_"+sub_accordion_id+"',toggleActive:'accordion_toggle_active_"+sub_accordion_id+"'}});"));
 						break;
 					case "Item":
-						var a = new Element("a",{"href":"#","class":"ae-create-amenity",onclick:"addDefaultTags('"+osmType+"','"+nodeId+"',"+Object.toJSON(object)+")"});
-						if (object.icon)
+						var types = object.type && object.type.split(',');
+						if (!types ||
+							(amenity.osmType == 'n' && types.indexOf('node') > -1) ||
+							(amenity.osmType == 'w' && (types.indexOf('way') > -1 || types.indexOf('closedway') > -1)) ||
+							(amenity.osmType == 'r' && types.indexOf('relation') > -1))
 						{
-							a.insert(new Element("img",{src:contextPath+object.icon}));
-						} else {
-							a.insert(new Element("div"));
+							var a = new Element("a",{"href":"#","class":"ae-create-amenity",onclick:"addDefaultTags('"+osmType+"','"+nodeId+"',"+Object.toJSON(object)+")"});
+							if (object.icon)
+							{
+								a.insert(new Element("img",{src:contextPath+object.icon}));
+							} else {
+								a.insert(new Element("div"));
+							}
+							a.insert(new Element("br"));
+							a.insert(object.name);
+							elem.insert(a);
 						}
-						a.insert(new Element("br"));
-						a.insert(object.name);
-						elem.insert(a);
 						break;
 					case "Sparator":
 						elem.insert(new Element("hr"));
