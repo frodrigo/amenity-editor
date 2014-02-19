@@ -18,7 +18,7 @@ public class TemplatesServiceTest extends TestBase {
 
 	@Test
 	public void testSerialization() throws Exception {
-		Object localizedNodeTemplates = templatesService.getViewTemplate(null);
+		Object localizedNodeTemplates = templatesService.getViewTemplate("/preset-default.xml");
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
 		mapper.writeValue(out, localizedNodeTemplates);
 		Assert.assertTrue(out.size() > 0);

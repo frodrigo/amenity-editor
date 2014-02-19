@@ -13,7 +13,7 @@ public class TemplatesServiceTest extends TestBase {
 
 	@Test
 	public void testGetViewTemplates() throws Exception {
-		Object localizedNodeTemplates = templatesService.getViewTemplate(null);
+		Object localizedNodeTemplates = templatesService.getViewTemplate("/preset-default.xml");
 		assertNotNull(localizedNodeTemplates);
 	}
 }
