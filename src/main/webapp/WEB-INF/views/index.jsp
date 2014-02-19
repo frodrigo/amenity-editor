@@ -290,6 +290,7 @@
 
         function createKeyValues(osmType, nodeId, formTag, amenity, tags, create)
         {
+        	var treadedTags = [];
 			for (var i = 0; i < tags.length; i++)
 			{
 				var object = tags[i].object;
@@ -306,6 +307,7 @@
 						{
 							amenity.keyValues[object.key] = amenity.keyValues[object.key] || object.default || "";
 							formTag.insert(createViewText(osmType, nodeId, object, amenity.keyValues[object.key]));
+							treadedTags.push(object.key);
 						}
 						break;
 					case "Combo":
@@ -313,6 +315,7 @@
 						{
 							amenity.keyValues[object.key] = amenity.keyValues[object.key] || object.default || "";
 							formTag.insert(createViewCombo(osmType, nodeId, object, amenity.keyValues[object.key]));
+							treadedTags.push(object.key);
 						}
 						break;
 					case "Multiselect":
@@ -320,10 +323,11 @@
 						{
 							amenity.keyValues[object.key] = amenity.keyValues[object.key] || object.default || "";
 							formTag.insert(createViewMultiselect(osmType, nodeId, object, amenity.keyValues[object.key]));
+							treadedTags.push(object.key);
 						}
 						break;
 					case "Checkgroup":
-						createKeyValues(osmType, nodeId, formTag, amenity, object.tags, create);
+						treadedTags = treadedTags.concat(createKeyValues(osmType, nodeId, formTag, amenity, object.tags, create));
 						break;
 					case "Check":
 						if (create || amenity.keyValues[object.key] == null)
@@ -338,6 +342,7 @@
 								}
 							}
 							formTag.insert(createViewCheck(osmType, nodeId, object, amenity.keyValues[object.key]));
+							treadedTags.push(object.key);
 						}
 						break;
 					case "Separator":
@@ -349,7 +354,7 @@
 						{
 							formTag.insert(new Element("div").update("Missing ref "+object.ref));
 						} else {
-							createKeyValues(osmType, nodeId, formTag, amenity, ref.tags, create);
+							treadedTags = treadedTags.concat(createKeyValues(osmType, nodeId, formTag, amenity, ref.tags, create));
 						}
 						break;
 					case "Key":
@@ -357,17 +362,83 @@
 						{
 							amenity.keyValues[object.key] = amenity.keyValues[object.key] || object.value;
 							formTag.insert(createViewKey(osmType, nodeId, object, amenity.keyValues[object.key]));
+							treadedTags.push(object.key);
 						}
 						break;
 					case "Optional":
 						var fieldset = new Element("fieldset");
 						fieldset.insert(new Element("legend").update(object.text));
-						createKeyValues(osmType, nodeId, fieldset, amenity, object.tags, create);
+						treadedTags = treadedTags.concat(createKeyValues(osmType, nodeId, fieldset, amenity, object.tags, create));
 						formTag.insert(fieldset);
 						break;
 				}
 			}
+			return treadedTags;
         }
+
+		function fetchViewKey(tags, collect)
+		{
+			for (var i = 0; i < tags.length; i++)
+			{
+				var object = tags[i].object;
+				switch (tags[i].type)
+				{
+					case "Reference":
+						var ref = keyValueTemplates[object.ref];
+						if (ref)
+						{
+							collect = collect.concat(fetchViewKey(ref.tags, []));
+						}
+						break;
+					case "Key":
+						collect.push([object.key, object.value]);
+						break;
+					case "Optional":
+						collect = collect.concat(fetchViewKey(object.tags, []));
+						break;
+				}
+			}
+			return collect
+        }
+
+		function fetchView(amenity, groupData)
+		{
+           	var osmType = amenity.osmType;
+			for (var i=0; i<groupData.length; i++)
+			{
+				var object = groupData[i].object;
+				switch (groupData[i].type)
+				{
+					case "Group":
+						var ret = fetchView(amenity, object.tags);
+						if(ret)
+						{
+							return ret;
+						}
+						break;
+					case "Item":
+						var types = object.type && object.type.split(',');
+						if (!types ||
+							(amenity.osmType == 'n' && types.indexOf('node') > -1) ||
+							(amenity.osmType == 'w' && (types.indexOf('way') > -1 || types.indexOf('closedway') > -1)) ||
+							(amenity.osmType == 'r' && types.indexOf('relation') > -1))
+						{
+							var keys = fetchViewKey(object.tags, []);
+							if(keys.length > 0)
+							{
+								var filtered = keys.filter(function (k) {
+									return amenity.keyValues[k[0]] && amenity.keyValues[k[0]] == k[1];
+								});
+								if(filtered.length == keys.length)
+								{
+									return object;
+								}
+							}
+						}
+						break;
+				}
+			}
+		}
 
         function createKeyValueTable(amenity, views)
         {
@@ -386,15 +457,25 @@
             }   
             formTag.insert(new Element("input",{"type":"hidden","name":"_method","value":nodeId > 0 ? "put" : "post"}));
 
-			if (views) {
+			var treadedTags = [];
+			if (!views)
+			{
+				views = fetchView(amenity, wizardData.tags);
+			}
+
+			if (views)
+			{
 				if (views.icon)
 				{
 					formTag.insert(new Element("img",{"src":contextPath+views.icon}));
 				}
 	            formTag.insert(new Element("span",{}).update(views.name));
-	            createKeyValues(osmType, nodeId, formTag, amenity, views.tags, true);
-			} else {
-				for (var key in amenity.keyValues)
+	            treadedTags = createKeyValues(osmType, nodeId, formTag, amenity, views.tags, true);
+	        }
+	        
+			for (var key in amenity.keyValues)
+			{
+				if (treadedTags.indexOf(key) < 0)
 				{
 					formTag.insert(createTagValue(osmType, nodeId, key, amenity.keyValues[key]));
 				}
@@ -501,7 +582,7 @@
 				var selected = index > -1;
 				if (index > -1)
 				{
-					array.splice(value, 1);
+					value.splice(index, 1);
 				}
 				select.insert(new Element("option", {value: values[i], selected: selected ? "selected" : null}).update(values[i]));
 			}
