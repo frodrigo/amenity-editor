@@ -120,6 +120,7 @@ var AE = {
 			OpenLayers.Event.stop(evt);
 		};
 		marker.events.register("mousedown", feature, feature.markerClick);
+		marker.events.register("touchstart", feature, feature.markerClick);
 		marker.events.register("mouseover", feature, feature.markerOver);
 		marker.events.register("mouseout", feature, feature.markerOut);
 

@@ -15,11 +15,13 @@
 	content="Einfaches Online Werkzeug um Amenity/POIs Knoten in OpenStreetMap zu bearbeiten.">
 <meta name="keywords" lang="de" content="osm, openstreetmap, amenity, editor, poi, pois, formular">
 <meta name="author" content="GrundID GmbH, www.grundid-gmbh.de">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<meta name="apple-mobile-web-app-capable" content="yes">
 
 <link rel="StyleSheet" type="text/css" href="<wt:ue>/stylesheet.css</wt:ue>" media="screen" />
 <link rel="StyleSheet" type="text/css" href="<wt:ue>/js/chosen.css</wt:ue>" media="screen" />
 <link rel="icon" type="image/png" href="favicon.png" />
-<script src="<wt:ue>/OpenLayers.js</wt:ue>" type="text/javascript"></script>
+<script src="<wt:ue>/OpenLayers.js</wt:ue>?mobile" type="text/javascript"></script>
 <script src="http://openstreetmap.org/openlayers/OpenStreetMap.js" type="text/javascript"></script>
 <script src="<wt:ue>/js/prototype-1.7.1.js</wt:ue>" type="text/javascript"></script>
 <script src="<wt:ue>/js/scriptaculous.js?load=effects,controls</wt:ue>" type="text/javascript"></script>
