@@ -433,7 +433,7 @@ function updateKeyValueTable(osmType, nodeId) {
         method: 'get',
         parameters: params,
         onSuccess: function (transport) {
-            createEditBox($("amenity_" + transport.responseJSON.osmType + transport.responseJSON.nodeId), transport.responseJSON);
+            createEditBox($("ae-edit-panel"), transport.responseJSON);
             alert("OK");
         }
     });
@@ -652,6 +652,7 @@ function createTagValue(osmType, nodeId, key, value) {
         size: 24,
         "value": key
     }));
+    nextFocus = nextFocus || keyId;
     newDiv.insert(new Element("div", {
         id: keyIdChoices,
         "class": "autocomplete"
@@ -687,7 +688,9 @@ function addTags(osmType, nodeId, tags) {
     var formTag = $("form_" + osmType + nodeId);
     createKeyValues(osmType, nodeId, formTag, amenity, tags, false);
     if (nextFocus) {
-        $(nextFocus).focus();
+        if ($(nextFocus) != null) {
+            $(nextFocus).focus();
+        }
         nextFocus = false;
     }
 }
@@ -789,7 +792,9 @@ function addDefaultTags(osmType, nodeId, wizard) {
     $("keyvaluetab_" + osmType + nodeId).show();
 
     if (nextFocus) {
-        $(nextFocus).focus();
+        if ($(nextFocus) != null) {
+            $(nextFocus).focus();
+        }
         nextFocus = false;
     }
 }
@@ -904,6 +909,13 @@ function createEditBox(newDiv, amenity, feature) {
     buttonBotton.insert(buttonDiv);
 
     newDiv.insert(buttonBotton);
+
+    if (nextFocus) {
+        if ($(nextFocus) != null) {
+            $(nextFocus).focus();
+        }
+        nextFocus = false;
+    }
 }
 
 function checkboxesChanged(cbs) {
