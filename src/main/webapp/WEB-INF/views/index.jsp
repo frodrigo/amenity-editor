@@ -32,16 +32,26 @@
 <script type="text/javascript">
 
 		var MSG = {
-			buttonStopCreating : '<spring:message code="button.stop.creating" />',
-			buttonCreateNode : '<spring:message code="button.create.node" />', 
-			templateInfo : '<spring:message code="template.info" />',  
-			ebOsmButton : '<spring:message code="eb.osm.button" />', 
-			ebOsmButtonTitle : '<spring:message code="eb.osm.button.label" />', 
-			ebMoveButton : '<spring:message code="eb.move.button" />', 
-			ebDeleteButton : '<spring:message code="eb.delete.button" />', 
-			ebSaveButton : '<spring:message code="eb.save.button" />', 
-			ebCloseButton : '<spring:message code="eb.close.button" />',
-			linkShowWiki : '<spring:message code="link.show_wiki" />'
+			buttonStopCreating : "<spring:message code="button.stop.creating" />",
+			buttonCreateNode : "<spring:message code="button.create.node" />", 
+			templateInfo : "<spring:message code="template.info" />",  
+			ebOsmButton : "<spring:message code="eb.osm.button" />", 
+			ebOsmButtonTitle : "<spring:message code="eb.osm.button.label" />", 
+			ebMoveButton : "<spring:message code="eb.move.button" />", 
+			ebDeleteButton : "<spring:message code="eb.delete.button" />", 
+			ebSaveButton : "<spring:message code="eb.save.button" />", 
+			ebCloseButton : "<spring:message code="eb.close.button" />",
+			ebNewNode : "<spring:message code="eb.newnode" />",
+			ebNodeName : "<spring:message code="eb.nodename" />",
+			linkShowWiki : "<spring:message code="link.show_wiki" />",
+			comboSelectOrType : "<spring:message code="combo.select_or_type" />",
+			checkTrue : "<spring:message code="check.true" />",
+			checkFalse : "<spring:message code="check.false" />",
+			alertNoBase : "<spring:message code="alert.no.base" />",
+			alertAcceptLicense : "<spring:message code="alert.acceptlicense" />",
+			noHighwayEdit : "<spring:message code="no.highway.edit" />",
+			saveActionInfo : "<spring:message code="save.action.info" />",
+			confirmDelete : "<spring:message code="confirm.delete" />"
 		};
 
 		var URL = {
@@ -51,6 +61,13 @@
 			acValue: "<wt:ue>/ae/ac/value</wt:ue>",
 			osmUpdate : "<wt:ue>/ae/osmUpdate</wt:ue>",
 			templates : "<wt:ue>/ae/templates</wt:ue>"
+		};
+
+		var PARAM = {
+			startLongitude: ${startParameters.geoLocation.longitude},
+			startLatitude: ${startParameters.geoLocation.latitude},
+			startZoom: ${startParameters.zoom},
+			permalink: <c:if test="${!startParameters.permalink}">true</c:if><c:if test="${startParameters.permalink}">false</c:if>,
 		};
 
 		var keyValueTemplates = {
@@ -202,7 +219,7 @@
 	            map.addControl(new OpenLayers.Control.MousePosition());
 	            var panel = new OpenLayers.Control.Panel();
 
-	            map.setCenter(lonLatToMercator(new OpenLayers.LonLat(${startParameters.geoLocation.longitude},${startParameters.geoLocation.latitude})), ${startParameters.zoom}); 
+	            map.setCenter(lonLatToMercator(new OpenLayers.LonLat(PARAM.startLongitude,PARAM.startLatitude)), PARAM.startZoom); 
 	            map.events.register('moveend', map, updateAmenities);
 	            map.events.register('zoomend', map, updateZoomStatus);
 	
@@ -548,7 +565,7 @@
             var newDiv = createViewBase(osmType, nodeId, view);
 			var valueId = "v_"+(idCounter++)+"_"+osmType+nodeId;
 			nextFocus = nextFocus || valueId;
-			var select = new Element("select", {type:"text", id:valueId, name: "value", class: "inputvalue", "data-placeholder": "<spring:message code="combo.select_or_type" />"});
+			var select = new Element("select", {type:"text", id:valueId, name: "value", class: "inputvalue", "data-placeholder": MSG.comboSelectOrType});
 			var values = view.values.split(",");
 			var is_selected = false;
 			for (var i=0; i<values.length; i++)
@@ -574,7 +591,7 @@
             var newDiv = createViewBase(osmType, nodeId, view);
 			var valueId = "v_"+(idCounter++)+"_"+osmType+nodeId;
 			nextFocus = nextFocus || valueId;
-			var select = new Element("select", {type:"text", id:valueId, name: "value", class: "inputvalue", multiple: "multiple", "data-placeholder": "<spring:message code="combo.select_or_type" />"});
+			var select = new Element("select", {type:"text", id:valueId, name: "value", class: "inputvalue", multiple: "multiple", "data-placeholder": MSG.comboSelectOrType});
 			value = value.split(";");
 			var values = view.values.split(",");
 			for (var i=0; i<values.length; i++)
@@ -604,8 +621,8 @@
 			nextFocus = nextFocus || valueId;
 			var select = new Element("select", {type:"text", id:valueId, name: "value", class: "inputvalue"});
 			select.insert(new Element("option", {value: "", selected: ["true", "false", "yes", "no"].indexOf(value) < 0 ? "selected" : null}).update(""));
-			select.insert(new Element("option", {value: "true", selected: ["true", "yes"].indexOf(value) > -1 ? "selected" : null}).update("<spring:message code="check.true" />"));
-			select.insert(new Element("option", {value: "false", selected: ["false", "no"].indexOf(value) > -1 ? "selected" : null}).update("<spring:message code="check.false" />"));
+			select.insert(new Element("option", {value: "true", selected: ["true", "yes"].indexOf(value) > -1 ? "selected" : null}).update(MSG.checkTrue));
+			select.insert(new Element("option", {value: "false", selected: ["false", "no"].indexOf(value) > -1 ? "selected" : null}).update(MSG.checkFalse));
 			newDiv.insert(select);
 
 			return newDiv;
@@ -760,14 +777,14 @@
 	            	div.insert(new Element("a",{"href":"http://www.openstreetmap.org/browse/relation/"+amenity.nodeId,"target":"_blank"}).update("Id: r"+amenity.nodeId));
 	        }
             else
-                div.insert("<spring:message code="eb.newnode" />");
+                div.insert(MSG.ebNewNode);
             div.insert(" lon: "+amenity.lon+" lat: "+amenity.lat);
             return div;
         }
 
         function createEditBox(newDiv, amenity, feature)
         {
-			newDiv.update(new Element("div",{"class":"ae-nodename"}).update("<spring:message code="eb.nodename" /> "+amenity.name));
+			newDiv.update(new Element("div",{"class":"ae-nodename"}).update(MSG.ebNodeName+" "+amenity.name));
 			newDiv.insert(createTitleDiv(amenity));
 			var editArea = new Element("div",{"class":"ae-editarea"});
 			var keyValueTab = new Element("div",{"class":"ae-keyvaluetab","id":"keyvaluetab_"+amenity.osmType+amenity.nodeId}).update(createKeyValueTable(amenity, null));
@@ -892,10 +909,8 @@
 	        	}
 				
 				
-<c:if test="${!startParameters.permalink}">	
-			if (formData.lon && formData.lat)
+			if (PARAM.permalink && formData.lon && formData.lat)
 		            map.setCenter(lonLatToMercator(new OpenLayers.LonLat(formData.lon,formData.lat)),MIN_ZOOM_FOR_EDIT+1);
-</c:if>
     		}
         }
 
@@ -908,7 +923,7 @@
 			}
 			else
 			{
-				alert("<spring:message code="alert.no.base" />");
+				alert(MSG.alertNoBase);
 			}
             
         }
@@ -948,7 +963,7 @@
         {
             if (!oauthTokensAvailable)
             {
-                alert("<spring:message code="alert.acceptlicense" />");
+                alert(MSG.alertAcceptLicense);
             }
             else
               return true;
@@ -965,7 +980,7 @@
 
             	if ((params["_nodeId"] == 0 || AE.isMoving()) && (params.key.indexOf("highway") != -1 || params.key.indexOf("railway") != -1))
             	{
-                	alert("<spring:message code="no.highway.edit" />");
+                	alert(MSG.noHighwayEdit);
                 	return;	
             	}
 
@@ -986,7 +1001,7 @@
 		        	document.body.style.cursor='auto';					
         			AE.removeNewAmenityFeature();
         			AE.movingAmenity = null;
-        			alert(transport.responseJSON.message+"\n\n<spring:message code="save.action.info" />");
+        			alert(transport.responseJSON.message+"\n\n"+MSG.saveActionInfo);
           		  }
           		});
         	}
@@ -994,7 +1009,7 @@
 
         function deleteAmenity(osmType, nodeId)
         {
-            if (confirm("<spring:message code="confirm.delete" />"))
+            if (confirm(MSG.confirmDelete))
             {
 				var f = $("form_"+osmType+nodeId);
 				if (checkAccessRights())
