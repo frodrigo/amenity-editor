@@ -843,6 +843,10 @@ function createEditBox(newDiv, amenity, feature) {
     editArea.insert(keyValueTab);
     newDiv.insert(editArea);
 
+    var buttonBotton = new Element("div", {
+        "class": "ae-buttons-botton"
+    });
+
     var buttonDiv1 = new Element("div", {
         "class": "ae-buttons-top"
     });
@@ -855,7 +859,7 @@ function createEditBox(newDiv, amenity, feature) {
         }
     }
 
-    newDiv.insert(buttonDiv1);
+    buttonBotton.insert(buttonDiv1);
 
     var buttonDiv = new Element("div", {
         "class": "ae-buttons"
@@ -896,23 +900,10 @@ function createEditBox(newDiv, amenity, feature) {
         value: MSG.ebSaveButton,
         onclick: "saveAmenity('" + amenity.osmType + "'," + amenity.nodeId + ")"
     }));
-    var closeButton = new Element("input", {
-        type: "button",
-        "class": "ae-edit-button",
-        value: MSG.ebCloseButton
-    });
-    buttonDiv.insert(closeButton);
 
-    var closeIcon = new Element("div", {
-        "class": "ae-closeicon"
-    });
-    closeIcon.update(new Element("a", {
-        "href": "#"
-    }));
-    buttonDiv.insert(closeIcon);
-    newDiv.insert(buttonDiv);
-    closeIcon.observe('click', AE.closePopupHandler.bindAsEventListener(amenity));
-    closeButton.observe('click', AE.closePopupHandler.bindAsEventListener(amenity));
+    buttonBotton.insert(buttonDiv);
+
+    newDiv.insert(buttonBotton);
 }
 
 function checkboxesChanged(cbs) {
@@ -1067,9 +1058,9 @@ function deleteAmenity(osmType, nodeId) {
         if (checkAccessRights()) {
             var params = new Object();
             params = Object.extend(params, f.serialize(true));
+            params._method = 'delete';
 
             new Ajax.Request(URL.amenity, {
-                method: 'delete',
                 parameters: params,
                 onSuccess: function (transport) {
                     AE.closePopup(osmType, nodeId);

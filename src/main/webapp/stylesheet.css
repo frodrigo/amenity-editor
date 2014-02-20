@@ -69,6 +69,15 @@ div.autocomplete ul li {
 	font-style: italic;
 }
 
+#ae-title {
+	background-color: lightgray;
+}
+
+#ae-tools {
+	background-color: lightgray;
+	margin-bottom: 1em;
+}
+
 div.ae-nodedetails {
 	font-size: 10px;
 	margin-bottom: 5px;
@@ -82,9 +91,14 @@ div.ae-buttons-top {
 	border-top: 1px solid #e7e7e7;
 }
 
+div.ae-buttons-botton {
+	height: 60px;
+	position: absolute;
+ 	bottom: 0;
+ 	min-width: 440px;
+}
+
 div.ae-buttons {
-	margin-top: 5px;
-	padding-top: 5px;
 	text-align: right;
 }
 
@@ -138,17 +152,13 @@ div.ae-nodename {
 	font-weight: bold;
 }
 
-div.ae-keyvaluetab {
-	width: 440px;
-	height: 170px;
-	overflow-y: scroll;
-	overflow-x: hide;
-}
-
 div.ae-editarea {
-	width: 440px;
-	min-height: 100px;
-	overflow: hide;
+	overflow: auto;
+	position: absolute;
+	top: 120px;
+	bottom: 60px;
+	overflow: auto;
+	min-width: 440px;
 }
 
 div.ae-keyvaluetab h2 {

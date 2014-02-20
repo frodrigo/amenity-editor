@@ -76,156 +76,161 @@
 </head>
 
 <body>
-	<div id="content" style="overflow: hidden; height: 100%">
-		<div
-			style="padding: 5px; height: 32px; position: absolute; left: 60px; top: 0px; right: 50px; z-index: 750; -moz-border-radius: 0px 0px 6px 6px; border-radius: 0px 0px 6px 6px; background-color: #FFFFFF; background-repeat: repeat-x; border: 1px solid #000000; border-top: none">
+	<div id="ae-panel" style="width: 15%; min-width: 440px; float: left">
+		<div id="ae-title">
 			<div style="font-weight: bold; font-size: 14px;">OSM Amenity Editor (${startParameters.version})</div>
-			<div style="position: relative; bottom: -5px; left: 0px; font-size: 9px; font-weight: normal">
+			<div style="font-size: 9px; font-weight: normal">
 				<spring:message code="info.credit" />
 				,
 				<spring:message code="info.contact" />
 			</div>
-			<div style="position: absolute; right: 5px; top: 5px; width: 900px; text-align: right">
-				<c:if test="${startParameters.oauthTokenAvailable}">
-					<span style="padding: 2px; background-color: #ffe7cd; font-size: 14px">OAuth OK!</span>
-				</c:if>
+		</div>
+		<div id="ae-tools">
+			<select id="ae-template-select" class="ae-small-button" onchange="loadTemplate();">
+				<c:set var="templates">
+					<spring:eval expression="@propertyConfigurer['templates']" />
+				</c:set>
+				<c:forEach items="${fn:split(templates, ',')}" var="preset">
+					<option value="${preset}">${preset}</option>
+				</c:forEach>
+			</select>
+			<input type="button" class="ae-small-button" value="<spring:message code="button.settings" />"
+				title="<spring:message code="button.settings.hint" />" onclick="showFilterSettings();">
+			<input type="button" class="ae-small-button" value="<spring:message code="button.help" />"
+				title="<spring:message code="button.help.hint" />" onclick="$('help').toggle();">
+			<input type="button" class="ae-small-button" value="<spring:message code="button.oauth" />"
+				title="<spring:message code="button.oauth.hint" />"
+				onclick="window.location.href='<wt:ue>/ae/oauthRequest</wt:ue>';" />
+			<c:if test="${startParameters.oauthTokenAvailable}">
+				<span style="padding: 2px; background-color: #ffe7cd; font-size: 14px">OAuth OK!</span>
+			</c:if>
+		</div>
+		<div id="ae-edit-panel"></div>
+	</div>
+	<div id="content" style="overflow: hidden; height: 100%">
+		<div
+			style="padding: 5px; position: absolute; top: 0px; right: 50px; z-index: 750; -moz-border-radius: 0px 0px 6px 6px; border-radius: 0px 0px 6px 6px; background-color: #FFFFFF; border: 1px solid #000000; border-top: none">
+			<div>
 				<input type="button" class="ae-small-button" value="<spring:message code="button.max.zoom" />"
 					title="<spring:message code="button.max.zoom.hint" />" onclick="setMaxZoom();" />
 				<input type="button" class="ae-small-button" value="<spring:message code="button.home.base" />"
 					title="<spring:message code="button.home.base.hint" />" onclick="goToHomeBase();" />
-				<select id="ae-template-select" class="ae-small-button" onchange="loadTemplate();">
-					<c:set var="templates">
-						<spring:eval expression="@propertyConfigurer['templates']" />
-					</c:set>
-					<c:forEach items="${fn:split(templates, ',')}" var="preset">
-						<option value="${preset}">${preset}</option>
-					</c:forEach>
-				</select>
 				<input type="button" class="ae-small-button" value="<spring:message code="button.create.node" />" id="newNodeButton"
 					title="<spring:message code="button.create.node.hint" />" onclick="switchAdding();" />
 				<input type="button" class="ae-small-button" value="<spring:message code="button.rod" />" id="loadOsmDataButton"
 					title="<spring:message code="button.rod.hint" />" onclick="loadBbox();" />
-				<input type="button" class="ae-small-button" value="<spring:message code="button.settings" />"
-					title="<spring:message code="button.settings.hint" />" onclick="showFilterSettings();">
-				<input type="button" class="ae-small-button" value="<spring:message code="button.help" />"
-					title="<spring:message code="button.help.hint" />" onclick="$('help').toggle();">
-				<input type="button" class="ae-small-button" value="<spring:message code="button.oauth" />"
-					title="<spring:message code="button.oauth.hint" />"
-					onclick="window.location.href='<wt:ue>/ae/oauthRequest</wt:ue>';" />
 			</div>
 		</div>
-		<div style="position: absolute; left: 80px; top: 55px; right: 60px; z-index: 1000;">
-			<center>
-				<div class="infobox" style="width: 800px; display: none; text-align: left" id="filter">
-					<form id="filterform">
-						<fieldset style="width: 520px; float: left">
-							<legend>
-								<spring:message code="settings.show" />
-							</legend>
-							<c:forEach items="<%=FilterManager.getInstance().getFiltersPositive()%>" var="filter">
-								<div style="width: 170px; float: left;">
-									<input type="checkbox" class="filter-positive-cb" name="show" value="${filter.name}"
-										<c:if test="${filter.defaultSelected}">checked="checked" </c:if> id="cb_${filter.name}" />
-									&nbsp;
-									<label for="cb_${filter.name}">
-										<spring:message code="filter.${filter.name}" />
-										&nbsp;
-										<img src="<wt:ue>/img/${filter.icon}</wt:ue>" width="12" height="12">
-									</label>
-								</div>
-							</c:forEach>
-							<div style="clear: both">
-								<input type="button" class="ae-small-button" value="<spring:message code="button.select.all" />"
-									onclick="selectAll();" />
-								<input type="button" class="ae-small-button" value="<spring:message code="button.deselect.all" />"
-									onclick="deselectAll();" />
-								<input type="button" class="ae-small-button" value="<spring:message code="button.invert.selection" />"
-									onclick="invertSelection();" />
-							</div>
-						</fieldset>
-						<fieldset style="width: 240px">
-							<legend>
-								<spring:message code="settings.hide" />
-							</legend>
-							<c:forEach items="<%=FilterManager.getInstance().getFiltersNegative()%>" var="filter">
-								<input type="checkbox" name="hide" value="${filter.name}" id="cb_${filter.name}" />&nbsp;
-<label for="cb_${filter.name}">
+		<div style="position: absolute; top: 55px; right: 50px; z-index: 1000; text-align: center;">
+			<div class="infobox" style="width: 800px; display: none; text-align: left" id="filter">
+				<form id="filterform">
+					<fieldset style="width: 520px; float: left">
+						<legend>
+							<spring:message code="settings.show" />
+						</legend>
+						<c:forEach items="<%=FilterManager.getInstance().getFiltersPositive()%>" var="filter">
+							<div style="width: 170px; float: left;">
+								<input type="checkbox" class="filter-positive-cb" name="show" value="${filter.name}"
+									<c:if test="${filter.defaultSelected}">checked="checked" </c:if> id="cb_${filter.name}" />
+								&nbsp;
+								<label for="cb_${filter.name}">
 									<spring:message code="filter.${filter.name}" />
+									&nbsp;
+									<img src="<wt:ue>/img/${filter.icon}</wt:ue>" width="12" height="12">
 								</label>
-								<br />
-							</c:forEach>
-						</fieldset>
-						<fieldset style="clear: both">
-							<legend>
-								<spring:message code="settings.userpass" />
-							</legend>
-							<div>
-								<spring:message code="settings.noaccount" />
 							</div>
-						</fieldset>
-						<fieldset>
-							<legend>
-								<spring:message code="settings.base" />
-							</legend>
-							<div style="height: 22px; position: relative;">
-								<span style="vertical-align: middle;">
-									<spring:message code="settings.lon" />
-									:&nbsp;
-								</span>
-								<input type="text" name="lon" size="12" style="width: 100px;">
-								<span style="vertical-align: middle;">
-									<spring:message code="settings.lat" />
-									:&nbsp;
-								</span>
-								<input type="text" name="lat" size="12" style="width: 100px;">
-							</div>
-							<input type="button" class="ae-small-button" value="<spring:message code="settings.button.center" />"
-								onclick="setMapCenterAsHomeBase();">
-						</fieldset>
-						<fieldset>
-							<legend>
-								<spring:message code="settings.cookies" />
-							</legend>
-							<input type="checkbox" name="saveincookie" value="1" id="cb_saveincookie" />
-							&nbsp;
-							<label for="cb_saveincookie">
-								<spring:message code="settings.saveincookie" />
+						</c:forEach>
+						<div style="clear: both">
+							<input type="button" class="ae-small-button" value="<spring:message code="button.select.all" />"
+								onclick="selectAll();" />
+							<input type="button" class="ae-small-button" value="<spring:message code="button.deselect.all" />"
+								onclick="deselectAll();" />
+							<input type="button" class="ae-small-button" value="<spring:message code="button.invert.selection" />"
+								onclick="invertSelection();" />
+						</div>
+					</fieldset>
+					<fieldset style="width: 240px">
+						<legend>
+							<spring:message code="settings.hide" />
+						</legend>
+						<c:forEach items="<%=FilterManager.getInstance().getFiltersNegative()%>" var="filter">
+							<input type="checkbox" name="hide" value="${filter.name}" id="cb_${filter.name}" />&nbsp;
+<label for="cb_${filter.name}">
+								<spring:message code="filter.${filter.name}" />
 							</label>
-						</fieldset>
-					</form>
-					<p>
-						<input type="button" class="ae-small-button" value="<spring:message code="settings.button.apply" />"
-							onclick="saveFilterSettings();">
-						<input type="button" class="ae-small-button" value="<spring:message code="settings.button.close" />"
-							onclick="$('filter').hide();">
-				</div>
-				<%@ include file="includes/infobox.jspf"%>
-				<div class="infobox" style="width: 250px; display: none" id="feamenities">
-					<spring:message code="info.fewamenities" />
-				</div>
-				<div class="infobox" style="width: 350px; display: none" id="moving">
-					<spring:message code="move.info" />
-					<br />
-					<input type="button" class="ae-small-button" value="<spring:message code="move.button" />"
-						title="<spring:message code="move.button.hint" />" onclick="cancelMoving()">
-				</div>
-				<div class="infobox" style="width: 170px; display: none" id="loading">
-					<spring:message code="status.loading.data" />
-					<br>
-					<img src="<wt:ue>/img/throbber.gif</wt:ue>">
-				</div>
-				<div class="infobox" style="width: 170px; display: none" id="storing">
-					<spring:message code="status.saving.data" />
-					<br>
-					<img src="<wt:ue>/img/throbber.gif</wt:ue>">
-				</div>
-				<div class="infobox" style="width: 400px; display: none" id="zoomStatus">
-					<spring:message code="status.zoom.to.small" />
-					<br>
-					<input type="button" class="ae-small-button" value="<spring:message code="button.adujst.zoom" />"
-						title="<spring:message code="button.adujst.zoom.hint" />" onclick="map.zoomTo(MIN_ZOOM_FOR_EDIT+1)">
-				</div>
-			</center>
+							<br />
+						</c:forEach>
+					</fieldset>
+					<fieldset style="clear: both">
+						<legend>
+							<spring:message code="settings.userpass" />
+						</legend>
+						<div>
+							<spring:message code="settings.noaccount" />
+						</div>
+					</fieldset>
+					<fieldset>
+						<legend>
+							<spring:message code="settings.base" />
+						</legend>
+						<div style="height: 22px; position: relative;">
+							<span style="vertical-align: middle;">
+								<spring:message code="settings.lon" />
+								:&nbsp;
+							</span>
+							<input type="text" name="lon" size="12" style="width: 100px;">
+							<span style="vertical-align: middle;">
+								<spring:message code="settings.lat" />
+								:&nbsp;
+							</span>
+							<input type="text" name="lat" size="12" style="width: 100px;">
+						</div>
+						<input type="button" class="ae-small-button" value="<spring:message code="settings.button.center" />"
+							onclick="setMapCenterAsHomeBase();">
+					</fieldset>
+					<fieldset>
+						<legend>
+							<spring:message code="settings.cookies" />
+						</legend>
+						<input type="checkbox" name="saveincookie" value="1" id="cb_saveincookie" />
+						&nbsp;
+						<label for="cb_saveincookie">
+							<spring:message code="settings.saveincookie" />
+						</label>
+					</fieldset>
+				</form>
+				<p>
+					<input type="button" class="ae-small-button" value="<spring:message code="settings.button.apply" />"
+						onclick="saveFilterSettings();">
+					<input type="button" class="ae-small-button" value="<spring:message code="settings.button.close" />"
+						onclick="$('filter').hide();">
+			</div>
+			<%@ include file="includes/infobox.jspf"%>
+			<div class="infobox" style="width: 250px; display: none" id="feamenities">
+				<spring:message code="info.fewamenities" />
+			</div>
+			<div class="infobox" style="width: 350px; display: none" id="moving">
+				<spring:message code="move.info" />
+				<br />
+				<input type="button" class="ae-small-button" value="<spring:message code="move.button" />"
+					title="<spring:message code="move.button.hint" />" onclick="cancelMoving()">
+			</div>
+			<div class="infobox" style="width: 170px; display: none" id="loading">
+				<spring:message code="status.loading.data" />
+				<br>
+				<img src="<wt:ue>/img/throbber.gif</wt:ue>">
+			</div>
+			<div class="infobox" style="width: 170px; display: none" id="storing">
+				<spring:message code="status.saving.data" />
+				<br>
+				<img src="<wt:ue>/img/throbber.gif</wt:ue>">
+			</div>
+			<div class="infobox" style="width: 400px; display: none" id="zoomStatus">
+				<spring:message code="status.zoom.to.small" />
+				<br>
+				<input type="button" class="ae-small-button" value="<spring:message code="button.adujst.zoom" />"
+					title="<spring:message code="button.adujst.zoom.hint" />" onclick="map.zoomTo(MIN_ZOOM_FOR_EDIT+1)">
+			</div>
 		</div>
 		<div style="height: 100%" id="map"></div>
 	</div>

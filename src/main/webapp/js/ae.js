@@ -26,25 +26,14 @@ var AE = {
 	},
 
 	showPopup : function(feature) {
-		if (feature.popup == null) {
-			feature.data.popupContentHTML = "<div id=\"amenity_" + feature.amenity.osmType + feature.amenity.nodeId
-					+ "\"  style=\"padding:5px\"><\/div>";
-			feature.popup = feature.createPopup();
-			this.map.addPopup(feature.popup);
-
-			createEditBox($("amenity_" + feature.amenity.osmType + feature.amenity.nodeId), feature.amenity, feature);
-			feature.popup.updateSize();
-		} else {
-			feature.popup.show();
-		}
-		feature.popupVisible = true;
+		createEditBox($("ae-edit-panel"), feature.amenity, feature);
 	},
 
 	hidePopup : function(feature) {
-		// TODO Check for unsaved changes
-		feature.popup.hide();
-		feature.popupVisible = false;
-		feature.popupClicked = false;
+		var children = $("ae-edit-panel").children;
+		for(var i = children.length-1; i>= 0; i--) {
+			children[i].remove();
+		};
 	},
 
 	closePopupHandler : function(event) {
@@ -117,13 +106,13 @@ var AE = {
 			}
 			OpenLayers.Event.stop(evt);
 		};
-		feature.markerOver = function(evt) {
-			if (!AE.isMoving()) {
-				document.body.style.cursor = 'pointer';
-				AE.showPopup(this);
-			}
-			OpenLayers.Event.stop(evt);
-		};
+//		feature.markerOver = function(evt) {
+//			if (!AE.isMoving()) {
+//				document.body.style.cursor = 'pointer';
+//				AE.showPopup(this);
+//			}
+//			OpenLayers.Event.stop(evt);
+//		};
 		feature.markerOut = function(evt) {
 			document.body.style.cursor = 'auto';
 			if (this.popup != null && !this.popupClicked)
