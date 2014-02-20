@@ -126,13 +126,22 @@ function loadTemplate() {
 function init() {
     loadTemplate();
 
+    geolocate = new OpenLayers.Control.Geolocate({
+        bind: true
+    });
     map = new OpenLayers.Map('map', {
         maxExtent: new OpenLayers.Bounds(-20037508, -20037508, 20037508, 20037508),
         restrictedExtent: new OpenLayers.Bounds(-20037508, -20037508, 20037508, 20037508),
         numZoomLevels: 18,
         displayProjection: new OpenLayers.Projection("EPSG:4326"),
-        units: 'm'
+        units: 'm',
+        controls: [
+            new OpenLayers.Control.TouchNavigation(),
+            new OpenLayers.Control.Zoom(),
+            geolocate
+        ]
     });
+    geolocate.activate();
 
     AE.init(map, contextPath);
     layerMapnik.attribution = null;

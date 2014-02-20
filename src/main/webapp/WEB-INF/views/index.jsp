@@ -70,6 +70,7 @@
 		};
 
 		var contextPath = '<wt:ue ignoreServletName="true"></wt:ue>';
+		var geolocate = null;
 
 		var oauthTokensAvailable = false;
 		<c:if test="${startParameters.oauthTokenAvailable}">oauthTokensAvailable = true;</c:if>
@@ -115,6 +116,8 @@
 			<div>
 				<input type="button" class="ae-small-button" value="<spring:message code="button.max.zoom" />"
 					title="<spring:message code="button.max.zoom.hint" />" onclick="setMaxZoom();" />
+				<input type="button" class="ae-small-button" value="<spring:message code="button.geolocate" />"
+					title="<spring:message code="button.geolocate.hint" />" onclick="geolocate.deactivate();geolocate.activate();" />
 				<input type="button" class="ae-small-button" value="<spring:message code="button.home.base" />"
 					title="<spring:message code="button.home.base.hint" />" onclick="goToHomeBase();" />
 				<input type="button" class="ae-small-button" value="<spring:message code="button.create.node" />" id="newNodeButton"
