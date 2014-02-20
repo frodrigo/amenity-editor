@@ -163,7 +163,7 @@ var AE = {
 			var feature = null;
 			// Delete all features
 			for ( var key in this.features) {
-				this.removeFeature(key);
+				this.removeFeatureByKey(key);
 			}
 			this.features = new Object();
 
