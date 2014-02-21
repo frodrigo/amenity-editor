@@ -43,6 +43,8 @@ OpenLayers.Control.Click = OpenLayers.Class(OpenLayers.Control, {
                 feature.popupClicked = true;
                 AE.layerNew.addMarker(feature.marker);
                 AE.newAmenityFeature = feature;
+
+                AE.showPopup(feature);
             }
             if (AE.isMoving()) {
                 AE.removeNewAmenityFeature();
