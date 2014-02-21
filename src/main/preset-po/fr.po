@@ -152,11 +152,11 @@ msgstr "Boissons"
 
 #: preset-default.java:181
 msgid "shop/clothes"
-msgstr "Magasin/habit"
+msgstr "Habit"
 
 #: preset-default.java:194
 msgid "shop/florist"
-msgstr "Magasin/fleur"
+msgstr "Fleur"
 
 #: preset-default.java:206
 msgid "doityourself"
@@ -216,15 +216,15 @@ msgstr "Parc relais"
 
 #: preset-default.java:318
 msgid "shop/car"
-msgstr "Magasin/voiture"
+msgstr "Voiture"
 
 #: preset-default.java:334
 msgid "shop/car repair"
-msgstr "Magasin/garage"
+msgstr "Garage"
 
 #: preset-default.java:340
 msgid "shop/bicycle"
-msgstr "Magasin/vélo"
+msgstr "Vélo"
 
 #: preset-default.java:356
 msgid "tourism"

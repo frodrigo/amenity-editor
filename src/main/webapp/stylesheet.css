@@ -183,6 +183,7 @@ div.ae-keyvaluetab h2 img {
 div.ae-create-amenity-group {
 	overflow: hidden;
 	margin-left: 10px;
+	max-width: 420px;
 }
 
 a.ae-create-amenity {

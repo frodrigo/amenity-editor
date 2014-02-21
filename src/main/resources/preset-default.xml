@@ -22,7 +22,7 @@
 		</optional>
 	</chunk>
 	<chunk id="eb.tel.label" name="Add telephone" icon="/img/icons/telephone_add.png">
-		<text key="phone" text="Phone number" default="+49" />
+		<text key="phone" text="Phone number" />
 	</chunk>
 	<chunk id="eb.fuel.label" name="Add fuel station tags" icon="/img/icons/car_add.png">
 		<checkgroup>
@@ -32,10 +32,10 @@
 			<check key="fuel:lpg" text="LPG (Liquefied petroleum gas)" />
 		</checkgroup>
 	</chunk>
-	<item name="empty node">
+	<item name="empty node" icon="/img/map/symbol_blank.png">
 		<text key="" />
 	</item>
-	<item name="empty amenity">
+	<item name="empty amenity" icon="/img/map/symbol_blank.png">
 		<text key="amenity" />
 		<text key="name" text="Name" />
 	</item>
@@ -72,7 +72,7 @@
 			<reference ref="eb.tel.label" />
 			<text key="url" />
 		</item>
-		<item name="biergarten">
+		<item name="biergarten" icon="/img/map/beergarden.png">
 			<link href="http://wiki.openstreetmap.org/wiki/Tag:amenity=biergarten"
 				de.href="http://wiki.openstreetmap.org/wiki/DE:Tag:amenity=biergarten"
 				ja.href="http://wiki.openstreetmap.org/wiki/JA:Tag:amenity=biergarten"
@@ -104,7 +104,7 @@
 			<reference ref="eb.tel.label" />
 			<text key="url" />
 		</item>
-		<item name="pub">
+		<item name="pub" icon="/img/map/bar.png">
 			<link href="http://wiki.openstreetmap.org/wiki/Tag:amenity=pub"
 				de.href="http://wiki.openstreetmap.org/wiki/DE:Tag:amenity=pub"
 				ja.href="http://wiki.openstreetmap.org/wiki/JA:Tag:amenity=pub"
@@ -203,7 +203,7 @@
 			<reference ref="eb.oh.label" />
 			<reference ref="eb.add.label" />
 		</item>
-		<item name="doityourself">
+		<item name="doityourself" icon="/img/map/tools.png">
 			<link href="http://wiki.openstreetmap.org/wiki/Tag:shop=doityourself"
 				de.href="http://wiki.openstreetmap.org/wiki/DE:Tag:shop=doityourself"
 				fr.href="http://wiki.openstreetmap.org/wiki/FR:Tag:shop=doityourself"
@@ -250,16 +250,16 @@
 		</item>
 	</group>
 	<group name="Health" icon="/img/map/doctor.png">
-		<item name="pharmacy">
-			<link href="http://wiki.openstreetmap.org/wiki/Tag:amenity=hospital"
-				de.href="http://wiki.openstreetmap.org/wiki/DE:Tag:amenity=hospital"
-				fr.href="http://wiki.openstreetmap.org/wiki/FR:Tag:amenity=hospital"
-				it.href="http://wiki.openstreetmap.org/wiki/IT:Tag:amenity=hospital"
-				ja.href="http://wiki.openstreetmap.org/wiki/JA:Tag:amenity=hospital"
-				pt.href="http://wiki.openstreetmap.org/wiki/Pt:Tag:amenity=hospital"
-				pt_BR.href="http://wiki.openstreetmap.org/wiki/Pt-br:Tag:amenity=hospital"
-				ru.href="http://wiki.openstreetmap.org/wiki/RU:Tag:amenity=hospital" />
-			<key key="shop" value="pharmacy" />
+		<item name="pharmacy" icon="/img/map/drug.png">
+			<link href="http://wiki.openstreetmap.org/wiki/Tag:amenity=pharmacy"
+				de.href="http://wiki.openstreetmap.org/wiki/DE:Tag:amenity=pharmacy"
+				fr.href="http://wiki.openstreetmap.org/wiki/FR:Tag:amenity=pharmacy"
+				ja.href="http://wiki.openstreetmap.org/wiki/JA:Tag:amenity=pharmacy"
+				no.href="http://wiki.openstreetmap.org/wiki/No:Tag:amenity=pharmacy"
+				pl.href="http://wiki.openstreetmap.org/wiki/Pl:Tag:amenity=pharmacy"
+				pt_BR.href="http://wiki.openstreetmap.org/wiki/Pt-br:Tag:amenity=pharmacy"
+				ru.href="http://wiki.openstreetmap.org/wiki/RU:Tag:amenity=pharmacy" />
+			<key key="amenity" value="pharmacy" />
 			<text key="name" text="Name" />
 			<reference ref="eb.oh.label" />
 			<reference ref="eb.add.label" />
@@ -337,7 +337,7 @@
 			<reference ref="eb.oh.label" />
 			<reference ref="eb.add.label" />
 		</item>
-		<item name="shop/bicycle">
+		<item name="shop/bicycle" icon="/img/map/bicycle_shop.png">
 			<link href="http://wiki.openstreetmap.org/wiki/Tag:shop=bicycle"
 				de.href="http://wiki.openstreetmap.org/wiki/DE:Tag:shop=bicycle"
 				fi.href="http://wiki.openstreetmap.org/wiki/Fi:Tag:shop=bicycle"
@@ -353,7 +353,7 @@
 			<reference ref="eb.add.label" />
 		</item>
 	</group>
-	<item name="tourism">
+	<item name="tourism" icon="/img/map/palace-2.png">
 		<text key="tourism" />
 		<text key="name" text="Name" />
 	</item>

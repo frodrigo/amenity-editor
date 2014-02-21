@@ -33,9 +33,9 @@ public class FilterManager {
 		addSimpleFilter("bakery", "map/bread.png", "shop", "bakery");
 		addSimpleFilter("restaurant", "map/restaurant.png", "amenity", "restaurant");
 		addSimpleFilter("fast_food", "map/fastfood.png", "amenity", "fast_food");
-		//		addSimpleFilter("biergarten", "map/.png", "amenity", "biergarten");
+		addSimpleFilter("biergarten", "map/biergarten.png", "amenity", "biergarten");
 		addSimpleFilter("cafe", "map/coffee.png", "amenity", "cafe");
-		//		addSimpleFilter("pub", "map/.png", "amenity", "pub");
+		addSimpleFilter("pub", "map/bar.png", "amenity", "pub");
 		addSimpleFilter("nightclub", "map/club.png", "amenity", "nightclub");
 		addSimpleFilter("fuel", "map/gazstation.png", "amenity", "fuel");
 		addSimpleFilter("parking", "map/parking.png", "amenity", "parking");
@@ -47,10 +47,10 @@ public class FilterManager {
 		//		addSimpleFilter("beverages", "map/.png", "shop", "beverages");
 		addSimpleFilter("car", "map/car.png", "shop", "car");
 		addSimpleFilter("car_repair", "map/carrepair.png", "shop", "car_repair");
-		//		addSimpleFilter("bicycle", "map/.png", "shop", "bicycle");
+		addSimpleFilter("bicycle", "map/bicycle_shop.png", "shop", "bicycle");
 		addSimpleFilter("clothes", "map/clothes.png", "shop", "clothes");
 		addSimpleFilter("florist", "map/flowers.png", "shop", "florist");
-		//		addSimpleFilter("doityourself", "map/.png", "shop", "doityourself");
+		addSimpleFilter("doityourself", "map/tools.png", "shop", "doityourself");
 		//		addSimpleFilter("electronics", "map/.png", "shop", "electronics");
 		addSimpleFilter("laundry", "map/laundromat.png", "shop", "laundry");
 		addSimpleFilter("hairdresser", "map/hairsalon.png", "shop", "hairdresser");
