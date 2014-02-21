@@ -120,8 +120,8 @@
 			<text key="url" />
 		</item>
 	</group>
-	<group name="Shops" icon="/img/map/shoppingmall.png">
-		<item name="empty shop" icon="/img/map/shoppingmall.png">
+	<group name="Shops" icon="/img/map/mall.png">
+		<item name="empty shop" icon="/img/map/mall.png">
 			<reference ref="eb.shop.label" />
 			<reference ref="eb.oh.label" />
 		</item>
@@ -152,7 +152,7 @@
 			<reference ref="eb.oh.label" />
 			<reference ref="eb.add.label" />
 		</item>
-		<item name="butcher" icon="/img/map/butcher.png">
+		<item name="butcher" icon="/img/map/butcher-2.png">
 			<link href="http://wiki.openstreetmap.org/wiki/Tag:shop=butcher"
 				de.href="http://wiki.openstreetmap.org/wiki/DE:Tag:shop=butcher"
 				es.href="http://wiki.openstreetmap.org/wiki/ES:Tag:shop=butcher"
@@ -178,7 +178,7 @@
 			<reference ref="eb.oh.label" />
 			<reference ref="eb.add.label" />
 		</item>
-		<item name="shop/clothes" icon="/img/map/clothes.png">
+		<item name="shop/clothes" icon="/img/map/clothers_male.png">
 			<link href="http://wiki.openstreetmap.org/wiki/Tag:shop=clothes"
 				de.href="http://wiki.openstreetmap.org/wiki/DE:Tag:shop=clothes"
 				fr.href="http://wiki.openstreetmap.org/wiki/FR:Tag:shop=clothes"
@@ -236,7 +236,7 @@
 			<reference ref="eb.oh.label" />
 			<reference ref="eb.add.label" />
 		</item>
-		<item name="hairdresser" icon="/img/map/hairsalon.png">
+		<item name="hairdresser" icon="/img/map/barber.png">
 			<link href="http://wiki.openstreetmap.org/wiki/Tag:shop=hairdresser"
 				de.href="http://wiki.openstreetmap.org/wiki/DE:Tag:shop=hairdresser"
 				fr.href="http://wiki.openstreetmap.org/wiki/FR:Tag:shop=hairdresser"
@@ -249,8 +249,8 @@
 			<reference ref="eb.add.label" />
 		</item>
 	</group>
-	<group name="Health" icon="/img/map/doctor.png">
-		<item name="pharmacy" icon="/img/map/drug.png">
+	<group name="Health" icon="/img/map/medicine.png">
+		<item name="pharmacy" icon="/img/map/drugstore.png">
 			<link href="http://wiki.openstreetmap.org/wiki/Tag:amenity=pharmacy"
 				de.href="http://wiki.openstreetmap.org/wiki/DE:Tag:amenity=pharmacy"
 				fr.href="http://wiki.openstreetmap.org/wiki/FR:Tag:amenity=pharmacy"
@@ -264,7 +264,7 @@
 			<reference ref="eb.oh.label" />
 			<reference ref="eb.add.label" />
 		</item>
-		<item name="doctor" icon="/img/map/doctor.png">
+		<item name="doctor" icon="/img/map/medicine.png">
 			<link href="http://wiki.openstreetmap.org/wiki/Tag:amenity=doctors"
 				ja.href="http://wiki.openstreetmap.org/wiki/JA:Tag:amenity=doctors"
 				pl.href="http://wiki.openstreetmap.org/wiki/Pl:Tag:amenity=doctors"
@@ -278,7 +278,7 @@
 		</item>
 	</group>
 	<group name="Car" icon="/img/map/car.png">
-		<item name="fuel" icon="/img/map/gazstation.png">
+		<item name="fuel" icon="/img/map/fillingstation.png">
 			<link href="http://wiki.openstreetmap.org/wiki/Tag:amenity=fuel"
 				de.href="http://wiki.openstreetmap.org/wiki/DE:Tag:amenity=fuel"
 				es.href="http://wiki.openstreetmap.org/wiki/ES:Tag:amenity=fuel"
@@ -357,7 +357,7 @@
 		<text key="tourism" />
 		<text key="name" text="Name" />
 	</item>
-	<item name="nightclub/Disco" icon="/img/map/club.png">
+	<item name="nightclub/Disco" icon="/img/map/dancinghall.png">
 		<link href="http://wiki.openstreetmap.org/wiki/Tag:amenity=nightclub"
 			da.href="http://wiki.openstreetmap.org/wiki/Da:Tag:amenity=nightclub"
 			de.href="http://wiki.openstreetmap.org/wiki/DE:Tag:amenity=nightclub"
@@ -374,7 +374,7 @@
 		<reference ref="eb.tel.label" />
 		<text key="url" />
 	</item>
-	<item name="place of worship" icon="/img/map/church2.png">
+	<item name="place of worship" icon="/img/map/prayer.png">
 		<link
 			href="http://wiki.openstreetmap.org/wiki/Tag:amenity=place_of_worship"
 			da.href="http://wiki.openstreetmap.org/wiki/Da:Tag:amenity=place_of_worship"
