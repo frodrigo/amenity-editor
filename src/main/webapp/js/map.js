@@ -136,6 +136,7 @@ function init() {
         displayProjection: new OpenLayers.Projection("EPSG:4326"),
         units: 'm',
         controls: [
+            new OpenLayers.Control.Navigation(),
             new OpenLayers.Control.TouchNavigation(),
             new OpenLayers.Control.Zoom(),
             geolocate
