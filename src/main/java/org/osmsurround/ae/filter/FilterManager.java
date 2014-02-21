@@ -65,7 +65,6 @@ public class FilterManager {
 		addSimpleFilter("atm", "map/atm.png", "amenity", "atm");
 		addSimpleFilter("pool", "map/pool.png", "amenity", "swimming_pool");
 		addSimpleFilter("recycle", "map/recycle.png", "amenity", "recycling");
-		addSimpleFilter("fitness_studio", "map/fitnesscenter.png", "amenity", "fitness_studio");
 		addSimpleFilter("maxspeed", "map/photoright.png", "enforcement", "maxspeed");
 		addSimpleFilter("hotel", "map/hotel.png", "tourism", "hotel");
 		addSimpleFilter("hostel", "map/hostel.png", "tourism", "hostel");
