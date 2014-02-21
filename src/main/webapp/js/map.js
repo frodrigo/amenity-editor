@@ -896,7 +896,7 @@ function createEditBox(newDiv, amenity, feature) {
         value: MSG.ebMoveButton,
         onclick: "moveAmenity('" + amenity.osmType + "'," + amenity.nodeId + ")"
     });
-    if ((amenity.osmtType != 'n') || (amenity.nodeId == 0) || AE.isMoving())
+    if ((amenity.osmType != 'n') || (amenity.nodeId == 0) || AE.isMoving())
         moveButton.setAttribute("disabled", "disabled");
     buttonDiv.insert(moveButton);
 
@@ -906,7 +906,7 @@ function createEditBox(newDiv, amenity, feature) {
         value: MSG.ebDeleteButton,
         onclick: "deleteAmenity('" + amenity.osmType + "'," + amenity.nodeId + ")"
     });
-    if ((amenity.osmtType == 'n') && ((amenity.nodeId == 0) || AE.isMoving()))
+    if ((amenity.osmType == 'n') && ((amenity.nodeId == 0) || AE.isMoving()))
         deleteButton.setAttribute("disabled", "disabled");
     buttonDiv.insert(deleteButton);
     buttonDiv.insert(new Element("input", {
