@@ -231,3 +231,23 @@ a.ae-create-amenity:hover {
 .inputkey {
 	width: 120px;
 }
+
+#content-tools {
+	padding: 0px 5px;
+	position: absolute;
+	top: 0px;
+	right: 50px;
+	z-index: 750;
+	-moz-border-radius: 0px 0px 6px 6px;
+	border-radius: 0px 0px 6px 6px;
+	background-color: #FFFFFF;
+	border: 1px solid #000000;
+	border-top: none;
+	max-width: 55%;
+	z-index: 2000;
+	text-align: right;
+}
+
+#search_results {
+	text-align: left;
+}

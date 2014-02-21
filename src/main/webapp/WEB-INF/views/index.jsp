@@ -50,7 +50,9 @@
 			alertAcceptLicense : "<spring:message code="alert.acceptlicense" />",
 			noHighwayEdit : "<spring:message code="no.highway.edit" />",
 			saveActionInfo : "<spring:message code="save.action.info" />",
-			confirmDelete : "<spring:message code="confirm.delete" />"
+			confirmDelete : "<spring:message code="confirm.delete" />",
+			searchResultNo : "<spring:message code="seach.result.no" />",
+			searchResultHide : "<spring:message code="seach.result.hide" />"
 		};
 
 		var URL = {
@@ -111,8 +113,7 @@
 		<div id="ae-edit-panel"></div>
 	</div>
 	<div id="content" style="overflow: hidden; height: 100%">
-		<div
-			style="padding: 5px; position: absolute; top: 0px; right: 50px; z-index: 750; -moz-border-radius: 0px 0px 6px 6px; border-radius: 0px 0px 6px 6px; background-color: #FFFFFF; border: 1px solid #000000; border-top: none">
+		<div id="content-tools">
 			<div>
 				<input type="button" class="ae-small-button" value="<spring:message code="button.max.zoom" />"
 					title="<spring:message code="button.max.zoom.hint" />" onclick="setMaxZoom();" />
@@ -124,6 +125,15 @@
 					title="<spring:message code="button.create.node.hint" />" onclick="switchAdding();" />
 				<input type="button" class="ae-small-button" value="<spring:message code="button.rod" />" id="loadOsmDataButton"
 					title="<spring:message code="button.rod.hint" />" onclick="loadBbox();" />
+				<div id="search">
+					<form onsubmit="return false;" method="get" style="margin-top: 4px">
+						<input type="text" autocomplete="off" name="q" value="" id="q">
+						<input type="button" class="ae-small-button" value="<spring:message code="button.search" />"
+							onclick="addressSearch()">
+						<input type="submit" style="display: none;">
+					</form>
+					<div id="search_results"></div>
+				</div>
 			</div>
 		</div>
 		<div style="position: absolute; top: 55px; right: 50px; z-index: 1000; text-align: center;">
@@ -210,9 +220,12 @@
 					<input type="button" class="ae-small-button" value="<spring:message code="settings.button.close" />"
 						onclick="$('filter').hide();">
 			</div>
-			<div class="infobox" style="width: 450px; text-align: left; display: none; height: 500px; overflow-y: scroll; padding: 10px" id="help">
-				<c:set var="infobox"><spring:message code="infobox" /></c:set>
-				<jsp:include page="includes/${infobox}.jspf"/>
+			<div class="infobox"
+				style="width: 450px; text-align: left; display: none; height: 500px; overflow-y: scroll; padding: 10px" id="help">
+				<c:set var="infobox">
+					<spring:message code="infobox" />
+				</c:set>
+				<jsp:include page="includes/${infobox}.jspf" />
 			</div>
 			<div class="infobox" style="width: 250px; display: none" id="feamenities">
 				<spring:message code="info.fewamenities" />

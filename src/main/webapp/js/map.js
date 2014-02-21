@@ -1160,4 +1160,44 @@ function invertSelection() {
     });
 }
 
+function panToLatLonBoundingBox(lat, lon, minlat, maxlat, minlon, maxlon, points) {
+    var proj_EPSG4326 = new OpenLayers.Projection("EPSG:4326");
+    var proj_map = map.getProjectionObject();
+    map.zoomToExtent(new OpenLayers.Bounds(minlon, minlat, maxlon, maxlat).transform(proj_EPSG4326, proj_map));
+}
+
+function addressSearch() {
+    var q = $("q").value;
+    $("search_results").innerHTML = '';
+
+    new Ajax.Request('http://nominatim.openstreetmap.org/search.php?email=ae.openstreetmap.fr&format=json&q=' + q, {
+        method: 'get',
+        onSuccess: function (transport) {
+            var content = "";
+            var data = transport.responseJSON;
+            if (data[0]) {
+                content += '<ul>';
+                for (var i = 0; i < data.length; i++) {
+                    whereIsThat = data[i].lat + ', ' + data[i].lon + ', ' + data[i].boundingbox[0] + ', ' + data[i].boundingbox[1] + ', ' + data[i].boundingbox[2] + ', ' + data[i].boundingbox[3];
+                    content += '<li ' + ((i) ? '' : ' selected') + 'onclick="panToLatLonBoundingBox(' + whereIsThat + '); $(\'search_results\').innerHTML=\'\';">';
+                    if (data[i].icon) {
+                        content += '<img src="' + data[i].icon + '"/>';
+                    }
+                    content += data[i].display_name + '</li>';
+                }
+                content += '</ul>';
+                panToLatLonBoundingBox(data[0].lat, data[0].lon, data[0].boundingbox[0], data[0].boundingbox[1], data[0].boundingbox[2], data[0].boundingbox[3]);
+                if (history.pushState)
+                    history.pushState({
+                        "id": 101
+                    }, "", "?q=" + q);
+            } else {
+                content += '<i>' + MSG.searchResultNo + '</i>';
+            }
+            content += '<a onclick="$(\'search_results\').innerHTML=\'\'" href="#">' + MSG.searchResultHide + '</a>';
+            $("search_results").innerHTML = content;
+        }
+    });
+}
+
 window.onload = init;
