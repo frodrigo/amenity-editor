@@ -334,14 +334,15 @@ function fetchViewKey(tags, collect) {
 }
 
 function fetchView(amenity, groupData) {
-    var osmType = amenity.osmType;
+    var match = [],
+        osmType = amenity.osmType;
     for (var i = 0; i < groupData.length; i++) {
         var object = groupData[i].object;
         switch (groupData[i].type) {
         case "Group":
             var ret = fetchView(amenity, object.tags);
             if (ret) {
-                return ret;
+                match.push(ret);
             }
             break;
         case "Item":
@@ -356,12 +357,24 @@ function fetchView(amenity, groupData) {
                         return amenity.keyValues[k[0]] && amenity.keyValues[k[0]] == k[1];
                     });
                     if (filtered.length == keys.length) {
-                        return object;
+                        match.push([keys.length, object]);
                     }
                 }
             }
             break;
         }
+    }
+
+    if (match.length > 0) {
+        var max = -1,
+            index = -1;
+        for (var i = 0; i < match.length; i++) {
+            if (match[i][0] > max) {
+                max = match[i][0];
+                index = i;
+            }
+        }
+        return match[index];
     }
 }
 
@@ -415,6 +428,9 @@ function createKeyValueTable(amenity, views) {
     var treadedTags = [];
     if (!views) {
         views = fetchView(amenity, wizardData.tags);
+        if (views) {
+        	views = views[1];
+        }
     }
 
     if (views) {
