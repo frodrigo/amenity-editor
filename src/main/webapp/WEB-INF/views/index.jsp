@@ -210,7 +210,10 @@
 					<input type="button" class="ae-small-button" value="<spring:message code="settings.button.close" />"
 						onclick="$('filter').hide();">
 			</div>
-			<%@ include file="includes/infobox.jspf"%>
+			<div class="infobox" style="width: 450px; text-align: left; display: none; height: 500px; overflow-y: scroll; padding: 10px" id="help">
+				<c:set var="infobox"><spring:message code="infobox" /></c:set>
+				<jsp:include page="includes/${infobox}.jspf"/>
+			</div>
 			<div class="infobox" style="width: 250px; display: none" id="feamenities">
 				<spring:message code="info.fewamenities" />
 			</div>

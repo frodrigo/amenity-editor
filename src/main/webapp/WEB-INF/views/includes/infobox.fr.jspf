@@ -1,0 +1,33 @@
+<h4>Bienvenue sur Amenity Editor</h4>
+<hr>
+Amenity Editor est un outil en ligne simple pour éditer les points d'intérêt (POI) d'OpenStreetMap sur une carte.
+L'objectif est de donner à l'utilisateur la possibilité d'ajouter ou d'éditer rapidement des informations comme les
+horaires d'ouvertures.
+<p>
+	<b>La mise en cache des données</b>
+<p>Pour accélérer l'affichage des POI sur la carte, les données OSM sont mise en cache. Cela peut avoir pour
+	conséquence qu'elles ne sont pas toujours à jour. Pour résoudre ce problème, il y a la possibilité de recharger des
+	données depuis les serveurs d'OSM. Cela se fait avec le bouton « Actualiser les données OSM ». Le chargement des
+	données peut prendre un peu de temps. Il faut juste être patient. Le cache est alors mis à jour automatiquement, c'est
+	également le cas lors d'éditions faites dans Amenity Editor.
+<p>
+	<b>Édition de POI</b>
+<p>
+	Pour modifier un point d'intérêt, cliquez dessus avec la souris. Cliquez sur « Ajouter un tag vide » pour ajouter une
+	nouvelle étiquette ou utiliser les icônes pour des lots d'étiquettes. Saisir les valeurs appropriées. Une saisie
+	semi-automatique vous permet d'obtenir des suggestions, selon le nom de la balise. <br> Pour enregistrer les
+	modifications, cliquez sur le bouton « Sauver ».<br> Pour supprimer un POI il suffit de cliquer sur le bouton
+	correspondant. <br> Pour déplacer un POI cliquez sur le bouton correspondant et suivez les instructions à l'écran.
+
+<p>
+	<b>Création d'un nouveau POI</b>
+<p>Pour créer de nouveaux POI le mode « Ajout de point » doit être activé. Cela se fait en cliquant sur « Ajouter un
+	point ». Vous pouvez cliquer n'importe où sur la carte, un marqueur jaune sera ajouté. Choisissez un modèle pour le
+	POI, ou cliquez sur « Modèle vide » et saisissez les informations.
+<p>
+	<b>Paramètres</b>
+<p>Dans les paramètres vous pouvez définir les nœuds qui doivent être affichés. Vous pouvez également enregistrer
+	votre point de départ, qui est utilisé lorsque l'application est chargé et lors de l'utilisation du bouton « Départ ».
+	Les paramètres peuvent être stockés dans un cookie pour les utiliser lors de la prochaine session.
+<p>
+	<input type="button" class="ae-small-button" value="Fermer l'aide" onclick="$('help').toggle();">

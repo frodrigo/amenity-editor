@@ -1,0 +1,31 @@
+<h4>Welcome to Amenity Editor</h4>
+<hr>
+The Amenity Editor is a simple online tool to edtit or create points of interest (POIs) on the OpenStreetMap map. It
+should give the user the ability to quickly add new or edit missing information like opening times or address.
+<p>
+	<b>Data caching</b>
+<p>In order to speed up the display of POIs on the OSM map data are cached. This can sometimes have the effect that
+	they are not always up to date. To solve this problem, there is the possibility to load data from the OSM server. This
+	is done with the button "Load data from OSM". Loading the data may take longer under certain circumstances. We ask here
+	just to be patient. The cache is automatically updated data when loading from OSM, also contributions in Amenity Editor
+	are cached.
+<p>
+	<b>Change of POIs</b>
+<p>
+	To change a POI, click on it with the mouse. All information will be displayed. Click on "Add tag" to add a new tag or
+	use the icons for certain sets of tags. Then, set the appropriate values. With auto-complete you may get suggestions,
+	depending on the tag name. <br> In order to save the changes, click on the "Save" button.<br> To delete a POI
+	simply click on the corresponding button.<br> To move to a POI click on the corresponding button and follow the
+	instructions on the screen.
+<p>
+	<b>Creating new POIs</b>
+<p>To create new POIs the create mode must be activated. This is done by clicking the "Create New Node" button. Then
+	click anywhere and it will be a yellow marker created. The pannel to insert the information will also appear. Choose a
+	template for the POI, or click on "Empty node" to capture any other information.
+<p>
+	<b>Settings</b>
+<p>In the settings you can define which nodes should be displayed. In addition, you can specify here your home base,
+	which is always shown when the application starts and when click on the button "home base" button. All settings can be
+	stored in a cookie if necessary to restore them at the next session.
+<p>
+	<input type="button" class="ae-small-button" value="Close Help" onclick="$('help').toggle();">
