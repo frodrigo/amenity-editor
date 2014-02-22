@@ -32,6 +32,10 @@
 			<check key="fuel:lpg" text="LPG (Liquefied petroleum gas)" />
 		</checkgroup>
 	</chunk>
+	<chunk id="eb.wheelchair.label" name="Wheelchair tags"
+		icon="/img/icons/wheelchair_add.png">
+		<combo key="wheelchair" text="Wheelchair" values="no,limited,yes" />
+	</chunk>
 	<item name="empty node" icon="/img/map/symbol_blank.png">
 		<text key="" />
 	</item>
@@ -56,6 +60,7 @@
 			<reference ref="eb.add.label" />
 			<reference ref="eb.tel.label" />
 			<text key="url" />
+			<reference ref="eb.wheelchair.label" />
 		</item>
 		<item name="fast food" icon="/img/map/fastfood.png">
 			<link href="http://wiki.openstreetmap.org/wiki/Tag:amenity=fast_food"
@@ -71,6 +76,7 @@
 			<reference ref="eb.add.label" />
 			<reference ref="eb.tel.label" />
 			<text key="url" />
+			<reference ref="eb.wheelchair.label" />
 		</item>
 		<item name="biergarten" icon="/img/map/beergarden.png">
 			<link href="http://wiki.openstreetmap.org/wiki/Tag:amenity=biergarten"
@@ -84,6 +90,7 @@
 			<reference ref="eb.add.label" />
 			<reference ref="eb.tel.label" />
 			<text key="url" />
+			<reference ref="eb.wheelchair.label" />
 		</item>
 		<item name="cafe" icon="/img/map/coffee.png">
 			<link href="http://wiki.openstreetmap.org/wiki/Tag:amenity=cafe"
@@ -103,6 +110,7 @@
 			<reference ref="eb.add.label" />
 			<reference ref="eb.tel.label" />
 			<text key="url" />
+			<reference ref="eb.wheelchair.label" />
 		</item>
 		<item name="pub" icon="/img/map/bar.png">
 			<link href="http://wiki.openstreetmap.org/wiki/Tag:amenity=pub"
@@ -118,6 +126,24 @@
 			<reference ref="eb.add.label" />
 			<reference ref="eb.tel.label" />
 			<text key="url" />
+			<reference ref="eb.wheelchair.label" />
+		</item>
+		<item name="bar" icon="/img/map/bar.png">
+			<link href="http://wiki.openstreetmap.org/wiki/Tag:amenity=bar"
+				de.href="http://wiki.openstreetmap.org/wiki/DE:Tag:amenity=bar"
+				es.href="http://wiki.openstreetmap.org/wiki/ES:Tag:amenity=bar"
+				it.href="http://wiki.openstreetmap.org/wiki/IT:Tag:amenity=bar"
+				ja.href="http://wiki.openstreetmap.org/wiki/JA:Tag:amenity=bar"
+				pt_BR.href="http://wiki.openstreetmap.org/wiki/Pt-br:Tag:amenity=bar"
+				ru.href="http://wiki.openstreetmap.org/wiki/RU:Tag:amenity=bar"
+				zh_CN.href="http://wiki.openstreetmap.org/wiki/Zh-hans:Tag:amenity=bar" />
+			<key key="amenity" value="bar" />
+			<text key="name" text="Name" />
+			<reference ref="eb.oh.label" />
+			<reference ref="eb.add.label" />
+			<reference ref="eb.tel.label" />
+			<text key="url" />
+			<reference ref="eb.wheelchair.label" />
 		</item>
 	</group>
 	<group name="Shops" icon="/img/map/mall.png">
@@ -351,6 +377,72 @@
 			<text key="name" text="Name" />
 			<reference ref="eb.oh.label" />
 			<reference ref="eb.add.label" />
+		</item>
+	</group>
+	<group name="Public space" icon="/img/map/office-building.png">
+		<item name="telephone" icon="/img/map/telephone.png">
+			<link href="http://wiki.openstreetmap.org/wiki/Tag:amenity=telephone"
+				de.href="http://wiki.openstreetmap.org/wiki/DE:Tag:amenity=telephone"
+				fi.href="http://wiki.openstreetmap.org/wiki/Fi:Tag:amenity=telephone"
+				fr.href="http://wiki.openstreetmap.org/wiki/FR:Tag:amenity=telephone"
+				ja.href="http://wiki.openstreetmap.org/wiki/JA:Tag:amenity=telephone"
+				pt_BR.href="http://wiki.openstreetmap.org/wiki/Pt-br:Tag:amenity=telephone"
+				ru.href="http://wiki.openstreetmap.org/wiki/RU:Tag:amenity=telephone" />
+			<key key="amenity" value="telephone" />
+			<text key="operator" text="Operator" />
+			<reference ref="eb.wheelchair.label" />
+		</item>
+		<item name="toilets" icon="/img/map/toilets.png">
+			<link href="http://wiki.openstreetmap.org/wiki/Tag:amenity=toilets"
+				de.href="http://wiki.openstreetmap.org/wiki/DE:Tag:amenity=toilets"
+				fr.href="http://wiki.openstreetmap.org/wiki/FR:Tag:amenity=toilets"
+				ja.href="http://wiki.openstreetmap.org/wiki/JA:Tag:amenity=toilets"
+				nl.href="http://wiki.openstreetmap.org/wiki/NL:Tag:amenity=toilets"
+				pt_BR.href="http://wiki.openstreetmap.org/wiki/Pt-br:Tag:amenity=toilets"
+				ru.href="http://wiki.openstreetmap.org/wiki/RU:Tag:amenity=toilets"
+				zh_TW.href="http://wiki.openstreetmap.org/wiki/Zh-hant:Tag:amenity=toilets" />
+			<key key="amenity" value="toilets" />
+			<combo key="access" text="Access rights" values="public,permissive,customers" />
+			<combo key="drinking_water" text="Drinking Water" values="yes,no,seasonal" />
+			<combo key="toilets:disposal" text="Type"
+				values="flush,pitlatrine,chemical,bucket" />
+			<combo key="fee" text="Fee" values="yes,no" />
+			<combo key="toilets:position" text="Usage Position"
+				values="seated,seated;urinal,squat,urinal" />
+			<reference ref="eb.wheelchair.label" />
+		</item>
+		<item name="drinking water" icon="/img/map/drinkingwater.png">
+			<link href="http://wiki.openstreetmap.org/wiki/Tag:amenity=drinking_water"
+				de.href="http://wiki.openstreetmap.org/wiki/DE:Tag:amenity=drinking_water"
+				fr.href="http://wiki.openstreetmap.org/wiki/FR:Tag:amenity=drinking_water"
+				ja.href="http://wiki.openstreetmap.org/wiki/JA:Tag:amenity=drinking_water"
+				nl.href="http://wiki.openstreetmap.org/wiki/NL:Tag:amenity=drinking_water"
+				pl.href="http://wiki.openstreetmap.org/wiki/Pl:Tag:amenity=drinking_water"
+				pt_BR.href="http://wiki.openstreetmap.org/wiki/Pt-br:Tag:amenity=drinking_water"
+				ru.href="http://wiki.openstreetmap.org/wiki/RU:Tag:amenity=drinking_water" />
+			<key key="amenity" value="drinking_water" />
+			<reference ref="eb.wheelchair.label" />
+		</item>
+		<item name="recycling" icon="/img/map/recycle.png">
+			<link href="http://wiki.openstreetmap.org/wiki/Tag:amenity=recycling"
+				de.href="http://wiki.openstreetmap.org/wiki/DE:Tag:amenity=recycling"
+				es.href="http://wiki.openstreetmap.org/wiki/ES:Tag:amenity=recycling"
+				fi.href="http://wiki.openstreetmap.org/wiki/Fi:Tag:amenity=recycling"
+				fr.href="http://wiki.openstreetmap.org/wiki/FR:Tag:amenity=recycling"
+				it.href="http://wiki.openstreetmap.org/wiki/IT:Tag:amenity=recycling"
+				ja.href="http://wiki.openstreetmap.org/wiki/JA:Tag:amenity=recycling"
+				pl.href="http://wiki.openstreetmap.org/wiki/Pl:Tag:amenity=recycling"
+				pt_BR.href="http://wiki.openstreetmap.org/wiki/Pt-br:Tag:amenity=recycling"
+				ru.href="http://wiki.openstreetmap.org/wiki/RU:Tag:amenity=recycling"
+				sv.href="http://wiki.openstreetmap.org/wiki/Sv:Tag:amenity=recycling" />
+			<key key="amenity" value="recycling" />
+			<check key="recycling:batteries" text="Batteries" />
+			<check key="recycling:cans" text="Cans" />
+			<check key="recycling:clothes" text="Clothes" />
+			<check key="recycling:glass" text="Glass" />
+			<check key="recycling:paper" text="Paper" />
+			<check key="recycling:scrap_metal" text="Scrap Metal" />
+			<combo key="recycling_type" text="Type" values="container,centre" />
 		</item>
 	</group>
 	<item name="tourism" icon="/img/map/palace-2.png">
