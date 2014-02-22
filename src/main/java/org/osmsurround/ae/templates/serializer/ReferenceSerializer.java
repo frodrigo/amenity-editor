@@ -15,7 +15,10 @@ public class ReferenceSerializer extends JsonSerializer<Reference> {
 	public void serialize(Reference value, JsonGenerator jgen, SerializerProvider provider) throws IOException,
 			JsonProcessingException {
 		jgen.writeStartObject();
-		jgen.writeStringField("ref", ((Chunk) value.getRef()).getId());
+		Chunk ref = (Chunk) value.getRef();
+		if (ref != null) {
+			jgen.writeStringField("ref", ref.getId());
+		}
 		jgen.writeEndObject();
 	}
 }
