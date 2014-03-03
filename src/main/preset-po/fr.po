@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-02-22 14:07+0100\n"
+"POT-Creation-Date: 2014-03-03 10:48+0100\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -91,8 +91,8 @@ msgid "LPG (Liquefied petroleum gas)"
 msgstr "GPL (Gaz de Pétrole Liquéfié)"
 
 #: preset-default.java:35
-msgid "Wheelchair tags"
-msgstr "Fauteuil roulant"
+msgid "Add wheelchair"
+msgstr "Ajouter fauteuil roulant"
 
 #: preset-default.java:37
 msgid "Wheelchair"

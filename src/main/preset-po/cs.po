@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: josm\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-02-22 14:14+0100\n"
+"POT-Creation-Date: 2014-03-03 10:48+0100\n"
 "PO-Revision-Date: 2014-02-09 10:22+0000\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
@@ -92,7 +92,7 @@ msgid "LPG (Liquefied petroleum gas)"
 msgstr "LPG (propan-butan)"
 
 #: preset-default.java:35
-msgid "Wheelchair tags"
+msgid "Add wheelchair"
 msgstr ""
 
 #: preset-default.java:37

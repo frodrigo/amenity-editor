@@ -32,7 +32,7 @@
 			<check key="fuel:lpg" text="LPG (Liquefied petroleum gas)" />
 		</checkgroup>
 	</chunk>
-	<chunk id="eb.wheelchair.label" name="Wheelchair tags"
+	<chunk id="eb.wheelchair.label" name="Add wheelchair"
 		icon="/img/icons/wheelchair_add.png">
 		<combo key="wheelchair" text="Wheelchair" values="no,limited,yes" />
 	</chunk>
